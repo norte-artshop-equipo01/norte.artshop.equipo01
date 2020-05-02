@@ -13,7 +13,7 @@ namespace art_shop_tests
         private IDatabaseConnection GetEntityFrameworkConnection()
         {
             var configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            return new EntityFrameworkConnection(configuration, "art-shop-model", "edu-spark-art", "NOTEBOOK");
+            return new EntityFrameworkConnection(configuration, "art-shop-model", "edu-spark-art-test", "NOTEBOOK");
         }
 
         private Database GetDatabase()
