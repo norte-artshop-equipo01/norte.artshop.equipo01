@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,15 +19,7 @@ namespace art_shop_core.EntityFramework
             var connectionStringSettings = new ConnectionStringSettings
             {
                 Name = "Entities",
-                ConnectionString = $"metadata=res://*/EntityFramework.{ modelName }.csdl|" +
-                                   $"res://*/EntityFramework.{ modelName }.ssdl|" +
-                                   $"res://*/EntityFramework.{ modelName }.msl;" +
-                                   "provider=System.Data.SqlClient;" +
-                                   $"provider connection string=\"data source={dataSource};" +
-                                   $"initial catalog={ databaseName };" +
-                                   "integrated security=True;" +
-                                   "MultipleActiveResultSets=True;" +
-                                   "App=EntityFramework\"",
+                ConnectionString = ConnectionStringTemplate(modelName, databaseName, dataSource),
                 ProviderName = "System.Data.EntityClient"
             };
 
@@ -35,7 +28,25 @@ namespace art_shop_core.EntityFramework
             configuration.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("ConnectionStrings");
 
-            entities = new Entities();
+            entities = new Entities("name=Entities");
+        }
+
+        public EntityFrameworkConnection(string modelName, string databaseName, string dataSource)
+        {
+            entities = new Entities(ConnectionStringTemplate(modelName, databaseName, dataSource));
+        }
+
+        private static string ConnectionStringTemplate(string modelName, string databaseName, string dataSource)
+        {
+            return $"metadata=res://*/EntityFramework.{modelName}.csdl|" +
+                   $"res://*/EntityFramework.{modelName}.ssdl|" +
+                   $"res://*/EntityFramework.{modelName}.msl;" +
+                   "provider=System.Data.SqlClient;" +
+                   $"provider connection string=\"data source={dataSource};" +
+                   $"initial catalog={databaseName};" +
+                   "integrated security=True;" +
+                   "MultipleActiveResultSets=True;" +
+                   "App=EntityFramework\"";
         }
 
         public void CloseConnection()
@@ -57,6 +68,12 @@ namespace art_shop_core.EntityFramework
         public void Remove<T>(T item) where T : class
         {
             entities.Set<T>().Remove(item);
+            entities.SaveChanges();
+        }
+
+        public void Update<T>(T item) where T : class
+        {
+            entities.Entry(item).State = EntityState.Modified;
             entities.SaveChanges();
         }
 

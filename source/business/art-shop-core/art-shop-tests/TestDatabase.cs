@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Linq;
 using art_shop_core;
 using art_shop_core.DAL;
 using art_shop_core.EntityFramework;
@@ -21,10 +22,9 @@ namespace art_shop_tests
             return new Database(GetEntityFrameworkConnection());
         }
 
-        [TestMethod]
-        public void Should_Save_To_Database()
+        private Artist GetTestArtist()
         {
-            var testArtist = new Artist()
+            return new Artist
             {
                 FirstName = "Test Artist Name",
                 LastName = "Test Artist Name",
@@ -38,8 +38,14 @@ namespace art_shop_tests
                 LifeSpan = "Test Life Span",
                 TotalProducts = 0
             };
+        }
 
+        [TestMethod]
+        public void EntityFrameworkConnection_Should_Save_Entity()
+        {
+            var testArtist = GetTestArtist();
             var database = GetDatabase();
+            
             database.Add(testArtist);
             var result = database.Find<Artist>(artist => artist.FirstName == "Test Artist Name");
             database.Remove(testArtist);
@@ -49,10 +55,35 @@ namespace art_shop_tests
         }
 
         [TestMethod]
-        public void EntityFrameworkConnection_Should_Check_Connection()
+        public void EntityFrameworkConnection_Should_Connect_Using_LocalConfiguration()
         {
             var efConn = GetEntityFrameworkConnection();
             Assert.IsTrue(efConn.TestConnection());
+        }
+
+        [TestMethod]
+        public void EntityFrameworkConnection_Should_Connect_Without_Using_LocalConfiguration()
+        {
+            var efConn = new EntityFrameworkConnection("art-shop-model", "edu-spark-art-test", "NOTEBOOK"); ;
+            Assert.IsTrue(efConn.TestConnection());
+        }
+
+        [TestMethod]
+        public void EntityFrameworkConnection_Should_Update_Entity()
+        {
+            var testArtist = GetTestArtist();
+            var database = GetDatabase();
+
+            database.Add(testArtist);
+            testArtist = database.Find<Artist>(artist => artist.FirstName == "Test Artist Name").FirstOrDefault();
+            testArtist.LastName = "Updated Last Name";
+            
+            database.Update(testArtist);
+            testArtist = database.Find<Artist>(artist => artist.FirstName == "Test Artist Name").FirstOrDefault();
+            database.Remove(testArtist);
+            database.CloseConnection();
+
+            Assert.AreEqual(testArtist.LastName, "Updated Last Name");
         }
     }
 }

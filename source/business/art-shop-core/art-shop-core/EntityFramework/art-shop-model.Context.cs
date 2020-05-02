@@ -15,8 +15,8 @@ namespace art_shop_core.EntityFramework
     
     public partial class Entities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public Entities(string connectionString)
+            : base(connectionString)
         {
         }
     

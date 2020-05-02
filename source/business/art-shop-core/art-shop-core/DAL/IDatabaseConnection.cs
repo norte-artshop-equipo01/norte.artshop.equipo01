@@ -13,6 +13,7 @@ namespace art_shop_core.DAL
         void CloseConnection();
         void Add<T>(T item) where T : class;
         void Remove<T>(T item) where T : class;
+        void Update<T>(T item) where T : class;
         List<T> Find<T>(Func<T, bool> filter) where T : class;
     }
 }

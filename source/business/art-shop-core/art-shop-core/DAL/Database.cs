@@ -31,6 +31,11 @@ namespace art_shop_core
             db.Remove(item);
         }
 
+        public void Update<T>(T item) where T : class
+        {
+            db.Update(item);
+        }
+
         public List<T> Find<T>(Func<T, bool> filter) where T : class
         {
             return db.Find(filter);
