@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8abee6ed9eeb45f98882898b59b98816" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Artist" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Cart" Width="1.5" PointX="5.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CartItem" Width="1.5" PointX="8" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Error" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OrderDetail" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OrderNumber" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Rating" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_PRODUCT_REFERENCE_ARTIST" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CARTITEM_REFERENCE_CART" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ORDER_REFERENCE_USER" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ORDERDET_REFERENCE_ORDER" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ORDERDET_REFERENCE_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_RATING_REFERENCE_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_RATING_REFERENCE_USER" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
