@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - UAI</title>
+    <link href="~/Content/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="container">
+        <!-- Cabecera -->
+        <header>
+            <img class="logo" src="/content/images/logo.gif" alt="Logo de la Institución" />
+            <nav>
+                <ul>
+                    <li><a href="/">Inicio</a> </li>
+                    <li><a href="/Home/Artistas">Artistas</a> </li>
+                    <li><a href="/Home/Galeria">Galería</a> </li>
+                    <li><a href="/Home/Contact">Contacto</a> </li>
+                    <li><a href="/Home/About">Nosotros</a> </li>
+                </ul>
+            </nav>
+        </header>
+        <!-- Contenido -->
+        <section>
+            <article>
+                @RenderBody()
+            </article>
+        </section>
+
+        <!-- Contenido relacionado-->
+        <aside id="pub">
+            <article>
+                <div>
+                    <h3>Sidebar</h3>
+                    <div>
+                        <ul>
+                            <li><a href="/">Inicio</a> </li>
+                            <li><a href="/Home/Artistas">Artistas</a> </li>
+                            <li><a href="/Home/Galeria">Galería</a> </li>
+                            <li><a href="/Home/Contact">Contacto</a> </li>
+                            <li><a href="/Home/About">Nosotros</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+        </aside>
+        <!-- Pie de pagina -->
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Spark Art</p>
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
