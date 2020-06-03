@@ -2,6 +2,43 @@
 @{
     ViewBag.Title = "Artistas";
 }
+<head>
+    <link href="~/Content/Formulario.css" rel="stylesheet" />
+</head>
 
-<h2>Artistas</h2>
+<body>
+    <h2>Nuevo Artista</h2>
 
+    <div class="container">
+        <form>
+            <p>
+                <label for="txtFirstName">Nombre:</label>
+                <input name="txtFirstName" id="txtFirstName" type="text" maxlength="30" required />
+            </p>
+
+            <p>
+                <label for="txtLastName">Apellido:</label>
+                <input name="txtLastName" id="txtLastName" type="text" maxlength="30" required />
+            </p>
+
+            <p>
+                <label for="txtLifeSpan">Edad:</label>
+                <input name="txtLifeSpan" id="txtLifeSpan" type="number" maxlength="3" /> <br />
+            </p>
+
+            <p>
+                <label for="txtCountry">País:</label>
+                <input name="txtCountry" id="txtCountry" type="text" maxlength="30" />
+            </p>
+
+            <p>
+                <label for="txtDescription">Descripción:</label> <br />
+                <textarea id="txtDescription" name="txtDescription2" rows="10" cols="60"> </textarea>
+            </p>
+            <p>
+                <label ></label>
+                <input type="submit" value="Guardar" />
+            </p>
+        </form>
+    </div>
+</body>

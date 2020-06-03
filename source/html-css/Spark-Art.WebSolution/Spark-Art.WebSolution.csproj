@@ -131,6 +131,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Formulario.css" />
     <Content Include="Content\images\la_persistencia_de_la_memoria-Salvador_Dali.jpg" />
     <Content Include="Content\images\logo.gif" />
     <Content Include="favicon.ico" />
