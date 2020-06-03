@@ -34,5 +34,11 @@ namespace Lppa.WebSite.Controllers
             ViewBag.Message = "Su página de contacto.";
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Create(FormCollection artista)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }
