@@ -14,7 +14,7 @@ namespace art_shop_tests
         private IDatabaseConnection GetEntityFrameworkConnection()
         {
             var configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            return new EntityFrameworkConnection(configuration, "art-shop-model", "edu-spark-art-test", "NOTEBOOK");
+            return new EntityFrameworkConnection(configuration, "art-shop-model", "edu-spark-art", @"LOCALHOST\SQLEXPRESS");
         }
 
         private Database GetDatabase()
@@ -64,7 +64,7 @@ namespace art_shop_tests
         [TestMethod]
         public void EntityFrameworkConnection_Should_Connect_Without_Using_LocalConfiguration()
         {
-            var efConn = new EntityFrameworkConnection("art-shop-model", "edu-spark-art-test", "NOTEBOOK"); ;
+            var efConn = new EntityFrameworkConnection("art-shop-model", "edu-spark-art", @"LOCALHOST\SQLEXPRESS"); ;
             Assert.IsTrue(efConn.TestConnection());
         }
 
@@ -84,6 +84,15 @@ namespace art_shop_tests
             database.CloseConnection();
 
             Assert.AreEqual(testArtist.LastName, "Updated Last Name");
+        }
+        [TestMethod]
+        public void Listar_Imagenes()
+        {
+            
+            var database = GetDatabase();
+            var obras = database.Find<Product>(product => product.Id > 0);
+            Assert.IsTrue(obras.Count > 0);
+           
         }
     }
 }
