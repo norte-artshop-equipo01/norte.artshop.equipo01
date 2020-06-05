@@ -1,0 +1,108 @@
+﻿
+html, body {
+    height: 100%;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    border: none;
+}
+
+/*p {
+    text-align: justify;
+}*/
+
+/*clase anterior*/
+h1 {
+    font-family: Verdana, Calibri, sans-serif;
+    font-size: 1.2em
+}
+
+h2 {
+    font-family: Verdana, Calibri, sans-serif;
+    font-size: 1.1em
+}
+
+span {
+    color: #060;
+}
+
+strong {
+    font-size: 20px;
+}
+
+em {
+    color: #FFF;
+    background-color: #7d99e0;
+}
+
+/* --------------- layout ------------------------*/
+
+#container {
+    width: 1080px;
+    margin: 0 auto;
+}
+
+.logo {
+    width: 150px;
+    height: 40px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+    nav ul li {
+        list-style: none;
+        display: inline;
+    }
+
+        nav ul li > a {
+            padding: 5px;
+            text-decoration: none;
+            background-color: powderblue;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+
+header {
+    display: block;
+    background-color: #6793ec;
+    padding: 10px 0px;
+}
+
+section {
+    background-color: #fafafa;
+    padding: 5px;
+    overflow: auto;
+    /*float: left;*/
+    float: right;
+    width: 79%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    min-height: 450px;
+}
+
+aside {
+    /*float: right;*/
+    float: left;
+    width: 19%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+footer {
+    clear: both;
+    position: relative;
+    height: 40px;
+    background-color: #6793ec;
+    text-align: center;
+    color: #fafafa;
+}
