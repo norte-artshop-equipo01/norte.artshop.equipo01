@@ -1,4 +1,6 @@
-﻿using art_shop_core.EntityFramework;
+﻿using art_shop_core;
+using art_shop_core.EntityFramework;
+using art_shop_core.DAL;
 using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,11 @@ namespace Lppa.WebSite.Controllers
     public class HomeController : Controller
     {
         List<Product> obrasdev = new List<Product>();
+        Core core;
+        public HomeController()
+        {
+            core = new Core(new EntityFrameworkConnection("art-shop-model", "edu-spark-art", @"localhost\SQLEXPRESS"));
+        }
 
         public ActionResult Index()
         {
@@ -33,9 +40,9 @@ namespace Lppa.WebSite.Controllers
             ViewBag.Message = "La página de descripción de su aplicación.";
            /* test();*/
             
-            EntityFrameworkConnection conn = new EntityFrameworkConnection("art-shop-model", "edu-spark-art", @"LOCALHOST\SQLEXPRESS");
-            List<Product> obrasdev = conn.Find<Product>(product => product.Id > 0);
-            return View(obrasdev);
+            //EntityFrameworkConnection conn = new EntityFrameworkConnection("art-shop-model", "edu-spark-art", @"localhost\SQLEXPRESS");
+            //List<Product> obrasdev = conn.Find<Product>(product => product.Id > 0);
+            return View(core.ProductManager.GetAllProducts());
             // return PartialView(obrasdev);
             
         }

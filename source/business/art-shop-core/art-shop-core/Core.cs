@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using art_shop_core;
 
 namespace art_shop_core
 {
@@ -20,6 +21,7 @@ namespace art_shop_core
         {
             database = databaseConnection;
             database.TestConnection();
+            
 
             UserManager = new UserManager(databaseConnection, currentUser);
             ProductManager = new ProductManager(databaseConnection);

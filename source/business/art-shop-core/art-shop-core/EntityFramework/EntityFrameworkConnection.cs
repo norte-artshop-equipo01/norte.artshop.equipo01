@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using art_shop_core.DAL;
+using art_shop_core.EntityFramework;
+
 
 namespace art_shop_core.EntityFramework
 {
     public class EntityFrameworkConnection : IDatabaseConnection
     {
-        private Entities entities;
+        public Entities entities;
 
         public EntityFrameworkConnection(Configuration configuration, string modelName, string databaseName, string dataSource)
         {

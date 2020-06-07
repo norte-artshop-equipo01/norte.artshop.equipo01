@@ -12,8 +12,8 @@ namespace art_shop_tests
     public class TestDatabase
     {
         private readonly string modelName = "art-shop-model";
-        private readonly string databaseName = "edu-spark-art-test";
-        private readonly string connectionString = "NOTEBOOK";
+        private readonly string databaseName = "edu-spark-art";
+        private readonly string connectionString = @"localhost\SQLEXPRESS";
 
         private IDatabaseConnection GetEntityFrameworkConnection()
         {

@@ -4,19 +4,21 @@
 
 <h2>Galeria</h2>
 
-<div id="container">
-    <h2><b>Título de la Imágen</b></h2><br />
+<div>
+    <h2><b>Títuo de la Imágen</b></h2><br />
 
 </div>
 
-<div>
+<div style="max-width=30px">
 
     @foreach (var elemento in Model)
     { 
-         <img src="~/content/images/@(elemento.Image)"> 
+         <img src="~/content/images/@(elemento.Image)" > 
          <br />
          <p>@elemento.Image</p>
-       
+
+        <input type="checkbox" />
+      
     }
 
 </div>
