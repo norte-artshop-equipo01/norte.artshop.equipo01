@@ -45,6 +45,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="art-shop-core">
+      <HintPath>..\..\business\art-shop-core\art-shop-core\bin\Debug\art-shop-core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\business\art-shop-core\art-shop-core\bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\business\art-shop-core\art-shop-core\bin\Debug\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -132,8 +141,38 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Formulario.css" />
+    <Content Include="Content\images\Botticelli-La primavera.jpg" />
+    <Content Include="Content\images\Botticelli_-_La_nascita_di_Venere.jpg" />
+    <Content Include="Content\images\Botticelli_La_Fortaleza.jpeg" />
+    <Content Include="Content\images\Brueghel_Peasant_Wedding.jpg" />
+    <Content Include="Content\images\Brueghel_The_Fall_of_the_Rebel_Angels.jpg" />
+    <Content Include="Content\images\Brueghel_The_Tower_of_Babel.jpg" />
+    <Content Include="Content\images\DaVinci_Mona_Lisa.jpg" />
+    <Content Include="Content\images\DaVinci_The_Last_Supper.jpg" />
+    <Content Include="Content\images\DaVinci_Vitruve_Luc_Viatour.jpg" />
+    <Content Include="Content\images\Degas_At_the_Races.jpg" />
+    <Content Include="Content\images\Degas_Cottonexchange.jpg" />
+    <Content Include="Content\images\Degas_The_Ballet_Class.jpg" />
+    <Content Include="Content\images\Kandinski_Composition_7.jpg" />
+    <Content Include="Content\images\Kandinski_Odessa_Port.jpg" />
+    <Content Include="Content\images\Kandinski_Sky_Blue.jpg" />
+    <Content Include="Content\images\Khalo_Frida y Diego Rivera.jpg" />
+    <Content Include="Content\images\Khalo_La columna rota.jpg" />
+    <Content Include="Content\images\Khalo_Sin esperanza.jpg" />
     <Content Include="Content\images\la_persistencia_de_la_memoria-Salvador_Dali.jpg" />
     <Content Include="Content\images\logo.gif" />
+    <Content Include="Content\images\Manet_A_Bar_at_the_Folies-Bergère.jpg" />
+    <Content Include="Content\images\Manet_Ejecucion del  Emperador Maximiliano.jpg" />
+    <Content Include="Content\images\Manet_Música_en_las_Tullerías.jpg" />
+    <Content Include="Content\images\Miguel_Angel_Crucifixion_La_Redonda_Logrono.jpg" />
+    <Content Include="Content\images\Miguel_Angel_El juicio Final.jpg" />
+    <Content Include="Content\images\Miguel_Angel_Martyrdom.jpg" />
+    <Content Include="Content\images\Picasso_Garnica.jpg" />
+    <Content Include="Content\images\Picasso_La mujer que llora.jpg" />
+    <Content Include="Content\images\Picasso_las señoritas de Avignon.jpg" />
+    <Content Include="Content\images\Van gogh_Self-Portrait.jpg" />
+    <Content Include="Content\images\Van_Gogh_El viñedo rojjo.jpg" />
+    <Content Include="Content\images\Van_Gogh_Jarro con girasoles.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -150,6 +189,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\listar.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
