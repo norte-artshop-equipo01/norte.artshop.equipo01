@@ -81,5 +81,10 @@ namespace art_shop_core.EntityFramework
         {
             return entities.Set<T>().Where(filter).ToList();
         }
+
+        public List<T> GetAll<T>() where T : class
+        {
+            return entities.Set<T>().ToList();
+        }
     }
 }

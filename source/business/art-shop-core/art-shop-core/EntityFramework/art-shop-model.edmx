@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Artist">
           <Key>
             <PropertyRef Name="Id" />
@@ -153,6 +153,7 @@
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ChangedOn" Type="datetime" Nullable="false" />
           <Property Name="ChangedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="binary" MaxLength="256" Nullable="false" />
         </EntityType>
         <Association Name="FK_CARTITEM_REFERENCE_CART">
           <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
@@ -278,18 +279,57 @@
             <End Role="Rating" EntitySet="Rating" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Artist" EntityType="Model.Artist" />
+          <EntitySet Name="Cart" EntityType="Model.Cart" />
+          <EntitySet Name="CartItem" EntityType="Model.CartItem" />
+          <EntitySet Name="Error" EntityType="Model.Error" />
+          <EntitySet Name="Order" EntityType="Model.Order" />
+          <EntitySet Name="OrderDetail" EntityType="Model.OrderDetail" />
+          <EntitySet Name="OrderNumber" EntityType="Model.OrderNumber" />
+          <EntitySet Name="Product" EntityType="Model.Product" />
+          <EntitySet Name="Rating" EntityType="Model.Rating" />
+          <AssociationSet Name="FK_PRODUCT_REFERENCE_ARTIST" Association="Model.FK_PRODUCT_REFERENCE_ARTIST">
+            <End Role="Artist" EntitySet="Artist" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARTITEM_REFERENCE_CART" Association="Model.FK_CARTITEM_REFERENCE_CART">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartItem" EntitySet="CartItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERDET_REFERENCE_ORDER" Association="Model.FK_ORDERDET_REFERENCE_ORDER">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERDET_REFERENCE_PRODUCT" Association="Model.FK_ORDERDET_REFERENCE_PRODUCT">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RATING_REFERENCE_PRODUCT" Association="Model.FK_RATING_REFERENCE_PRODUCT">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <EntitySet Name="User" EntityType="Model.User" />
+          <AssociationSet Name="FK_ORDER_REFERENCE_USER" Association="Model.FK_ORDER_REFERENCE_USER">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RATING_REFERENCE_USER" Association="Model.FK_RATING_REFERENCE_USER">
+            <End Role="User" EntitySet="User" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Artist">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="LifeSpan" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
@@ -298,21 +338,21 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChangedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_PRODUCT_REFERENCE_ARTIST" FromRole="Artist" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Model.FK_PRODUCT_REFERENCE_ARTIST" FromRole="Artist" ToRole="Product" />
         </EntityType>
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Cookie" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cookie" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="CartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ItemCount" Type="Int32" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChangedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CartItem" Relationship="Self.FK_CARTITEM_REFERENCE_CART" FromRole="Cart" ToRole="CartItem" />
+          <NavigationProperty Name="CartItem" Relationship="Model.FK_CARTITEM_REFERENCE_CART" FromRole="Cart" ToRole="CartItem" />
         </EntityType>
         <EntityType Name="CartItem">
           <Key>
@@ -327,7 +367,7 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChangedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Cart" Relationship="Self.FK_CARTITEM_REFERENCE_CART" FromRole="CartItem" ToRole="Cart" />
+          <NavigationProperty Name="Cart" Relationship="Model.FK_CARTITEM_REFERENCE_CART" FromRole="CartItem" ToRole="Cart" />
         </EntityType>
         <EntityType Name="Error">
           <Key>
@@ -362,8 +402,8 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChangedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK_ORDER_REFERENCE_USER" FromRole="Order" ToRole="User" />
-          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_ORDERDET_REFERENCE_ORDER" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="OrderDetail" Relationship="Model.FK_ORDERDET_REFERENCE_ORDER" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="User" Relationship="Model.FK_ORDER_REFERENCE_USER" FromRole="Order" ToRole="User" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -378,8 +418,8 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChangedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_ORDERDET_REFERENCE_ORDER" FromRole="OrderDetail" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ORDERDET_REFERENCE_PRODUCT" FromRole="OrderDetail" ToRole="Product" />
+          <NavigationProperty Name="Order" Relationship="Model.FK_ORDERDET_REFERENCE_ORDER" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Model.FK_ORDERDET_REFERENCE_PRODUCT" FromRole="OrderDetail" ToRole="Product" />
         </EntityType>
         <EntityType Name="OrderNumber">
           <Key>
@@ -397,10 +437,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ArtistId" Type="Int32" Nullable="false" />
-          <Property Name="Image" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="QuantitySold" Type="Int32" Nullable="false" />
           <Property Name="AvgStars" Type="Double" Nullable="false" />
@@ -408,9 +448,9 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChangedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Artist" Relationship="Self.FK_PRODUCT_REFERENCE_ARTIST" FromRole="Product" ToRole="Artist" />
-          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_ORDERDET_REFERENCE_PRODUCT" FromRole="Product" ToRole="OrderDetail" />
-          <NavigationProperty Name="Rating" Relationship="Self.FK_RATING_REFERENCE_PRODUCT" FromRole="Product" ToRole="Rating" />
+          <NavigationProperty Name="Artist" Relationship="Model.FK_PRODUCT_REFERENCE_ARTIST" FromRole="Product" ToRole="Artist" />
+          <NavigationProperty Name="OrderDetail" Relationship="Model.FK_ORDERDET_REFERENCE_PRODUCT" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="Rating" Relationship="Model.FK_RATING_REFERENCE_PRODUCT" FromRole="Product" ToRole="Rating" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
@@ -424,31 +464,12 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChangedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_RATING_REFERENCE_PRODUCT" FromRole="Rating" ToRole="Product" />
-          <NavigationProperty Name="User" Relationship="Self.FK_RATING_REFERENCE_USER" FromRole="Rating" ToRole="User" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="SignupDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="OrderCount" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ChangedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_ORDER_REFERENCE_USER" FromRole="User" ToRole="Order" />
-          <NavigationProperty Name="Rating" Relationship="Self.FK_RATING_REFERENCE_USER" FromRole="User" ToRole="Rating" />
+          <NavigationProperty Name="Product" Relationship="Model.FK_RATING_REFERENCE_PRODUCT" FromRole="Rating" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Model.FK_RATING_REFERENCE_USER" FromRole="Rating" ToRole="User" />
         </EntityType>
         <Association Name="FK_PRODUCT_REFERENCE_ARTIST">
-          <End Role="Artist" Type="Self.Artist" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="Model.Artist" Role="Artist" Multiplicity="1" />
+          <End Type="Model.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Artist">
               <PropertyRef Name="Id" />
@@ -459,8 +480,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CARTITEM_REFERENCE_CART">
-          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
-          <End Role="CartItem" Type="Self.CartItem" Multiplicity="*" />
+          <End Type="Model.Cart" Role="Cart" Multiplicity="1" />
+          <End Type="Model.CartItem" Role="CartItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cart">
               <PropertyRef Name="Id" />
@@ -470,21 +491,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ORDER_REFERENCE_USER">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ORDERDET_REFERENCE_ORDER">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <End Type="Model.Order" Role="Order" Multiplicity="1" />
+          <End Type="Model.OrderDetail" Role="OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="Id" />
@@ -495,8 +504,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDERDET_REFERENCE_PRODUCT">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <End Type="Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="Model.OrderDetail" Role="OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="Id" />
@@ -507,8 +516,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RATING_REFERENCE_PRODUCT">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <End Type="Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="Model.Rating" Role="Rating" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="Id" />
@@ -518,9 +527,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SignupDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OrderCount" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChangedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="Binary" Nullable="false" MaxLength="256" FixedLength="true" />
+          <NavigationProperty Name="Order" Relationship="Model.FK_ORDER_REFERENCE_USER" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Rating" Relationship="Model.FK_RATING_REFERENCE_USER" FromRole="User" ToRole="Rating" />
+        </EntityType>
+        <Association Name="FK_ORDER_REFERENCE_USER">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RATING_REFERENCE_USER">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Rating" Role="Rating" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -530,47 +571,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Artist" EntityType="Self.Artist" />
-          <EntitySet Name="Cart" EntityType="Self.Cart" />
-          <EntitySet Name="CartItem" EntityType="Self.CartItem" />
-          <EntitySet Name="Error" EntityType="Self.Error" />
-          <EntitySet Name="Order" EntityType="Self.Order" />
-          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
-          <EntitySet Name="OrderNumber" EntityType="Self.OrderNumber" />
-          <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="Rating" EntityType="Self.Rating" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_PRODUCT_REFERENCE_ARTIST" Association="Self.FK_PRODUCT_REFERENCE_ARTIST">
-            <End Role="Artist" EntitySet="Artist" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CARTITEM_REFERENCE_CART" Association="Self.FK_CARTITEM_REFERENCE_CART">
-            <End Role="Cart" EntitySet="Cart" />
-            <End Role="CartItem" EntitySet="CartItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDER_REFERENCE_USER" Association="Self.FK_ORDER_REFERENCE_USER">
-            <End Role="User" EntitySet="User" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDERDET_REFERENCE_ORDER" Association="Self.FK_ORDERDET_REFERENCE_ORDER">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="OrderDetail" EntitySet="OrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDERDET_REFERENCE_PRODUCT" Association="Self.FK_ORDERDET_REFERENCE_PRODUCT">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="OrderDetail" EntitySet="OrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RATING_REFERENCE_PRODUCT" Association="Self.FK_RATING_REFERENCE_PRODUCT">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Rating" EntitySet="Rating" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RATING_REFERENCE_USER" Association="Self.FK_RATING_REFERENCE_USER">
-            <End Role="User" EntitySet="User" />
-            <End Role="Rating" EntitySet="Rating" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -579,159 +580,160 @@
           <EntitySetMapping Name="Artist">
             <EntityTypeMapping TypeName="Model.Artist">
               <MappingFragment StoreEntitySet="Artist">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="LifeSpan" ColumnName="LifeSpan" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="TotalProducts" ColumnName="TotalProducts" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
                 <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="TotalProducts" ColumnName="TotalProducts" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="LifeSpan" ColumnName="LifeSpan" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cart">
             <EntityTypeMapping TypeName="Model.Cart">
               <MappingFragment StoreEntitySet="Cart">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Cookie" ColumnName="Cookie" />
-                <ScalarProperty Name="CartDate" ColumnName="CartDate" />
-                <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
                 <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
+                <ScalarProperty Name="CartDate" ColumnName="CartDate" />
+                <ScalarProperty Name="Cookie" ColumnName="Cookie" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CartItem">
             <EntityTypeMapping TypeName="Model.CartItem">
               <MappingFragment StoreEntitySet="CartItem">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CartId" ColumnName="CartId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
                 <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Error">
             <EntityTypeMapping TypeName="Model.Error">
               <MappingFragment StoreEntitySet="Error">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ErrorDate" ColumnName="ErrorDate" />
-                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
-                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
-                <ScalarProperty Name="Exception" ColumnName="Exception" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="Everything" ColumnName="Everything" />
-                <ScalarProperty Name="HttpReferer" ColumnName="HttpReferer" />
-                <ScalarProperty Name="PathAndQuery" ColumnName="PathAndQuery" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
                 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+                <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PathAndQuery" ColumnName="PathAndQuery" />
+                <ScalarProperty Name="HttpReferer" ColumnName="HttpReferer" />
+                <ScalarProperty Name="Everything" ColumnName="Everything" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="ErrorDate" ColumnName="ErrorDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="Model.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
-                <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
                 <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderDetail">
             <EntityTypeMapping TypeName="Model.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
                 <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderNumber">
             <EntityTypeMapping TypeName="Model.OrderNumber">
               <MappingFragment StoreEntitySet="OrderNumber">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
                 <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="Model.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="QuantitySold" ColumnName="QuantitySold" />
-                <ScalarProperty Name="AvgStars" ColumnName="AvgStars" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
                 <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="AvgStars" ColumnName="AvgStars" />
+                <ScalarProperty Name="QuantitySold" ColumnName="QuantitySold" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rating">
             <EntityTypeMapping TypeName="Model.Rating">
               <MappingFragment StoreEntitySet="Rating">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Stars" ColumnName="Stars" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
                 <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Stars" ColumnName="Stars" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="Model.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="SignupDate" ColumnName="SignupDate" />
-                <ScalarProperty Name="OrderCount" ColumnName="OrderCount" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="OrderCount" ColumnName="OrderCount" />
+                <ScalarProperty Name="SignupDate" ColumnName="SignupDate" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

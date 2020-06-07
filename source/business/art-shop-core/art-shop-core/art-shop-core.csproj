@@ -54,7 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\Database.cs" />
+    <Compile Include="Core.cs" />
+    <Compile Include="DAL\ArtistManager.cs" />
+    <Compile Include="DAL\ProductManager.cs" />
+    <Compile Include="DAL\Security\EncryptionHelper.cs" />
+    <Compile Include="DAL\UserManager.cs" />
     <Compile Include="EntityFramework\Artist.cs">
       <DependentUpon>art-shop-model.tt</DependentUpon>
     </Compile>
@@ -83,6 +87,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>art-shop-model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DAL\IDatabaseConnection.cs" />
     <Compile Include="EntityFramework\Order.cs">
       <DependentUpon>art-shop-model.tt</DependentUpon>
     </Compile>
@@ -101,7 +106,6 @@
     <Compile Include="EntityFramework\User.cs">
       <DependentUpon>art-shop-model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\IDatabaseConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +115,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="DAL\App.Config" />
     <None Include="EntityFramework\art-shop-model.edmx.diagram">
       <DependentUpon>art-shop-model.edmx</DependentUpon>

@@ -33,6 +33,7 @@ namespace art_shop_core.EntityFramework
         public string CreatedBy { get; set; }
         public System.DateTime ChangedOn { get; set; }
         public string ChangedBy { get; set; }
+        public byte[] Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
