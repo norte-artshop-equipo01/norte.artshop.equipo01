@@ -1,31 +1,31 @@
 ﻿@model List<art_shop_core.EntityFramework.Product>
-   @{ViewBag.Title = "Galeria";
+@{ViewBag.Title = "Galeria";
 }
 
 <h2>Galeria</h2>
 
-<div>
-    <h2><b>Títuo de la Imágen</b></h2><br />
 
-</div>
+<h2><b>Títuo de la Imágen</b></h2>
 
-<div style="max-width=30px">
 
-    @foreach (var elemento in Model)
-    { 
-         <img src="~/content/images/@(elemento.Image)" > 
-         <br />
-         <p>@elemento.Image</p>
 
-        <input type="checkbox" />
-      
-    }
+<div style="width:100%">
+           
+            @foreach (var elemento in Model)
+            {
+    <div class="contimagenes">
 
-</div>
+        <img src="~/content/images/@(elemento.Image)" class="imagengal">
 
-</div>
-<div id="resultado">
+        <p>@elemento.Image</p>
 
+        <!-- <input type="checkbox"  />-->
+        <br />
+        <input type="button" name="Agregar" value="Agregar al Carrito" />
+    </div>
+            
+            }
+         
 </div>
 
 
