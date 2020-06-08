@@ -18,7 +18,7 @@ namespace Lppa.WebSite.Controllers
         Core core;
         public HomeController()
         {
-            core = new Core(new EntityFrameworkConnection("art-shop-model", "edu-spark-art", @"localhost\SQLEXPRESS"));
+            core = new Core(new EntityFrameworkConnection("art-shop-model", "edu-spark-art", @"LY2PRO"));
         }
 
         public ActionResult Index()
@@ -31,6 +31,11 @@ namespace Lppa.WebSite.Controllers
             return View();
         }
         public ActionResult Artistas()
+        {
+            ViewBag.Message = "La página de descripción de su aplicación.";
+            return View();
+        }
+        public ActionResult ArtistasUser()
         {
             ViewBag.Message = "La página de descripción de su aplicación.";
             return View();

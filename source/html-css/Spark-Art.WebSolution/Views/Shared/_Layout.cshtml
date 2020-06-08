@@ -10,47 +10,81 @@
     <div id="container">
         <!-- Cabecera -->
         <header>
-            <img class="logo" src="/content/images/logo.gif" alt="Logo de la Institución" />
-            <nav>
+            <img class="logo-header" src="/content/images/logo.gif" alt="Logo de la Institución" />
+            <nav class="menu-nav">
                 <ul>
                     <li><a href="/">Inicio</a> </li>
-                    <li><a href="/Home/Artistas">Artistas</a> </li>
-                    <li><a href="/Home/Galeria">Galería</a> </li>
                     <li><a href="/Home/Contact">Contacto</a> </li>
                     <li><a href="/Home/About">Nosotros</a> </li>
+                    <li><a href="/Home/ArtistasUser">Artistas</a> </li>
+                    <li><a href="/Home/Galeria">Galería</a> </li> 
                 </ul>
             </nav>
         </header>
-        <!-- Contenido -->
-        <section>
-            <article>
-                @RenderBody()
-            </article>
-        </section>
+    <!-- Contenido -->
+                    <section>
+                        <article>
+                            @RenderBody()
+                        </article>
+                    </section>
 
-        <!-- Contenido relacionado-->
-        <aside id="pub">
-            <article>
-                <div>
-                    <h3>Sidebar</h3>
-                    <div>
-                        <ul>
-                            <li><a href="/">Inicio</a> </li>
-                            <li><a href="/Home/Artistas">Artistas</a> </li>
-                            <li><a href="/Home/Galeria">Galería</a> </li>
-                            <li><a href="/Home/Contact">Contacto</a> </li>
-                            <li><a href="/Home/About">Nosotros</a> </li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                    <!-- Contenido relacionado-->
+                    <aside>
+                        <article>
+                            <div>
+                                <h3 style="text-align:center">Menú</h3>
+                                <nav class="menu-nav-aside">
+                                    <ul>
+                                        <li><a  href="/Home/ArtistasUser">Artistas</a> </li>
+                                        <li><a href="/Home/Galeria">Galería</a> </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <hr />
+                            <br />
+                            <br />
+                            <div>
+                                <h3>Menú Administrador</h3>
+                                <p>Este menú se verá solo ingresando como administrador</p>
+                                <div class="menu-nav-aside">
+                                    <ul>
+                                        <li><a href="/Home/Artistas">ABM Artistas</a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
 
-        </aside>
-        <!-- Pie de pagina -->
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Spark Art</p>
-        </footer>
-    </div>
+                    </aside>
+                    <!-- Pie de pagina -->
+                    <footer>
+                        <div>
+                            <div class="footer">
+
+                                <div class="footer-logo">
+                                    <img class="logo-footer" src="/content/images/logo.gif" alt="Logo de la Institución" />
+                                </div>
+                                <div class="footer-text">
+                                    <p>
+                                        Teléfono:  +54 11 4433 5566
+                                        <br />
+                                        <br />
+                                        Dirección:  Suipacha 1234
+                                        <br />
+                                        <br />
+                                        Retiro. Buenos Aires, Argentina.
+                                        <br />
+                                        <br />
+                                        spark-art@spark-art.com
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </footer>
+</div>
     @RenderSection("scripts", required: false)
 </body>
 </html>
