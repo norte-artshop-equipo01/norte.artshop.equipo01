@@ -3,14 +3,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - UAI</title>
+    <title>@ViewBag.Title - Spark Art</title>
     <link href="~/Content/site.css" rel="stylesheet" />
 </head>
 <body>
     <div id="container">
         <!-- Cabecera -->
         <header>
-            <img class="logo-header" src="/content/images/logo.gif" alt="Logo de la Institución" />
+            <img class="logo-header" src="~/Content/images/logo.gif" alt="Logo" />
             <nav class="menu-nav">
                 <ul>
                     <li><a href="/">Inicio</a> </li>
@@ -29,13 +29,14 @@
                     </section>
 
                     <!-- Contenido relacionado-->
-                    <aside>
+                    <aside class="aside">
                         <article>
                             <div>
                                 <h3 style="text-align:center">Menú</h3>
+                                <br />
                                 <nav class="menu-nav-aside">
                                     <ul>
-                                        <li><a  href="/Home/ArtistasUser">Artistas</a> </li>
+                                        <li><a  href="/Home/ArtistasUser">Artistas</a><br /><br /> </li>
                                         <li><a href="/Home/Galeria">Galería</a> </li>
                                     </ul>
                                 </nav>
@@ -45,10 +46,10 @@
                             <br />
                             <div>
                                 <h3>Menú Administrador</h3>
-                                <p>Este menú se verá solo ingresando como administrador</p>
+                                <h5>Este menú se verá solo ingresando como administrador</h5>
                                 <div class="menu-nav-aside">
                                     <ul>
-                                        <li><a href="/Home/Artistas">ABM Artistas</a> </li>
+                                        <li><a href="/Home/Artistas">ABM Artistas</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -67,12 +68,9 @@
                                     <p>
                                         Teléfono:  +54 11 4433 5566
                                         <br />
-                                        <br />
                                         Dirección:  Suipacha 1234
                                         <br />
-                                        <br />
                                         Retiro. Buenos Aires, Argentina.
-                                        <br />
                                         <br />
                                         spark-art@spark-art.com
                                     </p>

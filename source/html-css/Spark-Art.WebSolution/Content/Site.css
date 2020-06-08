@@ -27,6 +27,11 @@ h2 {
     font-size: 1.1em
 }
 
+h3 {
+    font-family: Verdana, Calibri, sans-serif;
+    font-size: 15px;
+}
+
 span {
     color: #060;
 }
@@ -40,7 +45,6 @@ em {
     background-color: #7d99e0;
 }
 
-
 .h1_home {
     font-family: 'Crimson Text',serif;
     font-size: 30px;
@@ -48,12 +52,12 @@ em {
     font-weight: 600;
     margin-bottom: 20px;
     text-align-last: center;
-    padding-top: 5px;
+    padding-top: 10px;
     padding-bottom: 10px;
 }
 
 .p_home {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.7em;
     color: #444;
     text-align: center;
@@ -63,25 +67,25 @@ em {
     margin: 0 auto;
 }
 .logo-header {
-    width: 150px;
-    height: 40px;
-    margin-left: 43%;
+    width: 300px;
+    height: 80px;
+    margin-left: 36%;
     margin-top: 10px;
     padding-bottom: 10px;
 }
 
 .logo-footer {
-    width: 150px;
-    height: 40px;
+    width: 200px;
+    height: 80px;
     margin-left: 20px;
-    margin-top: 10%;
+    margin-top: 3%;
 }
 
-/*
+
 .menu-nav{
-    margin-left:35%
+    margin-left:34%
 }
-*/
+
 nav ul {
     margin: 0;
     padding: 0;
@@ -98,17 +102,21 @@ nav ul {
             background-color: burlywood;
             border-radius: 5px;
             margin-left: 5px;
+            color: black;
         }
 
 .menu-nav-aside {
-    margin-left: 10px;
+    margin: 0;
+    padding:0;
+    height:auto;
     list-style: none;
+    display:block;
 }
 
 
 header {
     display: block;
-    background-color: bisque;
+    background-color: darksalmon;
     padding: 10px 0px;
 }
 
@@ -124,26 +132,36 @@ section {
     min-height: 450px;
 }
 
-aside {
+.ul-nav {
+    padding-top: 5px;
+    text-decoration: none;
+    background-color: burlywood;
+    border-radius: 5px;
+    margin-left: 5px;
+    color: black;
+    list-style:none;
+}
+.aside {
     /*float: right;*/
     float: left;
     width: 19%;
+    height: auto;
     margin-top: 5px;
     margin-bottom: 5px;
+    background-color: bisque;
 }
 
 footer {
     clear: both;
     position: relative;
-    height: 150px;
-    background-color: bisque;
+    height: 100px;
+    background-color: darksalmon;
     text-align: center;
     color: black;
 }
 
 .footer-logo {
     width: 30%;
-    height: 80px;
     float: left;
 }
 
@@ -151,6 +169,7 @@ footer {
     width:60%;
     float:right;
     text-align: left;
+    padding-top:6px;
 }
 
 .contimagenes {
@@ -172,4 +191,13 @@ footer {
     text-align: center;
     border-radius: 20px;
     float: none;
+}
+
+.button {
+    padding: 5px;
+    text-decoration: none;
+    background-color: burlywood;
+    border-radius: 5px;
+    margin-left: 5px;
+    color: black;
 }
