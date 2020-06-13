@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="wrapper">
+        <header id="header">
+            <div id="logo">
+                <h1><a href="/">Ode to Food</a></h1>
+                <h2><span>Recetas inspiradas </span></h2>
+            </div>
+        </header>
+        <nav id="menu">
+            <ul>
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/Restaurant/">Restaurantes</a></li>
+                <li><a href="/home/about/">Acerca</a></li>
+                <li><a href="/home/contact/">Contacto</a></li>
+            </ul>
+        </nav>
+        <section id="page">
+            <article id="content">
+                @RenderBody()
+            </article>
+
+            <article id="sidebar">
+                <ul>
+                    <li id="search">
+                        <h2 class="search">Buscar recetas inspiradas</h2>
+                        <form method="get" action="">
+                            <fieldset>
+                                <input type="text" id="search-text" name="s" value="" autocomplete="off" />
+                                <input type="submit" id="search-submit" value="Buscar" />
+                            </fieldset>
+                        </form>
+                    </li>
+                    <li>
+                        <h2 class="categories">Clásicos de Buenos Aires</h2>
+                        <ul>
+                            <li><a href="#">Champiñones rellenos con espinacas</a></li>
+                            <li><a href="#">Salteado ardiente de pollo</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>Volutpat Dolore</h2>
+                        <ul>
+                            <li><a href="#">Nec metus sed donec</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>Bebindum Mauris </h2>
+                        <ul>
+                            <li><a href="#">Nec metus sed donec</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </article>
+            <div style="clear: both; height: 1px"></div>
+        </section>
+
+        <footer id="footer">
+            <p>&copy; @DateTime.Now.Year - OdeToFood | Recetas inspiradas de grandes restaurantes</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
