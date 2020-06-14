@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="Data\IDatabaseData.cs" />
     <Compile Include="Data\InMemory\InMemoryData.cs" />
+    <Compile Include="Data\Managers\OrderManager.cs" />
     <Compile Include="Data\Managers\ProductManager.cs" />
     <Compile Include="Data\Managers\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -66,8 +66,36 @@ namespace Artshop.Tests
             database.ProductManager.RemoveProduct(product);
 
             // Assert
-            var total = database.ProductManager.GetAllProduct().Count;
+            var total = database.ProductManager.GetAllProducts().Count;
             Assert.AreEqual(0, total);
+        }
+
+        [TestMethod]
+        public void Should_Find_Entity()
+        {
+            // Arrange
+            var database = new DatabaseConnection(ConnectionType.InMemory);
+
+            var order = new Order
+            {
+                Id = 0,
+                OrderNumber = 3,
+                TotalPrice = 18000,
+                ItemCount = 10,
+                CreatedBy = "admin",
+                ChangedBy = "admin",
+                CreatedOn = DateTime.Now,
+                ChangedOn = DateTime.Now,
+                OrderDate = DateTime.Now
+            };
+
+            database.OrderManager.AddNewOrder(order);
+
+            // Act
+            var storedOrder = database.OrderManager.FindOrder(new Func<Order, bool>(x => x.OrderNumber == 3)).FirstOrDefault();
+
+            // Assert
+            Assert.IsNotNull(storedOrder);
         }
 
         [TestMethod]
@@ -101,6 +129,52 @@ namespace Artshop.Tests
             // Assert
             var storedEmail = database.UserManager.FindUser(new Func<User, bool>( x => x.Id == 0)).FirstOrDefault().Email;
             Assert.AreEqual("user@spark.com", storedEmail);
+        }
+
+        [TestMethod]
+        public void Should_Return_All_Entities()
+        {
+            // Arrange
+            var database = new DatabaseConnection(ConnectionType.InMemory);
+
+            var botticelli = new Artist
+            {
+                Id = 0,
+                FirstName = "Sandro",
+                LastName = "Botticelli",
+                Country = "Argentina",
+                LifeSpan = "50",
+                Description = "Description",
+                CreatedBy = "admin",
+                ChangedBy = "admin",
+                CreatedOn = DateTime.Now,
+                ChangedOn = DateTime.Now,
+                TotalProducts = 1
+            };
+
+            var daVinci = new Artist
+            {
+                Id = 0,
+                FirstName = "Leonardo",
+                LastName = "Da Vinci",
+                Country = "Italia",
+                LifeSpan = "50",
+                Description = "Description",
+                CreatedBy = "admin",
+                ChangedBy = "admin",
+                CreatedOn = DateTime.Now,
+                ChangedOn = DateTime.Now,
+                TotalProducts = 1
+            };
+
+            database.ArtistManager.AddNewArtist(botticelli);
+            database.ArtistManager.AddNewArtist(daVinci);
+
+            // Act
+            var allArtists = database.ArtistManager.GetAllArtists();
+
+            // Assert
+            Assert.IsTrue(allArtists.Count > 1);
         }
     }
 }

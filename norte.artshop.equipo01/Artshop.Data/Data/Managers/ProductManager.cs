@@ -33,7 +33,7 @@ namespace Artshop.Data.Data.Managers
             return _database.Find(product);
         }
 
-        public List<Product> GetAllProduct()
+        public List<Product> GetAllProducts()
         {
             return _database.GetAll<Product>();
         }
