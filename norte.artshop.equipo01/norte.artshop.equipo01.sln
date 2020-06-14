@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artshop.Data", "Artshop.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artshop.Services", "Artshop.Services\Artshop.Services.csproj", "{356F71DC-120D-4F36-8D83-213A8D8D2492}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artshop.Tests", "Artshop.Tests\Artshop.Tests.csproj", "{F85DA356-8EA5-4A9E-A7BB-B8E422C9A8F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{356F71DC-120D-4F36-8D83-213A8D8D2492}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{356F71DC-120D-4F36-8D83-213A8D8D2492}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{356F71DC-120D-4F36-8D83-213A8D8D2492}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F85DA356-8EA5-4A9E-A7BB-B8E422C9A8F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F85DA356-8EA5-4A9E-A7BB-B8E422C9A8F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F85DA356-8EA5-4A9E-A7BB-B8E422C9A8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F85DA356-8EA5-4A9E-A7BB-B8E422C9A8F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

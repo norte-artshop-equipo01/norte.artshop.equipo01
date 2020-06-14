@@ -31,8 +31,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.10.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.10.9\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,7 +60,87 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Managers\ArtistManager.cs" />
+    <Compile Include="Data\DatabaseConnection.cs" />
+    <Compile Include="Data\DatabaseFactory.cs" />
+    <Compile Include="Data\EntityFramework\Artist.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\Cart.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\CartItem.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\EntityFrameworkData.cs" />
+    <Compile Include="Data\EntityFramework\Error.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\Order.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\OrderDetail.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\OrderNumber.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\Product.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\Rating.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\SparkArt.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparkArt.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\SparkArt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\SparkArt.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparkArt.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\User.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\IDatabaseData.cs" />
+    <Compile Include="Data\InMemory\InMemoryData.cs" />
+    <Compile Include="Data\Managers\ProductManager.cs" />
+    <Compile Include="Data\Managers\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Data\EntityFramework\SparkArt.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SparkArt.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\EntityFramework\SparkArt.edmx.diagram">
+      <DependentUpon>SparkArt.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Data\EntityFramework\SparkArt.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SparkArt.edmx</DependentUpon>
+      <LastGenOutput>SparkArt.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\EntityFramework\SparkArt.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SparkArt.edmx</DependentUpon>
+      <LastGenOutput>SparkArt.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
