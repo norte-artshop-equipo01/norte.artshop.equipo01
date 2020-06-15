@@ -22,7 +22,6 @@ namespace Artshop.Data.Data.EntityFramework
                 Provider = "System.Data.SqlClient",
                 Metadata = @"res://*/Data.EntityFramework.SparkArt.csdl|res://*/Data.EntityFramework.SparkArt.ssdl|res://*/Data.EntityFramework.SparkArt.msl",
                 ProviderConnectionString = ProviderConnectionString
-                //"data source=NOTEBOOK;initial catalog=edu-spark-art;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework"
             };
 
             entities = new Entities(entityString.ConnectionString);
