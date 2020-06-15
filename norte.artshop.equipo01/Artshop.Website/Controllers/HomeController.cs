@@ -26,5 +26,22 @@ namespace Artshop.Website.Controllers
 
             return View();
         }
+        public ActionResult Galeria()
+        {
+            ViewBag.Message = "La página de descripción de su aplicación.";
+
+            /*return View(Data.Managers..GetAllProducts());*/
+            return View();
+        }
+        public ActionResult Artistas()
+        {
+            ViewBag.Message = "La página de descripción de su aplicación.";
+            return View();
+        }
+        public ActionResult AbmArtistas()
+        {
+            ViewBag.Message = "La página de descripción de su aplicación.";
+            return View();
+        }
     }
 }
