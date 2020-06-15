@@ -35,5 +35,10 @@ namespace Artshop.Data.Data.EntityFramework
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Rating> Rating { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     }
 }

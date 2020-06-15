@@ -1,4 +1,5 @@
-﻿using Artshop.Data.Data.InMemory;
+﻿using Artshop.Data.Data.EntityFramework;
+using Artshop.Data.Data.InMemory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,14 @@ namespace Artshop.Data.Data
 
     internal static class DatabaseFactory
     {
-        public static IDatabaseData GetDatabase(ConnectionType type)
+        public static IDatabaseData GetDatabase(ConnectionType type, string connection = null)
         {
             switch (type)
             {
                 case ConnectionType.InMemory:
                     return new InMemoryData();
                 case ConnectionType.Database:
-                    throw new NotImplementedException();
+                    return new EntityFrameworkData(connection);
                 default:
                     throw new NotImplementedException();
             }

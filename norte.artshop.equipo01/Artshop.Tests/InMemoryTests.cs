@@ -14,25 +14,10 @@ namespace Artshop.Tests
         {
             // Arrange
             var database = new DatabaseConnection(ConnectionType.InMemory);
-
-            var artist = new Artist 
-            {
-                Id = 0,
-                FirstName = "Sandro",
-                LastName = "Botticelli",
-                Country = "Argentina",
-                LifeSpan = "50",
-                Description = "Description",
-                CreatedBy = "admin",
-                ChangedBy = "admin",
-                CreatedOn = DateTime.Now,
-                ChangedOn = DateTime.Now,
-                TotalProducts = 1
-            };
+            var artist = TestUtils.GetArtists()[0];
 
             // Act
             database.ArtistManager.AddNewArtist(artist);
-
 
             // Assert
             var total = database.ArtistManager.GetAllArtists().Count;
@@ -44,22 +29,7 @@ namespace Artshop.Tests
         {
             // Arrange
             var database = new DatabaseConnection(ConnectionType.InMemory);
-
-            var product = new Product
-            {
-                Id = 0,
-                Title = "La Primavera",
-                ArtistId = 0,
-                Description = "Description",
-                Image = "C:/demo/folder",
-                Price = 18000,
-                QuantitySold = 0,
-                AvgStars = 4.5,
-                CreatedBy = "admin",
-                ChangedBy = "admin",
-                CreatedOn = DateTime.Now,
-                ChangedOn = DateTime.Now
-            };
+            var product = TestUtils.GetProducts()[0];
             database.ProductManager.AddNewProduct(product);
 
             // Act
@@ -75,20 +45,7 @@ namespace Artshop.Tests
         {
             // Arrange
             var database = new DatabaseConnection(ConnectionType.InMemory);
-
-            var order = new Order
-            {
-                Id = 0,
-                OrderNumber = 3,
-                TotalPrice = 18000,
-                ItemCount = 10,
-                CreatedBy = "admin",
-                ChangedBy = "admin",
-                CreatedOn = DateTime.Now,
-                ChangedOn = DateTime.Now,
-                OrderDate = DateTime.Now
-            };
-
+            var order = TestUtils.GetOrders()[0];
             database.OrderManager.AddNewOrder(order);
 
             // Act
@@ -104,22 +61,7 @@ namespace Artshop.Tests
             // Arrange
             var database = new DatabaseConnection(ConnectionType.InMemory);
 
-            var user = new User
-            {
-                Id = 0,
-                FirstName = "user",
-                LastName = "user",
-                Email = "email",
-                City = "Buenos Aires",
-                Country = "Argentina",
-                SignupDate = DateTime.Now,
-                OrderCount = 0,
-                Password = new byte[0],
-                CreatedBy = "admin",
-                ChangedBy = "admin",
-                CreatedOn = DateTime.Now,
-                ChangedOn = DateTime.Now
-            };
+            var user = TestUtils.GetUsers()[0];
             database.UserManager.AddNewUser(user);
             user.Email = "user@spark.com";
 
@@ -136,36 +78,8 @@ namespace Artshop.Tests
         {
             // Arrange
             var database = new DatabaseConnection(ConnectionType.InMemory);
-
-            var botticelli = new Artist
-            {
-                Id = 0,
-                FirstName = "Sandro",
-                LastName = "Botticelli",
-                Country = "Argentina",
-                LifeSpan = "50",
-                Description = "Description",
-                CreatedBy = "admin",
-                ChangedBy = "admin",
-                CreatedOn = DateTime.Now,
-                ChangedOn = DateTime.Now,
-                TotalProducts = 1
-            };
-
-            var daVinci = new Artist
-            {
-                Id = 0,
-                FirstName = "Leonardo",
-                LastName = "Da Vinci",
-                Country = "Italia",
-                LifeSpan = "50",
-                Description = "Description",
-                CreatedBy = "admin",
-                ChangedBy = "admin",
-                CreatedOn = DateTime.Now,
-                ChangedOn = DateTime.Now,
-                TotalProducts = 1
-            };
+            var botticelli = TestUtils.GetArtists()[0];
+            var daVinci = TestUtils.GetArtists()[1];
 
             database.ArtistManager.AddNewArtist(botticelli);
             database.ArtistManager.AddNewArtist(daVinci);

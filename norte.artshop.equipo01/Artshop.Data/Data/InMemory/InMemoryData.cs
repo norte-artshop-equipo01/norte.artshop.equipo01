@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,10 @@ namespace Artshop.Data.Data.InMemory
                 { nameof(OrderNumber), new List<OrderNumber>() },
                 { nameof(Product), new List<Product>() },
                 { nameof(Rating), new List<Rating>() },
-                { nameof(User), new List<User>() },
+                { nameof(AspNetRoles), new List<AspNetRoles>() },
+                { nameof(AspNetUserClaims), new List<AspNetUserClaims>() },
+                { nameof(AspNetUserLogins), new List<AspNetUserLogins>() },
+                { nameof(AspNetUsers), new List<AspNetUsers>() },
             };
         }
 
@@ -38,15 +42,9 @@ namespace Artshop.Data.Data.InMemory
             
         }
 
-        public List<T> Find<T>(Func<T, bool> filter) where T : class
-        {
-            return GetList<T>(typeof(T).Name).Where(filter).ToList();
-        }
+        public List<T> Find<T>(Func<T, bool> filter) where T : class => GetList<T>(typeof(T).Name).Where(filter).ToList();
 
-        public List<T> GetAll<T>() where T : class
-        {
-            return GetList<T>(typeof(T).Name);
-        }
+        public List<T> GetAll<T>() where T : class => GetList<T>(typeof(T).Name);
 
         public void Remove<T>(T item) where T : class
         {
@@ -55,10 +53,12 @@ namespace Artshop.Data.Data.InMemory
             GetList<T>(typeof(T).Name).Remove(element);
         }
 
-        public bool TestConnection()
+        public void RunCustomCommand(string command)
         {
-            return true;
+            
         }
+
+        public bool TestConnection() => true;
 
         public void Update<T>(T item) where T : class
         {
@@ -66,9 +66,6 @@ namespace Artshop.Data.Data.InMemory
             Add(item);
         }
 
-        private List<T> GetList<T>(string name) where T : class
-        {
-            return (List<T>)Convert.ChangeType(database[name], typeof(List<T>));
-        }
+        private List<T> GetList<T>(string name) where T : class => (List<T>)Convert.ChangeType(database[name], typeof(List<T>));
     }
 }
