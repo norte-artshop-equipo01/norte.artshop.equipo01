@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Core.EntityClient;
 using System.Linq;
@@ -12,13 +13,15 @@ namespace Artshop.Data.Data.EntityFramework
     {
         public Entities entities;
 
-        public EntityFrameworkData()
+        public EntityFrameworkData(string ProviderConnectionString)
         {
+            if (string.IsNullOrEmpty(ProviderConnectionString)) throw new ArgumentNullException("ProviderConnectionString cannot be null or empty");
+
             var entityString = new EntityConnectionStringBuilder()
             {
                 Provider = "System.Data.SqlClient",
                 Metadata = @"res://*/Data.EntityFramework.SparkArt.csdl|res://*/Data.EntityFramework.SparkArt.ssdl|res://*/Data.EntityFramework.SparkArt.msl",
-                ProviderConnectionString = "data source=edu-spark-art.mssql.somee.com;initial catalog=edu-spark-art;user id=emmaleardi2_SQLLogin_2;pwd=vjq6rujdjw;MultipleActiveResultSets=True;App=EntityFramework"
+                ProviderConnectionString = ProviderConnectionString
             };
 
             entities = new Entities(entityString.ConnectionString);
@@ -49,6 +52,11 @@ namespace Artshop.Data.Data.EntityFramework
         {
             entities.Set<T>().Remove(item);
             entities.SaveChanges();
+        }
+
+        public void RunCustomCommand(string command)
+        {
+            entities.Database.ExecuteSqlCommand(command);
         }
 
         public bool TestConnection()

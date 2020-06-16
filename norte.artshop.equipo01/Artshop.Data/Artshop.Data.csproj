@@ -60,6 +60,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\EntityFramework\AspNetRoles.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\AspNetUserClaims.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\AspNetUserLogins.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\AspNetUsers.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\C__MigrationHistory.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Managers\ArtistManager.cs" />
     <Compile Include="Data\DatabaseConnection.cs" />
     <Compile Include="Data\DatabaseFactory.cs" />
