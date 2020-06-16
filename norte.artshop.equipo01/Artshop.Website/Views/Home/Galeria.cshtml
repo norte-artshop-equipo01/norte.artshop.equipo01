@@ -5,11 +5,12 @@
 <h1 class="h1_home"><b>Galeria</b></h1>
 <hr />
 <div style="width:100%">
+    
     @foreach (var elemento in Model)
     {
         <div class="contimagenes">
-            <img src="~/content/images/@(elemento.Image)" class="imagengal">
-            <p>@elemento.Image</p>
+            <img src="~/content/images/Products/@(elemento.Image)" class="imagengal">
+            <p>@elemento.Title</p>
             <br />
             <input type="button" name="Agregar" value="Agregar al Carrito" />
         </div>
