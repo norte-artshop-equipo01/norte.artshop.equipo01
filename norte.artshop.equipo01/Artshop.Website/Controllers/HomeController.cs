@@ -4,17 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace Artshop.Website.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly EntityFrameworkData entityFrameworkData;
+        private readonly DatabaseConnection db;
 
         public HomeController()
         {
-            entityFrameworkData = new EntityFrameworkData();
+            db = new DatabaseConnection(ConnectionType.Database, WebConfigurationManager.ConnectionStrings["LocalDB"].ToString());
         }
         public ActionResult Index()
         {
@@ -38,8 +39,7 @@ namespace Artshop.Website.Controllers
         {
             ViewBag.Message = "La página de descripción de su aplicación.";
 
-            /*return View(Data.Managers..GetAllProducts());*/
-            return View(entityFrameworkData.GetAll<Product>());
+            return View(db.ProductManager.GetAllProducts());
         }
         public ActionResult Artistas()
         {
