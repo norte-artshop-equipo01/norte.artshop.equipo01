@@ -15,7 +15,7 @@ namespace Artshop.Website.Controllers
 
         public HomeController()
         {
-            db = new DatabaseConnection(ConnectionType.Database, WebConfigurationManager.ConnectionStrings["LocalDB"].ToString());
+            db = new DatabaseConnection(ConnectionType.Database, WebConfigurationManager.ConnectionStrings["somee"].ToString());
         }
         public ActionResult Index()
         {
