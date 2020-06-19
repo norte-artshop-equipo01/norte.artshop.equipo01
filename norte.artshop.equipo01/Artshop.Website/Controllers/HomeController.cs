@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Artshop.Website.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly DatabaseConnection db;
@@ -17,6 +18,7 @@ namespace Artshop.Website.Controllers
         {
             db = new DatabaseConnection(ConnectionType.Database, WebConfigurationManager.ConnectionStrings["somee"].ToString());
         }
+        
         public ActionResult Index()
         {
             return View();

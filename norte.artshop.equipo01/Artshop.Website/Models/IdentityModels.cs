@@ -21,7 +21,7 @@ namespace Artshop.Website.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("somee", throwIfV1Schema: false)
         {
         }
 

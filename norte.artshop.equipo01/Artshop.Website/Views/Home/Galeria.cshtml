@@ -1,4 +1,4 @@
-﻿<!---s@model List<Artshop.Data.Data.EntityFramework.Product>-->
+﻿@model List<Artshop.Data.Data.EntityFramework.Product>
 @{ViewBag.Title = "Galeria";
 }
 
@@ -10,7 +10,7 @@
     {
         <div class="contimagenes">
             <img src="~/content/images/Products/@(elemento.Image)" class="imagengal">
-            <p>@elemento.Title</p>
+            <p>@elemento.Title, <nombre style="font-style:normal"> @elemento.Artist.FirstName @elemento.Artist.LastName</nombre></p>
             <br />
             <input type="button" name="Agregar" value="Agregar al Carrito" />
         </div>
