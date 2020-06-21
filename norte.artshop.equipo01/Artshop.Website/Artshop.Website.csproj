@@ -280,6 +280,7 @@
     <Content Include="Views\Backend\Index.cshtml" />
     <Content Include="Views\Backend\_LayoutBackend.cshtml" />
     <Content Include="Views\Backend\ABM2.cshtml" />
+    <Content Include="Views\Backend\AbmProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

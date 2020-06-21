@@ -31,7 +31,10 @@ namespace Artshop.Website.Controllers
         {
             return View();
         }
-       
+        public ActionResult AmbProducto()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Create2(Artist artista)
@@ -63,9 +66,22 @@ namespace Artshop.Website.Controllers
             newartist.CreatedBy = User.Identity.Name;
             newartist.ChangedBy = User.Identity.Name;
             db.ArtistManager.AddNewArtist(newartist);
-
             return RedirectToAction("AbmArtistas");
-
         }
+        [HttpPost]
+        public ActionResult CreateObra(Product product)
+        {
+            var newproduct = new Product();
+            UpdateModel(product);
+            newproduct = product;
+            newproduct.CreatedOn = DateTime.Now;
+            newproduct.ChangedOn = DateTime.Now;
+            newproduct.CreatedBy = User.Identity.Name;
+            newproduct.ChangedBy = User.Identity.Name;
+            db.ProductManager.AddNewProduct(newproduct);
+
+            return RedirectToAction("AbmProducto");
+        }
+        
     }
 }
