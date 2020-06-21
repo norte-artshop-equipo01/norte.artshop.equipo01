@@ -1,9 +1,9 @@
 ﻿@{
-    ViewBag.Title = "AbmArtistas";
+    Layout = "~/Views/Backend/_LayoutBackend.cshtml";
 }
-<head>
-    <link href="~/Content/Formulario.css" rel="stylesheet" />
-</head>
+    <head>
+        <link href="~/Content/Formulario.css" rel="stylesheet" />
+    </head>
 
 <body>
     <h1 class="h1_home">Nuevo Artista</h1>
@@ -13,27 +13,27 @@
         <form method="post" action="Create">
             <p>
                 <label for="txtFirstName">Nombre:</label>
-                <input name="txtFirstName" id="txtFirstName" type="text" maxlength="30" required />
+                <input name="FirstName" id="txtFirstName" type="text" maxlength="30" required />
             </p>
             <br />
             <p>
                 <label for="txtLastName">Apellido:</label>
-                <input name="txtLastName" id="txtLastName" type="text" maxlength="30" required />
+                <input name="LastName" id="txtLastName" type="text" maxlength="30" required />
             </p>
             <br />
             <p>
                 <label for="txtLifeSpan">Edad:</label>
-                <input name="txtLifeSpan" id="txtLifeSpan" type="number" maxlength="3" /> <br />
+                <input name="LifeSpan" id="txtLifeSpan" type="number" maxlength="3" /> <br />
             </p>
             <br />
             <p>
                 <label for="txtCountry">País:</label>
-                <input name="txtCountry" id="txtCountry" type="text" maxlength="30" />
+                <input name="Country" id="txtCountry" type="text" maxlength="30" />
             </p>
             <br />
             <p>
                 <label for="txtDescription">Descripción:</label> <br />
-                <textarea id="txtDescription" name="txtDescription2" rows="10" cols="60"> </textarea>
+                <textarea id="txtDescription" name="Description" rows="10" cols="60"> </textarea>
             </p>
             <br />
             <div class="div_button">

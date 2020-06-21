@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Artshop.Website.Controllers
 {
-    [Authorize]
+    
     public class HomeController : Controller
     {
         private readonly DatabaseConnection db;
@@ -43,6 +43,7 @@ namespace Artshop.Website.Controllers
 
             return View(db.ProductManager.GetAllProducts());
         }
+        [Authorize]
         public ActionResult Artistas()
         {
             ViewBag.Message = "La página de descripción de su aplicación.";
