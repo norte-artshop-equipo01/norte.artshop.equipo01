@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Artistas";
+}
+@model List<Artshop.Data.Data.EntityFramework.Artist>
+<h1 class="h1_home">Artistas</h1>
+<hr />
+<h2>Actualmente contamos con obras de los siguientes artistas:</h2>
+
+<div>
+    <ol>
+        @foreach (var elemento in Model)
+        {
+            <li>@elemento.FirstName, @elemento.LastName</li>
+        }
+    </ol>
+    <br />
+</div>

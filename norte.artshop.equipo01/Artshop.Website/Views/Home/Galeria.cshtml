@@ -1,0 +1,18 @@
+﻿@model List<Artshop.Data.Data.EntityFramework.Product>
+@{ViewBag.Title = "Galeria";
+}
+
+<h1 class="h1_home"><b>Galeria</b></h1>
+<hr />
+<div style="width:100%">
+    
+    @foreach (var elemento in Model)
+    {
+        <div class="contimagenes">
+            <img src="~/content/images/Products/@(elemento.Image)" class="imagengal">
+            <p>@elemento.Title, <nombre style="font-style:normal"> @elemento.Artist.FirstName @elemento.Artist.LastName</nombre></p>
+            <br />
+            <input type="button" name="Agregar" value="Agregar al Carrito" />
+        </div>
+     }
+</div>

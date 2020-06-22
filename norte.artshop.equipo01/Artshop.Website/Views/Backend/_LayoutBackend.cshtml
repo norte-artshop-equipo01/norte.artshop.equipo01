@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Spark Art - Backend</title>
+    @Styles.Render("~/Content/backendcss")
+</head>
+<body>
+   
+    <div id="container">
+        <!-- Cabecera -->
+        <header>
+            <a href="/Backend/Index"><img class="logo-header" src="~/Content/images/Logo_200x200.png" alt="Logo" /></a>
+            <nav class="menu-nav">
+                <ul>
+                    <li><a href="/Backend/Index">Inicio</a> </li>
+                    <li><a href="/Backend/ABM2">ABM2</a> </li>
+                    <li><a href="/Backend/AbmArtistas">ABM Artistas</a> </li>
+                    <li><a href="/Backend/AbmProducto">ABM Producto</a> </li>
+                    <li><a href="/Home/Galeria">Galería</a> </li>
+                </ul>
+            </nav>
+        </header>
+        <!-- Contenido relacionado-->
+        <aside class="aside">
+            <article>
+                <div>
+                    <h3 style="text-align:center">Menú</h3>
+                    <br />
+                    <nav class="menu-nav-aside">
+                        <ul>
+                            <!--
+                            <li><a href="/Backend/Index">Inicio</a> </li>
+                            <li><a href="/Backend/ABM2">ABM2</a> </li>
+                            <li><a href="/Backend/AbmArtistas">ABM Artistas</a> </li>
+                            <li><a href="/Backend/Index">Artistas</a> </li>
+                            <li><a href="/Backend/Index">Galería</a> </li>
+                             -->
+                        </ul>
+                    </nav>
+                </div>
+                <hr />
+                <br />
+                <br />
+                <div>
+                    <h3>Menú Administrador</h3>
+                    <div class="menu-nav-aside">
+                        <ul>
+                            <li><a href="/Backend/Index">Inicio</a> </li>
+                            <li><a href="/Backend/ABM2">ABM2</a> </li>
+                            <li><a href="/Backend/AbmArtistas">ABM Artistas</a> </li>
+                            <li><a href="/Backend/Index">Artistas</a> </li>
+                            <li><a href="/Home/Galeria">Galería</a> </li>
+
+
+                            <li><a href="/Backend/AbmArtistas">ABM Artistas</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+        </aside>
+        <!-- Contenido -->
+        <section>
+            <article>
+                @RenderBody()
+            </article>
+        </section>
+
+
+        <!-- Pie de pagina -->
+        <footer>
+            <div>
+                <div class="footer">
+
+                    <div>
+                        <a href="/Backend/Index"><img class="logo-footer" src="~/content/images/Logo_200x200.png" alt="Logo de la Institución" /></a>
+                    </div>
+                    <div>
+                        <p>
+                            Teléfono:  +54 11 4433 5566 | Dirección:  Suipacha 1234 | Retiro. Buenos Aires, Argentina.
+                            <br />
+                            &copy; @DateTime.Now.Year | http://www.nortegrupo01.somee.com
+                        </p>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

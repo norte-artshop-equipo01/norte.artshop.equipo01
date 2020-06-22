@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Spark Art - Galeria de Arte</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="wrapper">
+        <header id="header">
+            <div id="logo">
+                <a href="/home/Index"><img class="logo-header" src="~/Content/Images/Logo_200x200.png" alt="Logo" /></a> <!--class="logo-header"-->
+                    <!--a <h1><a href="/">Spark Art</a></h1>
+                          <h2><span>Galeria de Arte</span></h2>
+                    a-->
+</div>
+        </header>
+        <nav id="menu">
+            <ul>
+                <li class="active"><a href="/">Inicio</a></li>
+                <li><a href="/home/Artistas">Artistas</a></li>
+                <li><a href="/home/Galeria">Galería</a></li>
+                <li><a href="/home/about/">Nosotros</a></li>
+                <li><a href="/home/contact/">Contacto</a></li>
+            </ul>
+        </nav>
+        <section id="page">
+            <article id="content">
+                @RenderBody()
+            </article>
+
+            <article id="sidebar">
+                <ul>
+                    <li id="search">
+                        <h2 class="search">Que obra estas buscando?</h2>
+                        <form method="get" action="">
+                            <fieldset>
+                                <input type="text" id="search-text" name="s" value="" autocomplete="off" />
+                                <input type="submit" id="search-submit" value="Buscar" />
+                            </fieldset>
+                        </form>
+                    </li>
+                    <li>
+                        <h2 class="categories">Lo más buscado</h2>
+                        <ul>
+                            <li><a href="#">La Primavera - Botticelli</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul>
+                            <li><a href="#">La Columna Rota - Khalo</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </article>
+            <div style="clear: both; height: 1px"></div>
+        </section>
+
+        <footer id="footer">
+            <div>
+                <div class="footer">
+                    <div class="footer-logo">
+                        <a href="/home/Index"><img class="logo-footer" src="~/Content/Images/Logo_200x200.png" alt="Logo" /></a>
+                    </div>
+                    <div class="footer-text">
+                        <p>
+                            Teléfono:  +54 11 4433 5566
+                            <br />
+                            Dirección:  Suipacha 1234
+                            <br />
+                            Retiro. Buenos Aires, Argentina.
+                            <br />
+                            spark-art@spark-art.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

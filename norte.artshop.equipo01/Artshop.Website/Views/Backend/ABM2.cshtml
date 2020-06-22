@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "ABM2";
+    Layout = "~/Views/Backend/_LayoutBackend.cshtml";
+}
+
+@model Artshop.Data.Data.EntityFramework.Artist 
+
+<head>
+    <link href="~/Content/Formulario.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1 class="h1_home">Nuevo Artista</h1>
+    <hr />
+    <br />
+    <div class="container">
+        @using (Html.BeginForm("Create2", "Backend", FormMethod.Post))
+        {
+            <p>
+                <label>Nombre:</label>
+                @Html.TextBoxFor(x => x.FirstName)
+                
+            </p>
+            <br />
+            <p>
+                <label >Apellido:</label>
+                @Html.TextBoxFor(x => x.LastName)
+                
+            </p>
+            <br />
+            <p>
+                <label>Edad:</label>
+                @Html.TextBoxFor(x => x.LifeSpan)
+            </p>
+            <br />
+            <p>
+                <label>País:</label>
+                @Html.TextBoxFor(x => x.Country)
+            </p>
+            <br />
+            <p>
+                <label>Descripción:</label> <br />
+                @Html.TextAreaFor(x => x.Description)
+            </p>
+            <br />
+            <div class="div_button">
+                <input class="button" type="submit" value="Guardar" />
+            </div>
+        }
+    </div>
+</body>

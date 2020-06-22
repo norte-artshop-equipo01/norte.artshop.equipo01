@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "AbmProducto";
+    Layout = "~/Views/Backend/_LayoutBackend.cshtml";
+
+    List<SelectListItem> Artistas = (List<SelectListItem>)ViewBag.artistas;
+    @model Artshop.Data.Data.EntityFramework.Product
+
+
+
+}
+
+<head>
+    <link href="~/Content/Formulario.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1 class="h1_home">ABM Producto</h1>
+    <hr />
+    <br />
+    <div class="container">
+        @using (Html.BeginForm("CreateObra", "Backend", FormMethod.Post))
+        { 
+        <p>
+            <label>Titulo de la obra </label>
+
+            @Html.TextBoxFor(x => x.Title, new { @type = "text" })
+
+        </p>
+            <br />
+            <p>
+                <label>Artista</label>
+                @Html.DropDownListFor(x => x.ArtistId, Artistas)
+
+            </p>
+            <br />
+
+            <p>
+                <label for="txtPrecio">Precio</label>
+                @Html.TextBoxFor(x => x.Price, new { @type = "number", @min = "1" })
+            </p>
+            <br />
+            <p>
+                <label for="txtDescription">Descripción:</label>
+                @Html.TextAreaFor(x => x.Description)
+            </p>
+            <br />
+            <br />
+            <p>
+                <label for="txtfile">Archivo</label>
+                @Html.TextBoxFor(x => x.Image, new { @value = @Html.Partial("_Uploadphoto") })
+            </p>
+            
+            
+                <input class="button" type="submit" value="Guardar Registro" />
+            
+            <br />
+            <br />
+        }
+
+
+
+        @Html.Partial("_Uploadphoto")
+
+
+
+</body>
+
