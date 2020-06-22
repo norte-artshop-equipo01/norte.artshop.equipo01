@@ -43,11 +43,11 @@ namespace Artshop.Website.Controllers
 
             return View(db.ProductManager.GetAllProducts());
         }
-        [Authorize]
+        
         public ActionResult Artistas()
         {
             ViewBag.Message = "La página de descripción de su aplicación.";
-            return View();
+            return View(db.ArtistManager.GetAllArtists());
         }
         public ActionResult AbmArtistas()
         {
