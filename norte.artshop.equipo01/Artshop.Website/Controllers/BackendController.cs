@@ -1,7 +1,9 @@
 ﻿using Artshop.Data.Data;
 using Artshop.Data.Data.EntityFramework;
+using Microsoft.Owin.Security.Provider;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -9,7 +11,7 @@ using System.Web.Mvc;
 
 
 namespace Artshop.Website.Controllers
-{   [Authorize(Roles = "Administrator")]
+{   //[Authorize(Roles = "Administrator")]
    
     public class BackendController : Controller
     {
@@ -31,8 +33,21 @@ namespace Artshop.Website.Controllers
         {
             return View();
         }
-        public ActionResult AmbProducto()
+        public ActionResult AbmProducto()
         {
+            //List<Artist> artistas = this.db.ArtistManager.GetAllArtists();
+
+            List<SelectListItem> artistas = db.ArtistManager.GetAllArtists().ConvertAll(
+                d =>
+                {
+                    return new SelectListItem()
+                    {
+                        Text = d.FirstName+" "+d.LastName,
+                        Value = d.Id.ToString()
+                    };
+                }).ToList();
+                ViewBag.artistas = artistas;
+
             return View();
         }
 
@@ -74,6 +89,8 @@ namespace Artshop.Website.Controllers
             var newproduct = new Product();
             UpdateModel(product);
             newproduct = product;
+            newproduct.QuantitySold = 0;
+            newproduct.AvgStars = 0;
             newproduct.CreatedOn = DateTime.Now;
             newproduct.ChangedOn = DateTime.Now;
             newproduct.CreatedBy = User.Identity.Name;
@@ -82,6 +99,30 @@ namespace Artshop.Website.Controllers
 
             return RedirectToAction("AbmProducto");
         }
+        [HttpPost]
+        public ActionResult FileUpload(HttpPostedFileBase uploadFile)
+        {
+            if (uploadFile.ContentLength > 0)
+            {
+                string relativePath = "~/Content/Images/Products/" + Path.GetFileName(uploadFile.FileName);
+                string physicalPath = Server.MapPath(relativePath);
+                uploadFile.SaveAs(physicalPath);
+                //return View((object)relativePath);
+            }
+            List<SelectListItem> artistas = db.ArtistManager.GetAllArtists().ConvertAll(
+                d =>
+                {
+                    return new SelectListItem()
+                    {
+                        Text = d.FirstName + " " + d.LastName,
+                        Value = d.Id.ToString()
+                    };
+                }).ToList();
+            ViewBag.artistas = artistas;
+
+            return View("AbmProducto");
+        }
+
         
     }
 }

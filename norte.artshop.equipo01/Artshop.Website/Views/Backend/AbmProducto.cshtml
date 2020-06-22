@@ -1,54 +1,68 @@
 ﻿
 @{
-    ViewBag.Title = "AmbProducto";
+    ViewBag.Title = "AbmProducto";
     Layout = "~/Views/Backend/_LayoutBackend.cshtml";
+
+    List<SelectListItem> Artistas = (List<SelectListItem>)ViewBag.artistas;
+    @model Artshop.Data.Data.EntityFramework.Product
+
+
+
 }
-
-
-@model Artshop.Data.Data.EntityFramework.Product
 
 <head>
     <link href="~/Content/Formulario.css" rel="stylesheet" />
 </head>
 
 <body>
-    <h1 class="h1_home">AMB Producto</h1>
+    <h1 class="h1_home">ABM Producto</h1>
     <hr />
     <br />
     <div class="container">
         @using (Html.BeginForm("CreateObra", "Backend", FormMethod.Post))
-        {
+        { 
+        <p>
+            <label>Titulo de la obra </label>
+
+            @Html.TextBoxFor(x => x.Title, new { @type = "text" })
+
+        </p>
+            <br />
             <p>
-                <label for="txtFirstName">Nombre:</label>
-                @Html.TextBoxFor(x => x.)
+                <label>Artista</label>
+                @Html.DropDownListFor(x => x.ArtistId, Artistas)
 
             </p>
             <br />
-            <p>
-                <label for="txtLastName">Apellido:</label>
-                @Html.TextBoxFor(x => x.LastName)
 
+            <p>
+                <label for="txtPrecio">Precio</label>
+                @Html.TextBoxFor(x => x.Price, new { @type = "number", @min = "1" })
             </p>
             <br />
             <p>
-                <label for="txtLifeSpan">Edad:</label>
-                @Html.TextBoxFor(x => x.LifeSpan)
-            </p>
-            <br />
-            <p>
-                <label for="txtCountry">País:</label>
-                @Html.TextBoxFor(x => x.Country)
-            </p>
-            <br />
-            <p>
-                <label for="txtDescription">Descripción:</label> <br />
+                <label for="txtDescription">Descripción:</label>
                 @Html.TextAreaFor(x => x.Description)
             </p>
             <br />
-            <div class="div_button">
-                <input class="button" type="submit" value="Guardar" />
-            </div>
+            <br />
+            <p>
+                <label for="txtfile">Archivo</label>
+                @Html.TextBoxFor(x => x.Image, new { @value = @Html.Partial("_Uploadphoto") })
+            </p>
+            
+            
+                <input class="button" type="submit" value="Guardar Registro" />
+            
+            <br />
+            <br />
         }
-    </div>
+
+
+
+        @Html.Partial("_Uploadphoto")
+
+
+
 </body>
 

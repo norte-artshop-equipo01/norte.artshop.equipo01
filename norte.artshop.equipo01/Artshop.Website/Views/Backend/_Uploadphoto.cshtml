@@ -1,0 +1,13 @@
+﻿@model string
+<h2>Subir Archivo</h2>
+
+@using (Html.BeginForm("FileUpload", "Backend", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<input name="uploadFile" type="file" />
+<!----><input type="submit" value="Upload File" />
+}
+
+@if (!string.IsNullOrEmpty(Model))
+{
+    <img src="@Url.Content(Model)" alt="" />
+}

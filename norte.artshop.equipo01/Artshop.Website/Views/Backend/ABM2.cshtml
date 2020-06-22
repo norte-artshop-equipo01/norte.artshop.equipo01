@@ -18,29 +18,29 @@
         @using (Html.BeginForm("Create2", "Backend", FormMethod.Post))
         {
             <p>
-                <label for="txtFirstName">Nombre:</label>
+                <label>Nombre:</label>
                 @Html.TextBoxFor(x => x.FirstName)
                 
             </p>
             <br />
             <p>
-                <label for="txtLastName">Apellido:</label>
+                <label >Apellido:</label>
                 @Html.TextBoxFor(x => x.LastName)
                 
             </p>
             <br />
             <p>
-                <label for="txtLifeSpan">Edad:</label>
+                <label>Edad:</label>
                 @Html.TextBoxFor(x => x.LifeSpan)
             </p>
             <br />
             <p>
-                <label for="txtCountry">País:</label>
+                <label>País:</label>
                 @Html.TextBoxFor(x => x.Country)
             </p>
             <br />
             <p>
-                <label for="txtDescription">Descripción:</label> <br />
+                <label>Descripción:</label> <br />
                 @Html.TextAreaFor(x => x.Description)
             </p>
             <br />
