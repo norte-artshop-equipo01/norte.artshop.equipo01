@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 
 namespace Artshop.Website.Controllers
-{   //[Authorize(Roles = "Administrator")]
+{   [Authorize(Roles = "Administrator")]
    
     public class BackendController : Controller
     {
