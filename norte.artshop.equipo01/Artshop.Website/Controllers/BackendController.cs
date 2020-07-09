@@ -54,15 +54,14 @@ namespace Artshop.Website.Controllers
         [HttpPost]
         public ActionResult Create2(Artist artista)
         {
-            var newartist = new Artist();
-            UpdateModel(artista);
-            newartist = artista;
-            newartist.CreatedOn = DateTime.Now;
-            newartist.ChangedOn = DateTime.Now;
-            newartist.CreatedBy = User.Identity.Name;
-            newartist.ChangedBy = User.Identity.Name;
-            db.ArtistManager.AddNewArtist(newartist);
             
+            UpdateModel(artista);
+            artista.CreatedOn = DateTime.Now;
+            artista.ChangedOn = DateTime.Now;
+            artista.CreatedBy = User.Identity.Name;
+            artista.ChangedBy = User.Identity.Name;
+            db.ArtistManager.AddNewArtist(artista);
+          
             return RedirectToAction("ABM2");
         }
 
@@ -86,16 +85,16 @@ namespace Artshop.Website.Controllers
         [HttpPost]
         public ActionResult CreateObra(Product product)
         {
-            var newproduct = new Product();
+            
             UpdateModel(product);
-            newproduct = product;
-            newproduct.QuantitySold = 0;
-            newproduct.AvgStars = 0;
-            newproduct.CreatedOn = DateTime.Now;
-            newproduct.ChangedOn = DateTime.Now;
-            newproduct.CreatedBy = User.Identity.Name;
-            newproduct.ChangedBy = User.Identity.Name;
-            db.ProductManager.AddNewProduct(newproduct);
+            
+            product.QuantitySold = 0;
+            product.AvgStars = 0;
+            product.CreatedOn = DateTime.Now;
+            product.ChangedOn = DateTime.Now;
+            product.CreatedBy = User.Identity.Name;
+            product.ChangedBy = User.Identity.Name;
+            db.ProductManager.AddNewProduct(product);
 
             return RedirectToAction("AbmProducto");
         }
