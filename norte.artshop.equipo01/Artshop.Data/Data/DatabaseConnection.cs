@@ -2,6 +2,8 @@
 using Artshop.Data.Data.Managers;
 using Artshop.Data.Managers;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web;
 
 namespace Artshop.Data.Data
@@ -48,6 +50,22 @@ namespace Artshop.Data.Data
             };
 
             database.Add(error);
+        }
+        public List<ValidationResult> ValidateModel<T>(T model)
+        {
+            ValidationContext v = new ValidationContext(model);
+            List<ValidationResult> r = new List<ValidationResult>();
+
+            bool validate = Validator.TryValidateObject(model, v, r, true);
+
+            if (validate)
+            {
+                return null;
+            }
+            else
+            {
+                return r;
+            }
         }
     }
 }

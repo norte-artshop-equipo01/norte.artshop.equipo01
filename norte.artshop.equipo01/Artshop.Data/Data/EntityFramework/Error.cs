@@ -27,8 +27,8 @@ namespace Artshop.Data.Data.EntityFramework
 
         public Error()
         {
-            CreatedBy = "monitor@artshop.com";
-            ChangedBy = "monitor@artshop.com";
+            CreatedBy = "system@nortegrupo01.somee.com";
+            ChangedBy = "system@nortegrupo01.somee.com";
         }
     }
 }

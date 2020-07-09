@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Artshop.Website.Controllers
 {
-    public class ArtistController : Controller
+    public class ArtistController : BaseController
     {
         private readonly DatabaseConnection db;
         public ArtistController()
@@ -29,15 +29,27 @@ namespace Artshop.Website.Controllers
         [HttpPost]
         public ActionResult Create(Artist artista)
         {
-            
-            UpdateModel(artista);
-            artista.CreatedOn = DateTime.Now;
-            artista.ChangedOn = DateTime.Now;
-            artista.CreatedBy = User.Identity.Name;
-            artista.ChangedBy = User.Identity.Name;
-            db.ArtistManager.AddNewArtist(artista);
+            CheckAuditPattern(artista, true);
+            var listModel = db.ValidateModel(artista);
+            if (ModelIsValid(listModel))
+                return View(artista);
 
-            return RedirectToAction("Create");
+
+
+            try
+            {
+                db.ArtistManager.AddNewArtist(artista);
+                return RedirectToAction("Create");
+            }
+            catch (Exception ex)
+            {
+                db.Logger(ex, System.Web.HttpContext.Current);
+                ViewBag.MessageDanger = "Chequear Datos ingresados";
+                return View(artista);
+            }
+            
+            
+
         }
     }
 }

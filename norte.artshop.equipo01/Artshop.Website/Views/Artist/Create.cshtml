@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ABM2";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Backend/_LayoutBackend.cshtml";
 }
 
@@ -14,19 +14,22 @@
     <h1 class="h1_home">Nuevo Artista</h1>
     <hr />
     <br />
+    <span class="text-danger">@ViewBag.MessageDanger</span>
+    <br />
+    <br />
     <div class="container">
-        @using (Html.BeginForm("Create2", "Backend", FormMethod.Post))
+        @using (Html.BeginForm("Create", "Artist", FormMethod.Post))
         {
             <p>
                 <label>Nombre:</label>
                 @Html.TextBoxFor(x => x.FirstName)
-                
+
             </p>
             <br />
             <p>
-                <label >Apellido:</label>
+                <label>Apellido:</label>
                 @Html.TextBoxFor(x => x.LastName)
-                
+
             </p>
             <br />
             <p>
@@ -42,6 +45,8 @@
             <p>
                 <label>Descripción:</label> <br />
                 @Html.TextAreaFor(x => x.Description)
+
+                            
             </p>
             <br />
             <div class="div_button">

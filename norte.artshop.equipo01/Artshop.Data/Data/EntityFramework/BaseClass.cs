@@ -18,5 +18,6 @@ namespace Artshop.Data.Data.EntityFramework
             CreatedOn = DateTime.Now;
             ChangedOn = DateTime.Now;
         }
+        
     }
 }

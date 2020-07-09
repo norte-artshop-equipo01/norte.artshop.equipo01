@@ -30,7 +30,7 @@ namespace Artshop.Data.Data.EntityFramework
         public void Add<T>(T item) where T : class
         {
             entities.Set<T>().Add(item);
-            entities.SaveChanges();
+            entities.SaveChanges();    
         }
 
         public void CloseConnection()
