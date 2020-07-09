@@ -52,6 +52,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,7 +73,11 @@
     <Compile Include="Data\EntityFramework\AspNetUsers.cs">
       <DependentUpon>SparkArt.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\EntityFramework\BaseClass.cs" />
     <Compile Include="Data\EntityFramework\C__MigrationHistory.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityFramework\Error.cs">
       <DependentUpon>SparkArt.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Managers\ArtistManager.cs" />
@@ -88,9 +93,6 @@
       <DependentUpon>SparkArt.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\EntityFramework\EntityFrameworkData.cs" />
-    <Compile Include="Data\EntityFramework\Error.cs">
-      <DependentUpon>SparkArt.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\EntityFramework\Order.cs">
       <DependentUpon>SparkArt.tt</DependentUpon>
     </Compile>

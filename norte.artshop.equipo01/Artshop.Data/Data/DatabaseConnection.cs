@@ -1,5 +1,8 @@
-﻿using Artshop.Data.Data.Managers;
+﻿using Artshop.Data.Data.EntityFramework;
+using Artshop.Data.Data.Managers;
 using Artshop.Data.Managers;
+using System;
+using System.Web;
 
 namespace Artshop.Data.Data
 {
@@ -24,6 +27,27 @@ namespace Artshop.Data.Data
         public void RunCustomCommand(string command)
         {
             database.RunCustomCommand(command);
+        }
+
+        public void Logger(Exception exception, HttpContext context)
+        {
+            string userId = string.Empty;
+            try { userId = context.User.Identity.Name; }
+            catch {/* no hacer nada, o enviar un correo electrónico al webmaster */ }
+
+            var error = new Error
+            {
+                UserId = userId,
+                Exception = exception.GetType().FullName,
+                Message = exception.Message,
+                Everything = exception.ToString(),
+                IpAddress = context.Request.UserHostAddress,
+                UserAgent = context.Request.UserAgent,
+                PathAndQuery = context.Request.Url == null ? string.Empty : context.Request.Url.PathAndQuery,
+                HttpReferer = context.Request.UrlReferrer == null ? string.Empty : context.Request.UrlReferrer.PathAndQuery,
+            };
+
+            database.Add(error);
         }
     }
 }

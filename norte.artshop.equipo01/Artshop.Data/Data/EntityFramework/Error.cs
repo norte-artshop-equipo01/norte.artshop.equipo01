@@ -12,10 +12,10 @@ namespace Artshop.Data.Data.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Error
+    public partial class Error : BaseClass
     {
         public int Id { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public string UserId { get; set; }
         public Nullable<System.DateTime> ErrorDate { get; set; }
         public string IpAddress { get; set; }
         public string UserAgent { get; set; }
@@ -24,9 +24,5 @@ namespace Artshop.Data.Data.EntityFramework
         public string Everything { get; set; }
         public string HttpReferer { get; set; }
         public string PathAndQuery { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string ChangedBy { get; set; }
-        public System.DateTime ChangedOn { get; set; }
     }
 }
