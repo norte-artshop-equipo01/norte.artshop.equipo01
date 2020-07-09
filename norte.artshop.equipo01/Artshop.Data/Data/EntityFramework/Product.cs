@@ -12,7 +12,7 @@ namespace Artshop.Data.Data.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Product : BaseClass
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
@@ -29,10 +29,6 @@ namespace Artshop.Data.Data.EntityFramework
         public double Price { get; set; }
         public int QuantitySold { get; set; }
         public double AvgStars { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime ChangedOn { get; set; }
-        public string ChangedBy { get; set; }
     
         public virtual Artist Artist { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
