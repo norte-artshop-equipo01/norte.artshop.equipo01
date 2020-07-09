@@ -11,7 +11,8 @@ namespace Artshop.Data.Data.EntityFramework
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Artist
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +24,8 @@ namespace Artshop.Data.Data.EntityFramework
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        [NotMapped]
+        public string FullName { get { return FirstName + " " + LastName; } }
         public string LifeSpan { get; set; }
         public string Country { get; set; }
         public string Description { get; set; }
