@@ -114,7 +114,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="40" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
           <Property Name="ErrorDate" Type="datetime" />
           <Property Name="IpAddress" Type="nvarchar" MaxLength="40" />
           <Property Name="UserAgent" Type="nvarchar(max)" />
