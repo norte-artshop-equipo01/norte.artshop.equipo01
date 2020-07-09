@@ -16,7 +16,7 @@ namespace Artshop.Data.Managers
 
         public void AddNewArtist(Artist artist)
         {
-            arti
+            
             _database.Add(artist);
         }
 
