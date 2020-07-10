@@ -27,29 +27,56 @@ namespace Artshop.Website.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Artist artista)
+        public ActionResult _CreatePartial(Artist artista)
         {
             CheckAuditPattern(artista, true);
-            var listModel = db.ValidateModel(artista);
+            /*var listModel = db.ValidateModel(artista);
             if (ModelIsValid(listModel))
-                return View(artista);
-
-
-
+            {
+                
+                ViewBag.Message = "Chequear Datos ingresados";
+                return RedirectToAction("Index");
+            }*/
             try
             {
                 db.ArtistManager.AddNewArtist(artista);
-                return RedirectToAction("Create");
+                ViewBag.Message = "Artista Ingresado" + " "+ artista.FullName;
+                
             }
             catch (Exception ex)
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
-                ViewBag.MessageDanger = "Chequear Datos ingresados";
-                return View(artista);
+                ViewBag.Message = "Chequear Datos ingresados";
+                return RedirectToAction("Index");
+               
+               
             }
-            
-            
+            return RedirectToAction("Index");
+
 
         }
+        public ActionResult Delete(int id)
+        {
+            var artista = db.ArtistManager.FindArtist(x => x.Id == id).FirstOrDefault();
+            if (artista == null)
+            {
+                ViewBag.Message = "El artista no se encuentra";
+                return RedirectToAction("Index");
+            }
+            try
+            {
+                db.ArtistManager.RemoveArtist(artista);
+                ViewBag.Message = "Artista eliminado";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                db.Logger(ex, System.Web.HttpContext.Current);
+                ViewBag.Message = "No se pudo eliminar el artista";
+                return RedirectToAction("Index");
+            }   
+        }
+       
+       
     }
 }

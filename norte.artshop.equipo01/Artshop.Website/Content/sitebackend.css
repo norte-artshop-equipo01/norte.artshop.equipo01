@@ -227,8 +227,8 @@ footer {
     background-color: transparent;
     border-collapse: collapse;
     border-spacing: 0;
-    width: 100%;
-    max-width: 100%;
+    width: 98%;
+    max-width: 98%;
 }
 
     .table td, .table th {

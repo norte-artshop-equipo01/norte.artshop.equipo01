@@ -286,6 +286,7 @@
     <Content Include="Views\Backend\_Uploadphoto.cshtml" />
     <Content Include="Views\Artist\Create.cshtml" />
     <Content Include="Views\Artist\Index.cshtml" />
+    <Content Include="Views\Artist\_CreatePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -25,14 +25,7 @@ namespace Artshop.Website.Controllers
         {
             return View();
         }
-        public ActionResult ABM2()
-        {
-            return View();
-        }
-        public ActionResult AbmArtistas()
-        {
-            return View();
-        }
+       
         public ActionResult AbmProducto()
         {
             //List<Artist> artistas = this.db.ArtistManager.GetAllArtists();
@@ -51,37 +44,7 @@ namespace Artshop.Website.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Create2(Artist artista)
-        {
-            
-            UpdateModel(artista);
-            artista.CreatedOn = DateTime.Now;
-            artista.ChangedOn = DateTime.Now;
-            artista.CreatedBy = User.Identity.Name;
-            artista.ChangedBy = User.Identity.Name;
-            db.ArtistManager.AddNewArtist(artista);
-          
-            return RedirectToAction("ABM2");
-        }
-
-        [HttpPost]
-        public ActionResult Create(FormCollection artista)
-        {
-            var newartist = new Artist();
-            UpdateModel(newartist);
-            newartist.FirstName = artista["FirstName"];
-            newartist.LastName = artista["LastName"];
-            newartist.LifeSpan = artista["LifeSpan"];
-            newartist.Country = artista["Country"];
-            newartist.Description = artista["Description"];
-            newartist.CreatedOn = DateTime.Now;
-            newartist.ChangedOn = DateTime.Now;
-            newartist.CreatedBy = User.Identity.Name;
-            newartist.ChangedBy = User.Identity.Name;
-            db.ArtistManager.AddNewArtist(newartist);
-            return RedirectToAction("AbmArtistas");
-        }
+             
         [HttpPost]
         public ActionResult CreateObra(Product product)
         {

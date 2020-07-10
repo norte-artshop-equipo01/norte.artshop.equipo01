@@ -1,10 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create2";
     Layout = "~/Views/Backend/_LayoutBackend.cshtml";
 }
 
-@model Artshop.Data.Data.EntityFramework.Artist 
+@model Artshop.Data.Data.EntityFramework.Artist
 
 <head>
     <link href="~/Content/Formulario.css" rel="stylesheet" />
@@ -18,36 +18,44 @@
     <br />
     <br />
     <div class="container">
-        @using (Html.BeginForm("Create", "Artist", FormMethod.Post))
+       @using (Html.BeginForm("Create", "Artist", FormMethod.Post))
         {
-            <p>
-                <label>Nombre:</label>
-                @Html.TextBoxFor(x => x.FirstName)
+            <div>
+                @Html.LabelFor(x => x.FirstName)
+                <div>
+                    @Html.TextBoxFor(x => x.FirstName)
+                    @Html.ValidationMessageFor(x => x.FirstName, "", new { })
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(x => x.LastName)
+                <div>
+                    @Html.TextBoxFor(x => x.LastName)
+                    @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(x => x.LifeSpan)
+                <div>
+                    @Html.TextBoxFor(x => x.LifeSpan)
+                    @Html.ValidationMessageFor(x => x.LifeSpan, "", new { })
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(x => x.Country)
+                <div>
+                    @Html.TextBoxFor(x => x.Country)
+                    @Html.ValidationMessageFor(x => x.Country, "", new { })
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(x => x.Description)
+                <div>
+                    @Html.TextBoxFor(x => x.Description)
+                    @Html.ValidationMessageFor(x => x.Description, "", new { })
+                </div>
+            </div>
 
-            </p>
-            <br />
-            <p>
-                <label>Apellido:</label>
-                @Html.TextBoxFor(x => x.LastName)
-
-            </p>
-            <br />
-            <p>
-                <label>Edad:</label>
-                @Html.TextBoxFor(x => x.LifeSpan)
-            </p>
-            <br />
-            <p>
-                <label>País:</label>
-                @Html.TextBoxFor(x => x.Country)
-            </p>
-            <br />
-            <p>
-                <label>Descripción:</label> <br />
-                @Html.TextAreaFor(x => x.Description)
-
-                            
-            </p>
             <br />
             <div class="div_button">
                 <input class="button" type="submit" value="Guardar" />
@@ -55,3 +63,4 @@
         }
     </div>
 </body>
+    

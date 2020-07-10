@@ -1,0 +1,88 @@
+﻿
+
+@model Artshop.Data.Data.EntityFramework.Artist
+@using (Html.BeginForm("_CreatePartial", "Artist", FormMethod.Post))
+{
+    <div>
+        <span class="text-danger">@ViewBag.Message</span>
+
+    </div>
+    <br/>
+    <div>
+        <h2>Agregar Nuevo Artista</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LifeSpan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+
+
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.FirstName)
+                @Html.ValidationMessageFor(x => x.FirstName, "", new { })
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.LastName)
+                @Html.ValidationMessageFor(x => x.LastName, "", new { })
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.LifeSpan)
+                @Html.ValidationMessageFor(x => x.LifeSpan, "", new { })
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.Country)
+                @Html.ValidationMessageFor(x => x.Country, "", new { })
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.Description)
+                @Html.ValidationMessageFor(x => x.Description, "", new { })
+            </td>
+            <td>
+                <div class="div_button">
+                    <input class="button" type="submit" value="Agregar" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+               
+                @Html.ValidationMessageFor(x => x.FirstName, "", new { })
+            </td>
+            <td>
+           
+                @Html.ValidationMessageFor(x => x.LastName, "", new { })
+            </td>
+            <td>
+               
+                @Html.ValidationMessageFor(x => x.LifeSpan, "", new { })
+            </td>
+            <td>
+               
+                @Html.ValidationMessageFor(x => x.Country, "", new { })
+            </td>
+            <td>
+              
+                @Html.ValidationMessageFor(x => x.Description, "", new { })
+            </td>
+        </tr>
+
+
+    </table>
+}
