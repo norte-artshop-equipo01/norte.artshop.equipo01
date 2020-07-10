@@ -60,7 +60,7 @@ namespace Artshop.Website.Controllers
             var artista = db.ArtistManager.FindArtist(x => x.Id == id).FirstOrDefault();
             if (artista == null)
             {
-                ViewBag.Message = "El artista no se encuentra";
+                ViewBag.Messagealert = "El artista no se encuentra";
                 return View("Index", db.ArtistManager.GetAllArtists());
             }
             try
@@ -71,10 +71,10 @@ namespace Artshop.Website.Controllers
             catch (Exception ex)
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
-                ViewBag.Message = "No se pudo eliminar el artista";
+                ViewBag.Messagealert = "No se pudo eliminar el artista " + artista.FullName;
                 return View("Index", db.ArtistManager.GetAllArtists());
             }
-            ViewBag.Message = "Artista" + artista.FullName + " eliminado";
+            ViewBag.Messagealert = "Artista " + artista.FullName + " fue eliminado";
             return View("Index", db.ArtistManager.GetAllArtists());
 
         }
@@ -99,11 +99,11 @@ namespace Artshop.Website.Controllers
             catch (Exception ex)
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
-                ViewBag.Message = "Chequear Datos ingresados excepcion nueva";
+                ViewBag.Messagealert = "Chequear Datos ingresados excepcion nueva";
                 return View("Index", db.ArtistManager.GetAllArtists()); ;
             }
 
-            ViewBag.Message="Artista " + newartist.FullName + " ingresado";
+            ViewBag.Message="Artista " + newartist.FullName + " ingresado correctamente";
             return View("Index", db.ArtistManager.GetAllArtists());
         }
 

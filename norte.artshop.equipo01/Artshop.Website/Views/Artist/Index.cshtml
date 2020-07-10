@@ -11,16 +11,16 @@
     <div class="table">
         <h1 class="h1_home"> Administración de Artistas</h1>
         <br />
-        <h2 class="alerta">@ViewBag.message<br /></h2>
+        <h2 class="confirmacion">@ViewBag.message</h2>
+        <h2 class="alerta">@ViewBag.Messagealert</h2>
+        
         <br />
 
-        <!-- <div>
-        <a href="/Artist/Create" class="btn-input">Nuevo Artista</a>
-    </div>
-       -->
+
         <div>
             <h2>Agregar Nuevo Artista</h2>
         </div>
+        <!--Tabla para agrgar un artista-->
         @using (Html.BeginForm("Create", "Artist", FormMethod.Post))
         {
             <table class="table">
@@ -71,15 +71,11 @@
             </table>
         }
 
-
-
-
-
         <br />
         <h2 class="">Total de artistas  @Enumerable.Count(Model)</h2>
-
-
         <br />
+
+        <!--Tabla para mostrar los artistas-->
         <div>
             <table class="table">
                 <tr>
@@ -139,9 +135,9 @@
         </div>
 
         <br />
-        <div>
-            <a href="/Artist/Create" class="btn-input">Nuevo Artista</a>
-        </div>
+        <!--<div>
+        <a href="/Artist/Create" class="btn-input">Nuevo Artista</a>
+    </div>-->
         <br />
     </div>
 
