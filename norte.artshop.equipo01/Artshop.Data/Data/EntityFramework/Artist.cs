@@ -33,6 +33,8 @@ namespace Artshop.Data.Data.EntityFramework
         public int TotalProducts { get; set; }
         [NotMapped]
         public string FullName { get { return FirstName + " " + LastName; } }
+        public bool Disabled { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
     }

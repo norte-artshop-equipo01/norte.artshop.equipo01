@@ -25,13 +25,9 @@ namespace Artshop.Data.Data.EntityFramework
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Artist> Artist { get; set; }
-        public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<CartItem> CartItem { get; set; }
-        public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
         public virtual DbSet<OrderNumber> OrderNumber { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Rating> Rating { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
@@ -40,5 +36,9 @@ namespace Artshop.Data.Data.EntityFramework
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Error> Error { get; set; }
+        public virtual DbSet<Artist> Artist { get; set; }
+        public virtual DbSet<Cart> Cart { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
     }
 }

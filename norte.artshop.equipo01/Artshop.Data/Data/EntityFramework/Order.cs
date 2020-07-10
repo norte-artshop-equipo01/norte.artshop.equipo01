@@ -26,6 +26,7 @@ namespace Artshop.Data.Data.EntityFramework
         public double TotalPrice { get; set; }
         public int OrderNumber { get; set; }
         public int ItemCount { get; set; }
+        public bool Disabled { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

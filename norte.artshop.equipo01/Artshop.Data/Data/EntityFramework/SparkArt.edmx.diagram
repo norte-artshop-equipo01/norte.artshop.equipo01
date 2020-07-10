@@ -5,21 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8c814ffbe8df42569ca5b9143ba78780" Name="Diagram1" ZoomLevel="75">
-        <EntityTypeShape EntityType="Model.Artist" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Cart" Width="1.5" PointX="12.375" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CartItem" Width="1.5" PointX="14.625" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.OrderDetail" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.OrderNumber" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Rating" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_PRODUCT_REFERENCE_ARTIST" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_CARTITEM_REFERENCE_CART" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ORDER_REFERENCE_USER" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ORDERDET_REFERENCE_ORDER" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ORDERDET_REFERENCE_PRODUCT" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_RATING_REFERENCE_PRODUCT" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_RATING_REFERENCE_USER" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.75" PointX="12.75" PointY="6.375" />
         <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.75" PointX="5.5" PointY="9.875" />
@@ -30,6 +20,16 @@
         <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Model.AspNetUserRoles" />
         <EntityTypeShape EntityType="Model.Error" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Artist" Width="1.5" PointX="13.375" PointY="1.375" />
+        <EntityTypeShape EntityType="Model.Cart" Width="1.5" PointX="12.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="15.625" PointY="1" />
+        <AssociationConnector Association="Model.FK_PRODUCT_REFERENCE_ARTIST" />
+        <AssociationConnector Association="Model.FK_CARTITEM_REFERENCE_CART" />
+        <AssociationConnector Association="Model.FK_ORDER_REFERENCE_USER" />
+        <AssociationConnector Association="Model.FK_ORDERDET_REFERENCE_ORDER" />
+        <AssociationConnector Association="Model.FK_ORDERDET_REFERENCE_PRODUCT" />
+        <AssociationConnector Association="Model.FK_RATING_REFERENCE_PRODUCT" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
