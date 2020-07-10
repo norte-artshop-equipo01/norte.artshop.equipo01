@@ -24,6 +24,7 @@ namespace Artshop.Tests
         {
             database.RunCustomCommand("delete from [Product]");
             database.RunCustomCommand("delete from [Artist]");
+            database.RunCustomCommand("delete from [Cart]");
         }
 
         [TestMethod]
@@ -177,6 +178,31 @@ namespace Artshop.Tests
                                 .Invoke(new object[] { sessionContainer });
             //httpContext.Request.UserAgent = "TestUser";
             return httpContext;
+        }
+
+        [TestMethod]
+        public void Should_Store_Cart()
+        {
+            // Arrange
+            var database = new DatabaseConnection(ConnectionType.Database, connectionString);
+
+            var cart = new Cart
+            {
+                CartDate = DateTime.Now,
+                Cookie = "Cookie",
+                CreatedBy = "Admin"
+            };
+            
+            cart.CartItem.Add( new CartItem { Price = 10, ProductId = 1 } );
+            
+            // Act
+            database.CartManager.AddNewCart(cart);
+
+            // Assert
+            var storedCart = database.CartManager.FindCartByCookie("Cookie");
+            Assert.IsNotNull(storedCart);
+
+            PostTestCleanup(database);
         }
     }
 }

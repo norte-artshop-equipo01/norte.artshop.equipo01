@@ -16,6 +16,7 @@ namespace Artshop.Data.Data
         public readonly ProductManager ProductManager;
         public readonly UserManager UserManager;
         public readonly OrderManager OrderManager;
+        public readonly CartManager CartManager;
 
         public DatabaseConnection(ConnectionType type, string connection = null)
         {
@@ -24,6 +25,7 @@ namespace Artshop.Data.Data
             ProductManager = new ProductManager(DatabaseFactory.GetDatabase(type, connection));
             UserManager = new UserManager(DatabaseFactory.GetDatabase(type, connection));
             OrderManager = new OrderManager(DatabaseFactory.GetDatabase(type, connection));
+            CartManager = new CartManager(DatabaseFactory.GetDatabase(type, connection));
         }
 
         public void RunCustomCommand(string command)
