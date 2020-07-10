@@ -85,8 +85,6 @@ namespace Artshop.Website.Controllers
                     item.Disabled = true;
                     db.ProductManager.UpdateProduct(item);
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -141,23 +139,25 @@ namespace Artshop.Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Artist artist)
+        public ActionResult Edit(Artist artista)
         {
-            this.CheckAuditPattern(artist,false);
-            var listModel = db.ValidateModel(artist);
+            this.CheckAuditPattern(artista,false);
+            var listModel = db.ValidateModel(artista);
             if (ModelIsValid(listModel))
-                return View(artist);
+                return View(artista);
             try
             {
-                db.ArtistManager.UpdateArtist(artist);
-                return RedirectToAction("Index");
+                db.ArtistManager.UpdateArtist(artista);
+                
             }
             catch (Exception ex)
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
                 ViewBag.MessageDanger = ex.Message;
-                return View(artist);
+                return View(artista);
             }
+            ViewBag.MessageDanger = "El artita " + artista.FullName + " fue actualizado con éxito";
+                return View("Index", db.ArtistManager.GetAllArtists());
         }
 
 
