@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Artshop.Website.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ArtistController : BaseController
     {
         private readonly DatabaseConnection db;
