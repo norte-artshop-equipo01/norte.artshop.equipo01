@@ -44,9 +44,11 @@ namespace Artshop.Data.Data.Managers
             return _database.Find(new Func<Cart, bool> (c => c.Cookie == cookie)).FirstOrDefault();
         }
 
-        public List<Cart> GetAllCarts()
+        public List<Cart> GetAllCarts(bool includeDisabled = false)
         {
-            return _database.GetAll<Cart>();
+            return !includeDisabled
+                ? _database.GetAll<Cart>().Where(x => x.Disabled == false).ToList()
+                : _database.GetAll<Cart>();
         }
     }
 }

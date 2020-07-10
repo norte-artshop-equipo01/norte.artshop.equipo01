@@ -13,7 +13,6 @@ namespace Artshop.Data.Data
         void Remove<T>(T item) where T : class;
         bool TestConnection();
         void Update<T>(T item) where T : class;
-        void RunCustomCommand(string command);
-        
+        void RunCustomCommand(string command);   
     }
 }

@@ -46,6 +46,29 @@ namespace Artshop.Tests
         }
 
         [TestMethod]
+        public void Should_Return_Only_Enabled_By_Default()
+        {
+            // Arrange
+            var database = new DatabaseConnection(ConnectionType.Database, connectionString);
+            var artist1 = TestUtils.GetArtists()[0];
+            var artist2 = TestUtils.GetArtists()[1];
+            
+            database.ArtistManager.AddNewArtist(artist1);
+            database.ArtistManager.AddNewArtist(artist2);
+
+            // Act
+            artist2.Disabled = true;
+            database.ArtistManager.UpdateArtist(artist2);
+
+            // Assert
+            var artists = database.ArtistManager.GetAllArtists();
+            Assert.AreEqual(1, artists.Count());
+            Assert.AreEqual(artist1.FirstName, artists[0].FirstName);
+
+            PostTestCleanup(database);
+        }
+
+        [TestMethod]
         public void Should_Remove_Entity()
         {
             // Arrange
