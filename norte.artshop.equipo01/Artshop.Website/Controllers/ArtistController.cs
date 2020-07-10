@@ -81,7 +81,7 @@ namespace Artshop.Website.Controllers
             {
                 for (int i = 0; i < artista.Product.Count; i++)
                 {
-                    var item = artista.Product.ElementAt(i);
+                    var item = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == artista.Product.ElementAt(i).Id)).FirstOrDefault();
                     item.Disabled = true;
                     db.ProductManager.UpdateProduct(item);
                 }
