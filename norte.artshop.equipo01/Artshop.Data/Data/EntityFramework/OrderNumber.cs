@@ -12,13 +12,9 @@ namespace Artshop.Data.Data.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderNumber
+    public partial class OrderNumber : BaseClass
     {
         public int Id { get; set; }
         public int Number { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime ChangedOn { get; set; }
-        public string ChangedBy { get; set; }
     }
 }
