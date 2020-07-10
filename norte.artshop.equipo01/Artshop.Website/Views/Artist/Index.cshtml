@@ -120,7 +120,7 @@
 
                         <td>
                             @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Borrar", "Delete", new { id = item.Id },
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id },
                             new { onclick = "return confirm('Realmente desea eliminar el Artista " + item.FullName + " ?')" })
 
                         </td>
@@ -133,7 +133,10 @@
 
 
         </div>
-
+        <button id="opener">Abrir pop</button>
+        <div id="dialog-model" title="editar artista">
+            <p>Algo</p>
+        </div>
         <br />
       
     </div>

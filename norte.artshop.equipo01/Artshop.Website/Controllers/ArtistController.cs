@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
@@ -66,13 +67,31 @@ namespace Artshop.Website.Controllers
             }
             try
             {
-                db.ArtistManager.RemoveArtist(artista);
+                artista.Disabled = true;
+                db.ArtistManager.UpdateArtist(artista);
                 
             }
             catch (Exception ex)
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
                 ViewBag.Messagealert = "No se pudo eliminar el artista " + artista.FullName;
+                return View("Index", db.ArtistManager.GetAllArtists());
+            }
+            try
+            {
+                for (int i = 0; i < artista.Product.Count; i++)
+                {
+                    var item = artista.Product.ElementAt(i);
+                    item.Disabled = true;
+                    db.ProductManager.UpdateProduct(item);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                db.Logger(ex, System.Web.HttpContext.Current);
+                ViewBag.Messagealert = "No se pudo eliminar al menos un producto del artista " + artista.FullName;
                 return View("Index", db.ArtistManager.GetAllArtists());
             }
             ViewBag.Messagealert = "Artista " + artista.FullName + " fue eliminado";
@@ -106,6 +125,39 @@ namespace Artshop.Website.Controllers
 
             ViewBag.Message="Artista " + newartist.FullName + " ingresado correctamente";
             return View("Index", db.ArtistManager.GetAllArtists());
+        }
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var artist = db.ArtistManager.FindArtist(x=>x.Id==id).FirstOrDefault();
+            if (artist == null)
+            {
+                return HttpNotFound();
+            }
+            return View(artist);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Artist artist)
+        {
+            this.CheckAuditPattern(artist,false);
+            var listModel = db.ValidateModel(artist);
+            if (ModelIsValid(listModel))
+                return View(artist);
+            try
+            {
+                db.ArtistManager.UpdateArtist(artist);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                db.Logger(ex, System.Web.HttpContext.Current);
+                ViewBag.MessageDanger = ex.Message;
+                return View(artist);
+            }
         }
 
 
