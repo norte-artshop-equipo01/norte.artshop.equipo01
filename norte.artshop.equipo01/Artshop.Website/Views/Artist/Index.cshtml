@@ -9,16 +9,76 @@
 
 
     <div class="table">
-        <h1 class="h1_home"> Lista de Artistas</h1>
+        <h1 class="h1_home"> Administración de Artistas</h1>
         <br />
-        <h2 class="">Hay un total de @Enumerable.Count(Model) Artistas</h2>
+        <h2 class="alerta">@ViewBag.message<br /></h2>
         <br />
-        <p>@ViewBag.Message<br /></p>
 
+        <!-- <div>
+        <a href="/Artist/Create" class="btn-input">Nuevo Artista</a>
+    </div>
+       -->
         <div>
-            <a href="/Artist/Create" class="btn-input">Nuevo Artista</a>
+            <h2>Agregar Nuevo Artista</h2>
         </div>
-        @Html.Partial("_CreatePartial", new Artshop.Data.Data.EntityFramework.Artist());
+        @using (Html.BeginForm("Create", "Artist", FormMethod.Post))
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LifeSpan)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input name="FirstName" id="FirstName" type="text" maxlength="30" required />
+                    </td>
+                    <td>
+
+                        <input name="LastName" id="LastName" type="text" maxlength="30" required />
+                    </td>
+                    <td>
+
+                        <input name="LifeSpan" id="LifeSpan" type="number" maxlength="2" required />
+                    </td>
+                    <td>
+
+                        <input name="Country" id="Country" type="text" maxlength="30" required />
+                    </td>
+                    <td>
+
+                        <input id="Description" name="Description" rows="10" cols="60" required>
+                    </td>
+                    <td>
+                        <div class="div_button">
+                            <input class="button" type="submit" value="Agregar" />
+                        </div>
+                    </td>
+            </table>
+        }
+
+
+
+
+
+        <br />
+        <h2 class="">Total de artistas  @Enumerable.Count(Model)</h2>
+
+
         <br />
         <div>
             <table class="table">
@@ -64,7 +124,7 @@
 
                         <td>
                             @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id },
+                            @Html.ActionLink("Borrar", "Delete", new { id = item.Id },
                             new { onclick = "return confirm('Realmente desea eliminar el Artista " + item.FullName + " ?')" })
 
                         </td>
@@ -77,6 +137,7 @@
 
 
         </div>
+
         <br />
         <div>
             <a href="/Artist/Create" class="btn-input">Nuevo Artista</a>

@@ -26,57 +26,87 @@ namespace Artshop.Website.Controllers
         {
             return View();
         }
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult _CreatePartial(Artist artista)
         {
             CheckAuditPattern(artista, true);
-            /*var listModel = db.ValidateModel(artista);
+            var listModel = db.ValidateModel(artista);
             if (ModelIsValid(listModel))
             {
                 
                 ViewBag.Message = "Chequear Datos ingresados";
                 return RedirectToAction("Index");
-            }*/
+            }
             try
             {
                 db.ArtistManager.AddNewArtist(artista);
                 ViewBag.Message = "Artista Ingresado" + " "+ artista.FullName;
-                
+                return View("Index", db.ArtistManager.GetAllArtists());
             }
             catch (Exception ex)
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
-                ViewBag.Message = "Chequear Datos ingresados";
-                return RedirectToAction("Index");
+                ViewBag.Message = "Chequear Datos ingresados1";
+                return View("Index", db.ArtistManager.GetAllArtists());
                
                
             }
-            return RedirectToAction("Index");
 
 
-        }
+
+    }*/
         public ActionResult Delete(int id)
         {
             var artista = db.ArtistManager.FindArtist(x => x.Id == id).FirstOrDefault();
             if (artista == null)
             {
                 ViewBag.Message = "El artista no se encuentra";
-                return RedirectToAction("Index");
+                return View("Index", db.ArtistManager.GetAllArtists());
             }
             try
             {
                 db.ArtistManager.RemoveArtist(artista);
-                ViewBag.Message = "Artista eliminado";
-                return RedirectToAction("Index");
+                
             }
             catch (Exception ex)
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
                 ViewBag.Message = "No se pudo eliminar el artista";
-                return RedirectToAction("Index");
-            }   
+                return View("Index", db.ArtistManager.GetAllArtists());
+            }
+            ViewBag.Message = "Artista" + artista.FullName + " eliminado";
+            return View("Index", db.ArtistManager.GetAllArtists());
+
         }
-       
-       
+        [HttpPost]
+        public ActionResult Create(FormCollection artista)
+        {
+            var newartist = new Artist();
+            UpdateModel(newartist);
+            newartist.FirstName = artista["FirstName"];
+            newartist.LastName = artista["LastName"];
+            newartist.LifeSpan = artista["LifeSpan"];
+            newartist.Country = artista["Country"];
+            newartist.Description = artista["Description"];
+            CheckAuditPattern(newartist, true);
+           
+
+            try
+            {
+                db.ArtistManager.AddNewArtist(newartist);
+                
+            }
+            catch (Exception ex)
+            {
+                db.Logger(ex, System.Web.HttpContext.Current);
+                ViewBag.Message = "Chequear Datos ingresados excepcion nueva";
+                return View("Index", db.ArtistManager.GetAllArtists()); ;
+            }
+
+            ViewBag.Message="Artista " + newartist.FullName + " ingresado";
+            return View("Index", db.ArtistManager.GetAllArtists());
+        }
+
+
     }
 }
