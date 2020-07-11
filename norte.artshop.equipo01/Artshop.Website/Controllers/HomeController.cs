@@ -1,5 +1,6 @@
 ﻿using Artshop.Data.Data;
 using Artshop.Data.Data.EntityFramework;
+using Artshop.Website.Models;
 using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
@@ -48,10 +49,13 @@ namespace Artshop.Website.Controllers
             ViewBag.Message = "La página de descripción de su aplicación.";
             return View();
         }
-
+        
+        [Authorize]
         public ActionResult Buy(int id)
         {
             var producto = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == id)).FirstOrDefault();
+            var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
+            
             var item = new CartItem
             {
                 ProductId = producto.Id,
@@ -59,7 +63,6 @@ namespace Artshop.Website.Controllers
             };
             CheckAuditPattern(item);
 
-            var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
             if (carrito == null)
             {
                 NuevoCarrito(item);
@@ -68,8 +71,23 @@ namespace Artshop.Website.Controllers
             {
                 CarritoExistente(carrito, item);
             }
-            
-            return View();
+
+
+            var test = new List<CheckoutItem>();
+            foreach (var cartItem in carrito.CartItem)
+            {
+                var tempProd = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == cartItem.ProductId)).FirstOrDefault();
+                test.Add(new CheckoutItem
+                {
+                    ProductName = tempProd.Title,
+                    ArtistName = tempProd.Artist.FullName,
+                    Amount = cartItem.Quantity,
+                    UnitPrice = tempProd.Price,
+                    Image = tempProd.Image
+                });
+            }
+
+            return View(test);
         }
 
         private void NuevoCarrito(CartItem cartItem)

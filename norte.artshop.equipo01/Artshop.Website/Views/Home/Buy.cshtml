@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Artshop.Website.Models.CheckoutItem>
+@{ViewBag.Title = "Checkout";
+}
+
+<h1 class="h1_home"><b>Checkout</b></h1>
+<hr />
+<div style="width:100%">
+
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.ArtistName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArtistName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Image)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        <img class="imageback" src="~/Content/Images/Products/@item.Image" alt="Imagen del producto. @item.Image" title="@item.ProductName" />
+                    </td>
+
+                    
+                </tr>
+            }
+
+        </table>
+
+
+    </div>
+</div>
