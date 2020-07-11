@@ -34,7 +34,7 @@ namespace Artshop.Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(FormCollection obra, HttpPostedFile Imageback)
+        public ActionResult Create(FormCollection obra, HttpPostedFileBase Imageback)
         {
             var product = new Product();
             UpdateModel(product);
