@@ -29,10 +29,6 @@ namespace Artshop.Data.Data.EntityFramework
         public double Price { get; set; }
         public int QuantitySold { get; set; }
         public double AvgStars { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime ChangedOn { get; set; }
-        public string ChangedBy { get; set; }
         public bool Disabled { get; set; }
     
         public virtual Artist Artist { get; set; }
