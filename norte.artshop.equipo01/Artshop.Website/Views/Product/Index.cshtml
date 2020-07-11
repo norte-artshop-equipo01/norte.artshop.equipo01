@@ -5,14 +5,16 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Backend/_LayoutBackend.cshtml";
 }
-    <div class="table">
-        <h1 class="h1_home"> Administración de Productos</h1>
-        <hr />
+<div class="table">
+    <h1 class="h1_home"> Administración de Productos</h1>
+    <hr />
 
-        <h2 class="confirmacion">@ViewBag.message</h2>
-        <h2 class="alerta">@ViewBag.Messagealert</h2>
-        @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        { <table class="table">
+    <h2 class="confirmacion">@ViewBag.message</h2>
+    <h2 class="alerta">@ViewBag.Messagealert</h2>
+    @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+    {<div>
+            <table class="table">
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Title)
@@ -52,103 +54,108 @@
                         <input id="Description" name="Description" maxlength="250" required>
                     </td>
                     <td>
-                        <img class="imageback" id="Image" alt="Imagen del producto" />
+                        <img class="imageback" id="Image" name="Image" alt="Imagen del producto" />
                     </td>
                     <td>
-                        @Html.TextBox("imagenPrevisualizacion", null, new { type = "file", required = "required" })
-                        <!--<input type="file" id="Image" accept="image/*">-->
+
+                        <input type="file" name="Image2" id="imagenPrevisualizacion" accept="image/*">
                         <script src="script.js"></script>
                     </td>
 
 
                     <td>
-                        <div class="div_button">
-                            <input class="button" type="submit" value="Agregar" />
-                        </div>
+
+                        <input class="button" type="submit" value="Agregar" />
+
                     </td>
                 </tr>
-            </table>
-        }
-        <hr />
-        <br />
-        <h2 class="table">Total de Obras  @Model.Count()</h2>
-        <br />
-        <!--Tabla para mostrar los Productos-->
-        <div>
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Artist.FullName)
-                    </th>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.Description)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Price)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.QuantitySold)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.AvgStars)
-                    </th>
-                    <th>
-                        @Html.Label("Picture")
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Image)
-                    </th>
-
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>
-                    </td>
-                </tr>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelitem => item.Artist.FullName)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(model => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.Price)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.QuantitySold)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.AvgStars)
-                        </td>
-                        <td>
-                            <img class="imageback" src="~/Content/Images/Products/@item.Image" alt="Imagen del producto. @item.Image" class="form-control" title="@item.Title" />
-
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.Image)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id },
-                            new { onclick = "return confirm('Realmente desea eliminar esta obra: " + item.Title + " ?')" })
-
-                        </td>
-                    </tr>
-                }
-
-                <!-- Html.ActionLink("Eliminar", "Delete", new { id = item.Id })-->
-
             </table>
         </div>
-        <br />
+    }
+    <hr />
+
+    <br />
+    <h2 class="table">Total de Obras  @Model.Count()</h2>
+    <br />
+
+
+    <!--Tabla para mostrar los Productos-->
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Artist.FullName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantitySold)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AvgStars)
+                </th>
+                <th>
+                    @Html.Label("Picture")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+
+                <th></th>
+            </tr>
+            <tr>
+                <td>
+                </td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelitem => item.Artist.FullName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.QuantitySold)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.AvgStars)
+                    </td>
+                    <td>
+                        <img class="imageback" src="~/Content/Images/Products/@item.Image" alt="Imagen del producto. @item.Image" class="form-control" title="@item.Title" />
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Image)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Id },
+                        new { onclick = "return confirm('Realmente desea eliminar esta obra: " + item.Title + " ?')" })
+
+                    </td>
+                </tr>
+            }
+
+            <!-- Html.ActionLink("Eliminar", "Delete", new { id = item.Id })-->
+
+        </table>
     </div>
+    <br />
+</div>
 @section scripts{
     <script>
+
         // Obtener referencia al input y a la imagen
 
         const $seleccionArchivos = document.querySelector("#imagenPrevisualizacion"),
@@ -172,4 +179,4 @@
         });
     </script>
 
-} 
+}

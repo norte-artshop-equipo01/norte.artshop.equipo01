@@ -33,9 +33,9 @@ namespace Artshop.Website.Controllers
             return View(db.ProductManager.GetAllProducts());
         }
 
-        [HttpPost]
+       [HttpPost]
         public ActionResult Create(FormCollection obra, HttpPostedFileBase Imageback)
-        {
+        { 
             var product = new Product();
             UpdateModel(product);
             try
@@ -67,7 +67,7 @@ namespace Artshop.Website.Controllers
                     };
                 }).ToList();
                 ViewBag.artistas = artistas1;
-                return View("Idex", db.ProductManager.GetAllProducts());
+                return View("Index", db.ProductManager.GetAllProducts());
             }
 
             List<SelectListItem> artistas = db.ArtistManager.GetAllArtists().ConvertAll(
@@ -81,8 +81,55 @@ namespace Artshop.Website.Controllers
                 }).ToList();
             ViewBag.artistas = artistas;
             ViewBag.Message = "Producto cargado correctamente.";
-            return View("Idex",db.ProductManager.GetAllProducts());
+            return View("Index",db.ProductManager.GetAllProducts());
 
         }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var product= db.ProductManager.FindProduct(x => x.Id == id).FirstOrDefault();
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            List<SelectListItem> artistas = db.ArtistManager.GetAllArtists().ConvertAll(
+                d =>
+                {
+                    return new SelectListItem()
+                    {
+                        Text = d.FullName,
+                        Value = d.Id.ToString()
+                    };
+                }).ToList();
+            ViewBag.artistas = artistas; ;
+            return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Product product)
+        {
+            this.CheckAuditPattern(product, false);
+            var listModel = db.ValidateModel(product);
+            if (ModelIsValid(listModel))
+                return View(product);
+            try
+            {
+                db.ProductManager.UpdateProduct(product);
+
+            }
+            catch (Exception ex)
+            {
+                db.Logger(ex, System.Web.HttpContext.Current);
+                ViewBag.MessageDanger = ex.Message;
+                return View(product);
+            }
+            ViewBag.MessageDanger = "La obra " + product.Title + " fue actualizada con éxito";
+            return View("Index", db.ProductManager.GetAllProducts());
+        }
     }
+
 }
