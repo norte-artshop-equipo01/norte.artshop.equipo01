@@ -19,67 +19,41 @@ namespace Artshop.Website.Controllers
         public ActionResult Index()
         {
             
-            List<SelectListItem> artistas = db.ArtistManager.GetAllArtists().ConvertAll(
-                d =>
-                {
-                    return new SelectListItem()
-                    {
-                        Text = d.FirstName + " " + d.LastName,
-                        Value = d.Id.ToString()
-                    };
-                }).ToList();
-            ViewBag.artistas = artistas;
-
+                ViewBag.Artistas = art_bag();
+            
             return View(db.ProductManager.GetAllProducts());
         }
 
        [HttpPost]
-        public ActionResult Create(FormCollection obra, HttpPostedFileBase Imageback)
+        public ActionResult Create(FormCollection obra, HttpPostedFileBase Image2)
         { 
             var product = new Product();
             UpdateModel(product);
             try
             {
-                if (Imageback.ContentLength > 0 && Imageback!=null)
+                if (Image2.ContentLength > 0 && Image2!=null)
                 {
-                    string filename = Path.GetFileName(Imageback.FileName);
+                    string filename = Path.GetFileName(Image2.FileName);
                     string path = Path.Combine(Server.MapPath("/content/Images/products"), filename);
-                    Imageback.SaveAs(path);
-
+                    Image2.SaveAs(path);
                     product.Image = filename;
-                    CheckAuditPattern(product, true); ;
-                    db.ProductManager.AddNewProduct(product);
-                                   
-                  
+                    CheckAuditPattern(product, true);
+                    product.AvgStars = 0;
+                    product.QuantitySold = 0;
+                    db.ProductManager.AddNewProduct(product);                   
                 }
             }
             catch (Exception ex)
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
                 ViewBag.MessageDanger = "¡Error al cargar el Producto con su imagén.";
-                List<SelectListItem> artistas1= db.ArtistManager.GetAllArtists().ConvertAll(
-                d =>
-                {
-                    return new SelectListItem()
-                    {
-                        Text = d.FirstName + " " + d.LastName,
-                        Value = d.Id.ToString()
-                    };
-                }).ToList();
-                ViewBag.artistas = artistas1;
+               
+                ViewBag.Artistas = art_bag();
                 return View("Index", db.ProductManager.GetAllProducts());
             }
 
-            List<SelectListItem> artistas = db.ArtistManager.GetAllArtists().ConvertAll(
-                d =>
-                {
-                    return new SelectListItem()
-                    {
-                        Text = d.FirstName + " " + d.LastName,
-                        Value = d.Id.ToString()
-                    };
-                }).ToList();
-            ViewBag.artistas = artistas;
+            
+            ViewBag.Artistas = art_bag();
             ViewBag.Message = "Producto cargado correctamente.";
             return View("Index",db.ProductManager.GetAllProducts());
 
@@ -96,23 +70,31 @@ namespace Artshop.Website.Controllers
             {
                 return HttpNotFound();
             }
-            List<SelectListItem> artistas = db.ArtistManager.GetAllArtists().ConvertAll(
-                d =>
-                {
-                    return new SelectListItem()
-                    {
-                        Text = d.FullName,
-                        Value = d.Id.ToString()
-                    };
-                }).ToList();
-            ViewBag.artistas = artistas; ;
+          
+            ViewBag.Artistas = art_bag(); 
             return View(product);
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, HttpPostedFileBase Image2)
         {
-            this.CheckAuditPattern(product, false);
+            if (Image2 != null)
+            { try
+                {
+                    string filename = Path.GetFileName(Image2.FileName);
+                    string path = Path.Combine(Server.MapPath("/content/Images/products"), filename);
+                    Image2.SaveAs(path);
+                    product.Image = filename;
+                }
+                catch (Exception)
+                {
+                    ViewBag.MessageDanger = "No se pudo guardar la imagen";
+                    return View(product);
+                }
+            
+                              
+            }
+                this.CheckAuditPattern(product, false);
             var listModel = db.ValidateModel(product);
             if (ModelIsValid(listModel))
                 return View(product);
@@ -125,11 +107,55 @@ namespace Artshop.Website.Controllers
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
                 ViewBag.MessageDanger = ex.Message;
+                ViewBag.Artistas = art_bag();
                 return View(product);
+
             }
-            ViewBag.MessageDanger = "La obra " + product.Title + " fue actualizada con éxito";
-            return View("Index", db.ProductManager.GetAllProducts());
+            ViewBag.Message = "La obra " + product.Title + " fue actualizada con éxito";
+            ViewBag.Artitas = art_bag();
+            return RedirectToAction("Index", db.ProductManager.GetAllProducts());
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var producto = db.ProductManager.FindProduct(x => x.Id == id).FirstOrDefault();
+            if (producto == null)
+            {
+                ViewBag.Messagealert = "El producto no se encuentra";
+                return RedirectToAction("Index");
+            }
+            try
+            {
+                producto.Disabled = true;
+                db.ProductManager.UpdateProduct(producto);
+            }
+            catch (Exception ex)
+            {
+                db.Logger(ex, System.Web.HttpContext.Current);
+                ViewBag.Messagealert = "No se pudo eliminar la obra " + producto.Title;
+                return RedirectToAction("Index");
+            }
+           
+            ViewBag.Messagealert = "La obra " + producto.Title + " fue eliminada";
+            return RedirectToAction("Index");
+
+        }
+
+        private List<SelectListItem> art_bag()
+        {
+            List<SelectListItem> artistas = db.ArtistManager.GetAllArtists().ConvertAll(
+               d =>
+               {
+                   return new SelectListItem()
+                   {
+                       Text = d.FullName,
+                       Value = d.Id.ToString()
+                   };
+               }).ToList();
+           
+            return artistas;
+
         }
     }
-
+    
 }
