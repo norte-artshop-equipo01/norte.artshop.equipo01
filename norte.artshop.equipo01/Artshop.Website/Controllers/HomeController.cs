@@ -10,13 +10,13 @@ using System.Web.Mvc;
 namespace Artshop.Website.Controllers
 {
     
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly DatabaseConnection db;
+        
 
         public HomeController()
         {
-            db = new DatabaseConnection(ConnectionType.Database, WebConfigurationManager.ConnectionStrings["somee"].ToString());
+         
         }
         
         public ActionResult Index()

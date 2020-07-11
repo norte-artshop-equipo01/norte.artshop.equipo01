@@ -15,10 +15,10 @@ namespace Artshop.Website.Controllers
     [Authorize(Roles = "Administrator")]
     public class ArtistController : BaseController
     {
-        private readonly DatabaseConnection db;
+        
         public ArtistController()
         {
-            db = new DatabaseConnection(ConnectionType.Database, WebConfigurationManager.ConnectionStrings["somee"].ToString());
+          
         }
         public ActionResult Index()
         {

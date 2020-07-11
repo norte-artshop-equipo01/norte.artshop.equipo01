@@ -13,14 +13,14 @@ using System.Web.Mvc;
 namespace Artshop.Website.Controllers
 {   [Authorize(Roles = "Administrator")]
    
-    public class BackendController : Controller
+    public class BackendController : BaseController
     {
-        private readonly DatabaseConnection db;
+        
         public BackendController()
         {
-            db = new DatabaseConnection(ConnectionType.Database, WebConfigurationManager.ConnectionStrings["somee"].ToString());
+          
         }
-        // GET: Backend
+        
         public ActionResult Index()
         {
             return View();
@@ -28,7 +28,7 @@ namespace Artshop.Website.Controllers
        
         public ActionResult AbmProducto()
         {
-            //List<Artist> artistas = this.db.ArtistManager.GetAllArtists();
+            
 
             List<SelectListItem> artistas = db.ArtistManager.GetAllArtists().ConvertAll(
                 d =>

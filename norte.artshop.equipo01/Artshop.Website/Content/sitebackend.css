@@ -263,3 +263,10 @@ footer {
     font-size: 15px;
     color: green;
 }
+.imageback{
+    max-height: 130px;
+    max-width:200px;
+    float: left;
+    text-align:left;
+    float: none;
+}

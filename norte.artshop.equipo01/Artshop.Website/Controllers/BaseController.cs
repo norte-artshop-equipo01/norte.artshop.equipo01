@@ -1,15 +1,22 @@
-﻿using Artshop.Data.Data.EntityFramework;
+﻿using Artshop.Data.Data;
+using Artshop.Data.Data.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace Artshop.Website.Controllers
 {
     public class BaseController : Controller
     {
+        public readonly DatabaseConnection db;
+        public BaseController()
+        {
+            db = new DatabaseConnection(ConnectionType.Database, WebConfigurationManager.ConnectionStrings["somee"].ToString());
+        }
         
             protected bool ModelIsValid(List<ValidationResult> listModel)
             {
