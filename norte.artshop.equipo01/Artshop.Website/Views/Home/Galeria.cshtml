@@ -12,7 +12,7 @@
             <img src="~/content/images/Products/@(elemento.Image)" class="imagengal">
             <p>@elemento.Title, <nombre style="font-style:normal"> @elemento.Artist.FirstName @elemento.Artist.LastName</nombre></p>
             <br />
-            <input type="button" name="Agregar" value="Agregar al Carrito" />
+            @Html.ActionLink("Agregar al carrito", "Buy", new { id = elemento.Id })
         </div>
      }
 </div>

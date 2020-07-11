@@ -26,6 +26,7 @@ namespace Artshop.Data.Managers
             {
                 _database.Remove(artist.Product.ElementAt(i));
             }
+
             _database.Remove(artist);
         }
 

@@ -14,22 +14,15 @@ namespace Artshop.Website.Controllers
 {   [Authorize(Roles = "Administrator")]
    
     public class BackendController : BaseController
-    {
-        
-        public BackendController()
-        {
-          
-        }
-        
+    {   
         public ActionResult Index()
         {
+            Request.Cookies.Add(new HttpCookie("spark-cookie") { Value = User.Identity.Name, Expires = DateTime.Now.AddDays(7) });
             return View();
         }
        
         public ActionResult AbmProducto()
         {
-            
-
             List<SelectListItem> artistas = db.ArtistManager.GetAllArtists().ConvertAll(
                 d =>
                 {
