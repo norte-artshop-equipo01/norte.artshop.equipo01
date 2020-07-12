@@ -106,7 +106,7 @@ namespace Artshop.Website.Controllers
             cartItem.Cart = cart;
             db.CartManager.UpdateCart(cart);
         }
-        
+        [Authorize]
         public ActionResult Buy()
         {
             return View(Listado_car());
