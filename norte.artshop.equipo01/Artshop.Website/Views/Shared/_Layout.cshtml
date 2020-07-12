@@ -25,7 +25,11 @@
                 <li><a href="/home/Artistas">Artistas</a></li>
                 <li><a href="/home/Galeria">Galería</a></li>
                 <li><a href="/home/about/">Nosotros</a></li>
-                <li><a href="/home/contact/">Contacto</a></li>
+                @if (Request.IsAuthenticated)
+                {
+                     <li><a href="/home/Buy/">Carrito</a></li>
+                }
+                    <li><a href="/home/contact/">Contacto</a></li>
             </ul>
             @Html.Partial("_LoginPartial")
         </nav>

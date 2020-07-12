@@ -68,21 +68,9 @@ namespace Artshop.Website.Controllers
             {
                 CarritoExistente(carrito, item);
             }
-            { }
+            
 
-            var test = new List<CheckoutItem>();
-            foreach (var cartItem in carrito.CartItem)
-            {
-                var tempProd = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == cartItem.ProductId)).FirstOrDefault();
-                test.Add(new CheckoutItem
-                {
-                    ProductName = tempProd.Title,
-                    ArtistName = tempProd.Artist.FullName,
-                    Amount = cartItem.Quantity,
-                    UnitPrice = tempProd.Price,
-                    Image = tempProd.Image
-                });
-            }
+            
 
             return View(db.ProductManager.GetAllProducts());
         }
@@ -115,6 +103,34 @@ namespace Artshop.Website.Controllers
             cart.CartItem.Add(cartItem);
             cartItem.Cart = cart;
             db.CartManager.UpdateCart(cart);
+        }
+        
+        public ActionResult Buy()
+        {
+            return View(Listado_car());
+        }
+
+        private List<CheckoutItem> Listado_car()
+        {
+            var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
+            var lista = new List<CheckoutItem>();
+            if (carrito != null) 
+            {
+            
+            foreach (var cartItem in carrito.CartItem)
+            {
+                var tempProd = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == cartItem.ProductId)).FirstOrDefault();
+                lista.Add(new CheckoutItem
+                {
+                    ProductName = tempProd.Title,
+                    ArtistName = tempProd.Artist.FullName,
+                    Amount = cartItem.Quantity,
+                    UnitPrice = tempProd.Price,
+                    Image = tempProd.Image
+                });
+            }
+            }
+            return lista;
         }
     }
 }
