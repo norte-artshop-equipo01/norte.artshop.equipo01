@@ -25,7 +25,6 @@ namespace Artshop.Data.Data.EntityFramework
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CartItem> CartItem { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
         public virtual DbSet<OrderNumber> OrderNumber { get; set; }
         public virtual DbSet<Rating> Rating { get; set; }
@@ -40,5 +39,6 @@ namespace Artshop.Data.Data.EntityFramework
         public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<CartItem> CartItem { get; set; }
     }
 }

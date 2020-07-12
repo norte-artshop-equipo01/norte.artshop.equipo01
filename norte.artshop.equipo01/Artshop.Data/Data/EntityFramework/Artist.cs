@@ -6,14 +6,14 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Artshop.Data.Data.EntityFramework
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Artist : BaseClass
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    public partial class Artist:BaseClass
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Artist()
@@ -22,19 +22,16 @@ namespace Artshop.Data.Data.EntityFramework
         }
     
         public int Id { get; set; }
-        [Required]
         public string FirstName { get; set; }
-        [Required]
         public string LastName { get; set; }
         public string LifeSpan { get; set; }
         public string Country { get; set; }
         public string Description { get; set; }
-        [Required]
         public int TotalProducts { get; set; }
+        
+        public bool Disabled { get; set; }
         [NotMapped]
         public string FullName { get { return FirstName + " " + LastName; } }
-        public bool Disabled { get; set; }
-    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
     }

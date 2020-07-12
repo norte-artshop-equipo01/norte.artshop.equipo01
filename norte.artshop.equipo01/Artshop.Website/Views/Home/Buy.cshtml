@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Artshop.Website.Models.CheckoutItem>
+﻿@model IEnumerable<Artshop.Data.Data.EntityFramework.CartItem>
 @{ViewBag.Title = "Checkout";
 }
 @if (@Model!=null && @Model.Count()>0 )
@@ -40,19 +40,19 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ProductName)
+                            @Html.DisplayFor(modelItem => item.Product.Title)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ArtistName)
+                            @Html.DisplayFor(modelItem => item.Product.Artist.FullName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.UnitPrice)
+                            @Html.DisplayFor(modelItem => item.Product.Price)
                         </td>
                         <td>
-                            <img class="imagecarrito " src="~/Content/Images/Products/@item.Image" alt="Imagen del producto. @item.Image" title="@item.ProductName" />
+                            <img class="imagecarrito " src="~/Content/Images/Products/@item.Product.Image" alt="Imagen del producto. @item.Product.Image" title="@item.Product.Title" />
                         </td>
                         <td>
-                            @Html.EditorFor(modelItem => item.Amount)
+                            @Html.EditorFor(modelItem => item.Quantity)
                         </td>
                         
                     </tr>

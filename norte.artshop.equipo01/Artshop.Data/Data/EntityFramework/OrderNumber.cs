@@ -16,5 +16,6 @@ namespace Artshop.Data.Data.EntityFramework
     {
         public int Id { get; set; }
         public int Number { get; set; }
+        
     }
 }

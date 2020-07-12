@@ -21,6 +21,11 @@ namespace Artshop.Data.Data.Managers
 
         public void RemoveProduct(Product product)
         {
+             for (int i = 0; i < product.CartItem.Count; i++)
+            {
+                _database.Remove(product.CartItem.ElementAt(i));
+            }
+
             _database.Remove(product);
         }
 

@@ -24,11 +24,6 @@ namespace Artshop.Data.Data.EntityFramework
         public string Everything { get; set; }
         public string HttpReferer { get; set; }
         public string PathAndQuery { get; set; }
-
-        public Error()
-        {
-            CreatedBy = "system@nortegrupo01.somee.com";
-            ChangedBy = "system@nortegrupo01.somee.com";
-        }
+        
     }
 }

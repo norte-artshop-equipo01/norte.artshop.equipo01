@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8c814ffbe8df42569ca5b9143ba78780" Name="Diagram1" ZoomLevel="75">
-        <EntityTypeShape EntityType="Model.CartItem" Width="1.5" PointX="14.625" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.OrderDetail" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.OrderNumber" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Rating" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
@@ -25,11 +24,13 @@
         <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="3" PointY="2.75" />
         <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="15.625" PointY="1" />
         <AssociationConnector Association="Model.FK_PRODUCT_REFERENCE_ARTIST" />
-        <AssociationConnector Association="Model.FK_CARTITEM_REFERENCE_CART" />
         <AssociationConnector Association="Model.FK_ORDER_REFERENCE_USER" />
         <AssociationConnector Association="Model.FK_ORDERDET_REFERENCE_ORDER" />
         <AssociationConnector Association="Model.FK_ORDERDET_REFERENCE_PRODUCT" />
         <AssociationConnector Association="Model.FK_RATING_REFERENCE_PRODUCT" />
+        <EntityTypeShape EntityType="Model.CartItem" Width="1.5" PointX="17.875" PointY="7.25" />
+        <AssociationConnector Association="Model.FK_CARTITEM_REFERENCE_CART" />
+        <AssociationConnector Association="Model.FK_CARTITEM_REFERENCE_PRODUCT" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

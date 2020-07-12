@@ -24,7 +24,8 @@ namespace Artshop.Data.Data.EntityFramework
         public string Cookie { get; set; }
         public System.DateTime CartDate { get; set; }
         public int ItemCount { get; set; }
-        public bool Disabled { get; set; }
+        
+        public Nullable<bool> Disabled { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CartItem> CartItem { get; set; }

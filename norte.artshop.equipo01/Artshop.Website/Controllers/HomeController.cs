@@ -109,7 +109,9 @@ namespace Artshop.Website.Controllers
         [Authorize]
         public ActionResult Buy()
         {
-            return View(Listado_car());
+            var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
+            return View(db.CartItemManager.GetAllCartItem(carrito.Id));
+            
         }
 
         private List<CheckoutItem> Listado_car()

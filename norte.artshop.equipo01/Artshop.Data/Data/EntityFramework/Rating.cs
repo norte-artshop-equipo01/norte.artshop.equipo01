@@ -18,8 +18,9 @@ namespace Artshop.Data.Data.EntityFramework
         public int UserId { get; set; }
         public int ProductId { get; set; }
         public int Stars { get; set; }
+        
     
-        public virtual Product Product { get; set; }
         public virtual User User { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

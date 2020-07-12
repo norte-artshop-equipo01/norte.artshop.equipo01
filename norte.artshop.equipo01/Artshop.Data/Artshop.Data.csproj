@@ -74,6 +74,9 @@
       <DependentUpon>SparkArt.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\EntityFramework\BaseClass.cs" />
+    <Compile Include="Data\EntityFramework\CartItem.cs">
+      <DependentUpon>SparkArt.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\EntityFramework\C__MigrationHistory.cs">
       <DependentUpon>SparkArt.tt</DependentUpon>
     </Compile>
@@ -87,9 +90,6 @@
       <DependentUpon>SparkArt.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\EntityFramework\Cart.cs">
-      <DependentUpon>SparkArt.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\EntityFramework\CartItem.cs">
       <DependentUpon>SparkArt.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\EntityFramework\EntityFrameworkData.cs" />
@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Data\IDatabaseData.cs" />
     <Compile Include="Data\InMemory\InMemoryData.cs" />
+    <Compile Include="Data\Managers\CartItemManager.cs" />
     <Compile Include="Data\Managers\CartManager.cs" />
     <Compile Include="Data\Managers\OrderManager.cs" />
     <Compile Include="Data\Managers\ProductManager.cs" />
