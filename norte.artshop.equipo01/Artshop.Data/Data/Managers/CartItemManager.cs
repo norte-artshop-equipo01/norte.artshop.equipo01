@@ -31,9 +31,9 @@ namespace Artshop.Data.Data.Managers
             _database.Update(cartitem);
         }
 
-        public List<CartItem> FindCartItem(Func<CartItem, bool> cartitem)
+        public List<CartItem> FindCartItem(Func<CartItem, bool> filter)
         {
-            return _database.Find(cartitem);
+            return _database.Find(filter);
         }
 
         public List<CartItem> GetAllCartItem(int cartId)

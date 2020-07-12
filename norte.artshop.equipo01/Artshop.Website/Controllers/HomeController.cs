@@ -48,19 +48,22 @@ namespace Artshop.Website.Controllers
         
         [Authorize]
         [HttpPost]
-        public ActionResult Galeria(FormCollection prod)
+        public ActionResult Galeria(Product producto)
         {
             
-            var temp =prod["Id"];
+            //var temp =prod["Id"];
            
             
-           var producto = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == Convert.ToInt16(temp))).FirstOrDefault();
+          // var producto = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == Convert.ToInt16(temp))).FirstOrDefault();
             var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
-            
+
+
             var item = new CartItem
-            {
+            {   
                 ProductId = producto.Id,
-                Price = producto.Price
+                Price = producto.Price,
+                Quantity = 1
+                
             };
             CheckAuditPattern(item);
 
@@ -70,6 +73,7 @@ namespace Artshop.Website.Controllers
             }
             else
             {
+                item.CartId = carrito.Id;
                 CarritoExistente(carrito, item);
             }
                        
@@ -80,11 +84,11 @@ namespace Artshop.Website.Controllers
         private void NuevoCarrito(CartItem cartItem)
         {
             var carrito = new Cart();
-            carrito.CartItem.Add(cartItem);
             carrito.CartDate = DateTime.Now;
             carrito.Cookie = User.Identity.Name;
-            cartItem.Cart = carrito;
-            cartItem.Quantity++;
+           //cartItem.Cart = carrito;
+            //cartItem.Quantity=1;
+            carrito.CartItem.Add(cartItem);
             CheckAuditPattern(carrito, true);
 
             db.CartManager.AddNewCart(carrito);
@@ -92,49 +96,93 @@ namespace Artshop.Website.Controllers
 
         private void CarritoExistente(Cart cart, CartItem cartItem)
         {
+
+            bool flag = true;
             for (int i = 0; i < cart.CartItem.Count; i++)
             {
+               
                 if (cart.CartItem.ElementAt(i).ProductId == cartItem.ProductId)
                 {
+                    flag = false;
+
+
                     cart.CartItem.ElementAt(i).Quantity++;
                     db.CartManager.UpdateCart(cart);
                     return;
                 }
+                             
             }
+            if (flag) { 
 
             cart.CartItem.Add(cartItem);
-            cartItem.Cart = cart;
+            //cartItem.Cart = cart;
             db.CartManager.UpdateCart(cart);
+            }
+        }
+        private List<CartItem> obtener_cart(string user)
+        {
+            var carrito = db.CartManager.FindCartByCookie(user);
+                
+            return db.CartItemManager.GetAllCartItem(carrito.Id);
         }
         [Authorize]
         public ActionResult Buy()
         {
-            var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
-            return View(db.CartItemManager.GetAllCartItem(carrito.Id));
+            //var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
+            return View(obtener_cart(User.Identity.Name));
             
         }
 
-        //private List<CheckoutItem> Listado_car()
-        //{
-        //    var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
-        //    var lista = new List<CheckoutItem>();
-        //    if (carrito != null) 
-        //    {
+        public ActionResult DeleteItemCar(int id)
+        {
+            var item = db.CartItemManager.FindCartItem(x => x.Id == id).FirstOrDefault();
+            if (item == null)
+            {
+                ViewBag.Messagealert = "El producto no se encuentra en el carrito, Actualizar la vista";
+                return RedirectToAction("Buy", obtener_cart(User.Identity.Name));
+            }
+            try
+            {
+                db.CartItemManager.RemoveCartItem(item);
+                
+            }
+            catch (Exception ex)
+            {
+                db.Logger(ex, System.Web.HttpContext.Current);
+                ViewBag.Messagealert = "No se pudo eliminar la linea";
+                return RedirectToAction("Buy",obtener_cart(User.Identity.Name));
+            }
+
+            ViewBag.Messagealert = "Se quito la obra  del carrito";
+            return RedirectToAction("Buy", obtener_cart(User.Identity.Name));
+
+        }
+        [HttpPost]
+        public ActionResult UpdateItemCar(FormCollection item)
+        {
+            var id = item["item.Id"];
+            var cantidad = item["item.Quantity"];
             
-        //    foreach (var cartItem in carrito.CartItem)
-        //    {
-        //        var tempProd = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == cartItem.ProductId)).FirstOrDefault();
-        //        lista.Add(new CheckoutItem
-        //        {
-        //            ProductName = tempProd.Title,
-        //            ArtistName = tempProd.Artist.FullName,
-        //            Amount = cartItem.Quantity,
-        //            UnitPrice = tempProd.Price,
-        //            Image = tempProd.Image
-        //        });
-        //    }
-        //    }
-        //    return lista;
-        //}
+           var cartitem= db.CartItemManager.FindCartItem(x => x.Id == Convert.ToInt16(id)).FirstOrDefault();
+            this.CheckAuditPattern(cartitem, false);
+            var listModel = db.ValidateModel(cartitem);
+            if (ModelIsValid(listModel))
+                return RedirectToAction("Buy", obtener_cart(User.Identity.Name));
+            try
+            {
+                cartitem.Quantity = Convert.ToInt16(cantidad);
+                db.CartItemManager.UpdateCarItem(cartitem);
+
+            }
+            catch (Exception ex)
+            {
+                db.Logger(ex, System.Web.HttpContext.Current);
+                ViewBag.Messagealert = ex.Message;
+                return View(obtener_cart(User.Identity.Name));
+            }
+            ViewBag.Messagealert = "Catidad de "+cartitem.Product.Title+" actualizada";
+            return RedirectToAction("Buy", obtener_cart(User.Identity.Name));
+        }
+
     }
 }

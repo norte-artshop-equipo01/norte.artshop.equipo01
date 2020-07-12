@@ -352,11 +352,10 @@ a {
 }
 
 .button {
-    padding: 5px;
+    padding: 1px;
     text-decoration: none;
-    background-color: burlywood;
+    background-color: darkturquoise;
     border-radius: 5px;
-  
     margin-right: auto;
     color: black;
 }
@@ -378,8 +377,8 @@ a {
     background-color: transparent;
     border-collapse: collapse;
     border-spacing: 0;
-    width: 90%;
-    max-width: 90%;
+    width: 95%;
+    max-width: 95%;
 }
 
     .table td, .table th {

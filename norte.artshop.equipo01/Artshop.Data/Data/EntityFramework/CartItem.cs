@@ -11,7 +11,8 @@ namespace Artshop.Data.Data.EntityFramework
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class CartItem : BaseClass
     {
         public int Id { get; set; }
@@ -23,5 +24,7 @@ namespace Artshop.Data.Data.EntityFramework
     
         public virtual Cart Cart { get; set; }
         public virtual Product Product { get; set; }
+        [NotMapped]
+        public double Total { get { return (Price*Quantity); } }
     }
 }
