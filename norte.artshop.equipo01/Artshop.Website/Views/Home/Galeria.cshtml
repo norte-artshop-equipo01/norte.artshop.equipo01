@@ -7,8 +7,9 @@
 <div style="width:100%">
 
 
-    
-    @foreach (var elemento in Model)
+    @using (Html.BeginForm("Create", "Artist", FormMethod.Post))
+    {
+        foreach (var elemento in Model)
         {
             <div class="contimagenes">
                 <img src="~/content/images/Products/@(elemento.Image)" class="imagengal">
@@ -18,5 +19,5 @@
                 @Html.ActionLink("Agregar al carrito", "Buy", new { id = elemento.Id })
             </div>
         }
-    
+    }
 </div>

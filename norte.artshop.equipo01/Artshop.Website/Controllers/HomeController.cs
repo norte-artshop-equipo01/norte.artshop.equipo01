@@ -47,10 +47,10 @@ namespace Artshop.Website.Controllers
        
         
         [Authorize]
-        
-        public ActionResult Buy(int id)
+        [HttpPost]
+        public ActionResult Galeria(Product producto)
         {
-            var producto = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == id)).FirstOrDefault();
+           // var producto = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == id)).FirstOrDefault();
             var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
             
             var item = new CartItem
@@ -84,7 +84,7 @@ namespace Artshop.Website.Controllers
                 });
             }
 
-            return View(test);
+            return View(db.ProductManager.GetAllProducts());
         }
 
         private void NuevoCarrito(CartItem cartItem)
