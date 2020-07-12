@@ -8,6 +8,9 @@
     <div class="table">
         <h1 class="h1_home"> Administración de Productos</h1>
         <hr />
+        <h2 class="confirmacion">@ViewBag.message</h2>
+        <h2 class="alerta">@ViewBag.Messagealert</h2>
+        <br />
         <div>
             <h2>Agregar Nueva Obra</h2>
         </div>
@@ -73,7 +76,7 @@
                 </table>
             </div>
         }
-        <hr  />
+        <hr />
 
         <br />
         <h2 class="table">Total de Obras  @Model.Count()</h2>
@@ -110,7 +113,7 @@
 
                     <th></th>
                 </tr>
-               
+
                 @foreach (var item in Model)
                 {
                     <tr>

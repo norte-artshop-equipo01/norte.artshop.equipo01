@@ -31,7 +31,7 @@ namespace Artshop.Website.Controllers
             UpdateModel(product);
             try
             {
-                if (Image2.ContentLength > 0 && Image2!=null)
+                if (Image2 != null && Image2.ContentLength > 0)
                 {
                     string filename = Path.GetFileName(Image2.FileName);
                     string path = Path.Combine(Server.MapPath("/content/Images/products"), filename);
@@ -46,7 +46,7 @@ namespace Artshop.Website.Controllers
             catch (Exception ex)
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
-                ViewBag.MessageDanger = "¡Error al cargar el Producto con su imagén.";
+                ViewBag.Messagealert= "¡Error al cargar el Producto con su imagén!";
                
                 ViewBag.Artistas = art_bag();
                 return View("Index", db.ProductManager.GetAllProducts());
@@ -88,7 +88,7 @@ namespace Artshop.Website.Controllers
                 }
                 catch (Exception)
                 {
-                    ViewBag.MessageDanger = "No se pudo guardar la imagen";
+                    ViewBag.Messagealert = "No se pudo guardar la imagen";
                     return View(product);
                 }
             
@@ -106,7 +106,7 @@ namespace Artshop.Website.Controllers
             catch (Exception ex)
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
-                ViewBag.MessageDanger = ex.Message;
+                ViewBag.Messagealer = ex.Message;
                 ViewBag.Artistas = art_bag();
                 return View(product);
 
