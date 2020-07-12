@@ -15,7 +15,7 @@ namespace Artshop.Website.Controllers
         public readonly DatabaseConnection db;
         public BaseController()
         {
-            db = new DatabaseConnection(ConnectionType.Database, WebConfigurationManager.ConnectionStrings["LocalDB"].ToString());
+            db = new DatabaseConnection(ConnectionType.Database, WebConfigurationManager.ConnectionStrings["somee"].ToString());
         }
         
             protected bool ModelIsValid(List<ValidationResult> listModel)

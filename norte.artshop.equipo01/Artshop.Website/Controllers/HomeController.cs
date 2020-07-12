@@ -114,27 +114,27 @@ namespace Artshop.Website.Controllers
             
         }
 
-        private List<CheckoutItem> Listado_car()
-        {
-            var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
-            var lista = new List<CheckoutItem>();
-            if (carrito != null) 
-            {
+        //private List<CheckoutItem> Listado_car()
+        //{
+        //    var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
+        //    var lista = new List<CheckoutItem>();
+        //    if (carrito != null) 
+        //    {
             
-            foreach (var cartItem in carrito.CartItem)
-            {
-                var tempProd = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == cartItem.ProductId)).FirstOrDefault();
-                lista.Add(new CheckoutItem
-                {
-                    ProductName = tempProd.Title,
-                    ArtistName = tempProd.Artist.FullName,
-                    Amount = cartItem.Quantity,
-                    UnitPrice = tempProd.Price,
-                    Image = tempProd.Image
-                });
-            }
-            }
-            return lista;
-        }
+        //    foreach (var cartItem in carrito.CartItem)
+        //    {
+        //        var tempProd = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == cartItem.ProductId)).FirstOrDefault();
+        //        lista.Add(new CheckoutItem
+        //        {
+        //            ProductName = tempProd.Title,
+        //            ArtistName = tempProd.Artist.FullName,
+        //            Amount = cartItem.Quantity,
+        //            UnitPrice = tempProd.Price,
+        //            Image = tempProd.Image
+        //        });
+        //    }
+        //    }
+        //    return lista;
+        //}
     }
 }
