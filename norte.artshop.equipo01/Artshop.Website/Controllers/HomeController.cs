@@ -44,13 +44,10 @@ namespace Artshop.Website.Controllers
             ViewBag.Message = "La página de descripción de su aplicación.";
             return View(db.ArtistManager.GetAllArtists());
         }
-        public ActionResult AbmArtistas()
-        {
-            ViewBag.Message = "La página de descripción de su aplicación.";
-            return View();
-        }
+       
         
         [Authorize]
+        
         public ActionResult Buy(int id)
         {
             var producto = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == id)).FirstOrDefault();
@@ -71,7 +68,7 @@ namespace Artshop.Website.Controllers
             {
                 CarritoExistente(carrito, item);
             }
-
+            { }
 
             var test = new List<CheckoutItem>();
             foreach (var cartItem in carrito.CartItem)

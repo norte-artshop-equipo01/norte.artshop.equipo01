@@ -4,6 +4,10 @@
 
 <h1 class="h1_home"><b>Checkout</b></h1>
 <hr />
+<br/>
+<h2>Usted posee @Model.Count() artículos pendientes de compra</h2>
+<br/>
+<hr />
 <div style="width:100%">
 
     <div>
@@ -25,7 +29,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Image)
                 </th>
-                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
             </tr>
 
             @foreach (var item in Model)
@@ -44,14 +50,16 @@
                         @Html.DisplayFor(modelItem => item.UnitPrice)
                     </td>
                     <td>
-                        <img class="imageback" src="~/Content/Images/Products/@item.Image" alt="Imagen del producto. @item.Image" title="@item.ProductName" />
+                        <img class="imagecarrito " src="~/Content/Images/Products/@item.Image" alt="Imagen del producto. @item.Image" title="@item.ProductName" />
                     </td>
-
-                    
+                    <td>
+                        @Html.EditorFor(modelItem => item.Amount)
+                    </td>
                 </tr>
             }
-
         </table>
+        <br/>
+        <hr />
 
 
     </div>
