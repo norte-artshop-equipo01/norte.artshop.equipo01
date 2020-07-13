@@ -48,13 +48,13 @@ namespace Artshop.Website.Controllers
         
         [Authorize]
         [HttpPost]
-        public ActionResult Galeria(Product producto)
+        public ActionResult Galeria(Product producto1)
         {
             
             //var temp =prod["Id"];
            
             
-          // var producto = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == Convert.ToInt16(temp))).FirstOrDefault();
+           var producto = db.ProductManager.FindProduct(new Func<Product, bool>(x => x.Id == producto1.Id)).FirstOrDefault();
             var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
 
 
@@ -108,7 +108,6 @@ namespace Artshop.Website.Controllers
 
                     cart.CartItem.ElementAt(i).Quantity++;
                     db.CartManager.UpdateCart(cart);
-                    return;
                 }
                              
             }
@@ -122,13 +121,14 @@ namespace Artshop.Website.Controllers
         private List<CartItem> obtener_cart(string user)
         {
             var carrito = db.CartManager.FindCartByCookie(user);
-                
+            
             return db.CartItemManager.GetAllCartItem(carrito.Id);
         }
         [Authorize]
         public ActionResult Buy()
         {
             //var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
+            ViewBag.Total=sum_items(obtener_cart(User.Identity.Name));
             return View(obtener_cart(User.Identity.Name));
             
         }
@@ -139,10 +139,12 @@ namespace Artshop.Website.Controllers
             if (item == null)
             {
                 ViewBag.Messagealert = "El producto no se encuentra en el carrito, Actualizar la vista";
+                ViewBag.Total = sum_items(obtener_cart(User.Identity.Name));
                 return RedirectToAction("Buy", obtener_cart(User.Identity.Name));
             }
             try
             {
+                
                 db.CartItemManager.RemoveCartItem(item);
                 
             }
@@ -150,13 +152,26 @@ namespace Artshop.Website.Controllers
             {
                 db.Logger(ex, System.Web.HttpContext.Current);
                 ViewBag.Messagealert = "No se pudo eliminar la linea";
+                ViewBag.Total = sum_items(obtener_cart(User.Identity.Name));
                 return RedirectToAction("Buy",obtener_cart(User.Identity.Name));
             }
 
             ViewBag.Messagealert = "Se quito la obra  del carrito";
+            ViewBag.Total = sum_items(obtener_cart(User.Identity.Name));
             return RedirectToAction("Buy", obtener_cart(User.Identity.Name));
 
         }
+        private double sum_items(List<CartItem> cart)
+        {
+            // var cart = obtener_cart(User.Identity.Name);
+            double suma = 0;
+            for (int i = 0; i < cart.Count(); i++)
+            {
+                suma += cart.ElementAt(i).Total;
+            }
+            return suma;
+        }
+
         [HttpPost]
         public ActionResult UpdateItemCar(FormCollection item)
         {
@@ -167,9 +182,13 @@ namespace Artshop.Website.Controllers
             this.CheckAuditPattern(cartitem, false);
             var listModel = db.ValidateModel(cartitem);
             if (ModelIsValid(listModel))
+            {
+                ViewBag.Total = sum_items(obtener_cart(User.Identity.Name));
                 return RedirectToAction("Buy", obtener_cart(User.Identity.Name));
+            }
             try
             {
+
                 cartitem.Quantity = Convert.ToInt16(cantidad);
                 db.CartItemManager.UpdateCarItem(cartitem);
 
@@ -181,6 +200,7 @@ namespace Artshop.Website.Controllers
                 return View(obtener_cart(User.Identity.Name));
             }
             ViewBag.Messagealert = "Catidad de "+cartitem.Product.Title+" actualizada";
+            ViewBag.Total = sum_items(obtener_cart(User.Identity.Name));
             return RedirectToAction("Buy", obtener_cart(User.Identity.Name));
         }
 

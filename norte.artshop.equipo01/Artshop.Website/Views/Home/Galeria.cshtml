@@ -19,6 +19,7 @@
         <img src="~/content/images/Products/@(elemento.Image)" class="imagengal">
         <p>@elemento.Title, <nombre style="font-style:normal"> @elemento.Artist.FirstName @elemento.Artist.LastName</nombre></p>
         <br />
+        @Html.HiddenFor(model=>elemento.Price)
         <input type="submit" value="Agregar al carrito" class="btn-input" />
 
     </div>
