@@ -7,18 +7,24 @@
 <!DOCTYPE html>
 
 <body>
-    <h1 class="h1_home">Pagina de registro</h1>
-    <hr />
+    <h1 class="h1_home">Página de registro</h1>
+    
 
     <span class="text-danger">@ViewBag.Messagealert</span>
-
-    <h2>Usuario para email:@Model.Email</h2>
+    <div style="background-color:lightgray; padding-left:10px">
+        <hr style="padding-left:0"/>
+        <h2>Información de usuario para el email: <strong> @Model.Email</strong></h2>
+        <hr />
+    </div>
     <br />
     <div class="container">
         @using (Html.BeginForm("Userreg", "Order", FormMethod.Post))
         {
             @Html.HiddenFor(x => x.Password);
-            @Html.HiddenFor(x => x.Id);
+            if (Model.Id > 0)
+            {
+                @Html.HiddenFor(x => x.Id);
+            }
             @Html.HiddenFor(x => x.Email);
             @Html.HiddenFor(x => x.SignupDate);
             @Html.HiddenFor(x => x.OrderCount);
@@ -58,9 +64,19 @@
 
             <br />
             <div class="div_button">
-                <input class="button" type="submit" value="Registrarse" />
+                <input class="button" type="submit" value="Continuar" />
             </div>
         }
-        <br />
+        @using (Html.BeginForm("Buy", "Home"))
+        {
+            <br />
+            <span class="div_button">
+                <input class="button" type="submit" value="Volver" />
+            </span>
+            <br />
+            <hr />
+            <br />
+        }
+
     </div>
 </body>

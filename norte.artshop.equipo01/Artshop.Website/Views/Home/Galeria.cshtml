@@ -7,16 +7,20 @@
 <div style="width:100%">
 
     @foreach (var elemento in Model)
-    { using (Html.BeginForm("Galeria", "Home", FormMethod.Post))
-    { <input id="Id" name="Id" style="display:none" type="Number" value=@elemento.Id>
-    <div class="contimagenes">
-        <img src="~/content/images/Products/@(elemento.Image)" class="imagengal">
-        <p>@elemento.Title, <nombre style="font-style:normal"> @elemento.Artist.FirstName @elemento.Artist.LastName</nombre></p>
-        <strong>Precio $ @elemento.Price</strong>
-        @Html.HiddenFor(model=>elemento.Price)
-        <input type="submit" value="Agregar al carrito" class="btn-input" />
+    {
+        using (Html.BeginForm("Galeria", "Home", FormMethod.Post))
+        {<input id="Id" name="Id" style="display:none" type="Number" value=@elemento.Id>
+            <div class="contimagenes">
+                <img src="~/content/images/Products/@(elemento.Image)" class="imagengal">
+                <p>@elemento.Title, <nombre style="font-style:normal"> @elemento.Artist.FirstName @elemento.Artist.LastName</nombre></p>
+                <p><strong>Precio $ @elemento.Price</strong></p>
+              
+                @Html.HiddenFor(model => elemento.Price)
+                <input type="submit" value="Agregar al carrito" class="btn-input" />
 
-    </div>
+
+            </div>
+        }
     }
-    }
+
 </div>

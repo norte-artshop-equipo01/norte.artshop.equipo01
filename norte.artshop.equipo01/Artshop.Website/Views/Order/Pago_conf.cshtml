@@ -6,22 +6,25 @@
 
 <h1 class="h1_home"><b>Su orden fue procesada</b></h1>
 <hr />
-    <span class="alerta">@ViewBag.MessageAlert</span>
+<span class="alerta">@ViewBag.MessageAlert</span>
 <br />
-<div>
+@using (Html.BeginForm("Index", "Home"))
+{
+    <div style="padding-left: 10px;align-content: center;text-align: -webkit-center;">
 
-    <h2 class="confirmacion">@ViewBag.Message</h2>
+        <h2 class="confirmacion" style="align-content:center;text-align:center">@ViewBag.Message</h2>
 
+        <br />
+        <h2 class="confirmacion" style="align-content:center;text-align:center">Gracias por su compra!</h2>
+        <br />
+        <br />
+        
+            <input class="button" type="submit" value="Volver al Inicio" />
+        
+       
+
+    </div>
+}
     <br />
-    <h2>Gracias por su compra!</h2>
-    <br/>
-    @using (Html.BeginForm("Index", "Home"))
-    {<br />
-        <input class="button" type="submit" value="Volver al Inicio" />
-    }
-
-</div>
-
-<br />
-<hr />
-
+    <hr />
+    <br />

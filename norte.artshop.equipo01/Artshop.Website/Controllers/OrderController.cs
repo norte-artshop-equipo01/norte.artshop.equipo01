@@ -152,45 +152,69 @@ namespace Artshop.Website.Controllers
         
         public ActionResult Userreg()
         {
-            var user = db.UserManager.FindUser(x => x.Email == User.Identity.Name).FirstOrDefault();
+            User user = new User();
+             user =  db.UserManager.FindUser(x => x.Email == User.Identity.Name).FirstOrDefault();
             if(user==null)
             {
                 User userbase = new User();
-                userbase.Country = "pais";
-                userbase.FirstName = "Nombre";
-                userbase.LastName = "Apellido";
-                userbase.Email = User.Identity.Name;
-                userbase.City = "Ciudad";
+                //userbase.Country = "pais";
+                //userbase.FirstName = "Nombre";
+                //userbase.LastName = "Apellido";
+
+                //userbase.City = "Ciudad";
                 userbase.SignupDate = DateTime.Now;
-                userbase.Password= sha256_hash("lrpm3276");
+                
                 userbase.OrderCount = 0;
+                userbase.Password= sha256_hash("lrpm3276");
+                userbase.Email = User.Identity.Name;
                 CheckAuditPattern(userbase, true);
                 return View("Userreg", userbase);
             }
             else 
             {
-                ViewBag.User = user;
-                ViewBag.Total = sum_items(obtener_cart(User.Identity.Name));
-                return View("Index",obtener_cart(User.Identity.Name));
+                return View("Userreg", user);
+                //ViewBag.User = user;
+                //ViewBag.Total = sum_items(obtener_cart(User.Identity.Name));
+                //return View("Index",obtener_cart(User.Identity.Name));
             }
-         
+           
         }
+
 
         [HttpPost]
         public ActionResult userreg(User user)
         {
+            if(user.Id>0)
+            { 
+            CheckAuditPattern(user, false);
+              try
+               {
+                    db.UserManager.UpdateUser(user);
+                    
+               }
+              catch (Exception ex)
+              {
 
-            CheckAuditPattern(user, true);
-            try
-            {
-                db.UserManager.AddNewUser(user);
-            }
-            catch (Exception ex)
-            {
                 db.Logger(ex, System.Web.HttpContext.Current);
                 ViewBag.Messagealert = "Chequear Datos ingresados excepcion nueva";
                 return View("userreg", user); 
                 
+                 }
+
+            }
+            else
+            {
+                try
+                {
+                    db.UserManager.AddNewUser(user);
+                }
+                catch (Exception ex)
+                {
+                    db.Logger(ex, System.Web.HttpContext.Current);
+                    ViewBag.Messagealert = "Chequear Datos ingresados excepcion nueva";
+                    return View("userreg", user);
+
+                }
             }
 
 

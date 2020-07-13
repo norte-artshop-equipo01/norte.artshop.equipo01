@@ -23,7 +23,7 @@ h1, h2, h3 {
 
 
 p, blockquote, ul, ol {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     line-height: 2em;
 }
 
@@ -330,8 +330,8 @@ a {
 
 /* Galeria */
 .contimagenes {
-    margin: 1em;
-    padding: 1em;
+    margin: .5em;
+    padding: .5em;
     float: left;
     text-align: center;
     align-items: center;
@@ -379,6 +379,7 @@ a {
     border-spacing: 0;
     width: 95%;
     max-width: 95%;
+    text-align:center;
 }
 
     .table td, .table th {

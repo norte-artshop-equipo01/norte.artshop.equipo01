@@ -1,15 +1,18 @@
 ﻿@{ @model IEnumerable<Artshop.Data.Data.EntityFramework.CartItem>
-        double Total = ViewBag.Total;
+double Total = ViewBag.Total;
 
-    }
+}
 @if (@Model != null && @Model.Count() > 0)
 {
     <h1 class="h1_home"><b>Checkout</b></h1>
-    <hr />
+    <div style="background-color:lightgray; padding-left:10px">
+        <hr />
+        <br />
+        <h2>Usted posee @Model.Count() artículos pendientes de compra.</h2>
+        <br />
+        <hr />
+    </div>
     <br />
-    <h2>Usted posee @Model.Count() artículos pendientes de compra.</h2>
-    <br />
-    <hr />
     <div style="width:100%">
 
 
@@ -88,18 +91,31 @@
             <br />
         </div>
     </div>
+
     using (Html.BeginForm("Userreg", "Order", FormMethod.Get))
     {
-        <div style="text-align:right">
+        <div style="text-align:right;">
             <h2> Total $ @Total</h2>
             <br />
+
             <input class="button" type="submit" value="Ir al Pago" />
+
+            <br />
+        </div>}
+    <br />
+    using (Html.BeginForm("Galeria", "Home", FormMethod.Get))
+    {
+        <div style="text-align:right">
+
+            <input class="button" type="submit" value="Volver" />
+
         </div>
+        <br />
         <hr />
         <br />
-
-
     }
+
+
 }
 @if (@Model.Count() == 0)
 {<h1 class="h1_home"><b>Aun no seleccionó ninguna de nuestras Obras</b></h1>}
