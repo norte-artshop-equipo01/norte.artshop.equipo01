@@ -96,6 +96,7 @@ namespace Artshop.Website.Controllers
 
         private void CarritoExistente(Cart cart, CartItem cartItem)
         {
+            
 
             bool flag = true;
             for (int i = 0; i < cart.CartItem.Count; i++)
@@ -127,6 +128,16 @@ namespace Artshop.Website.Controllers
         [Authorize]
         public ActionResult Buy()
         {
+            var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
+            if (carrito == null)
+            {
+                var cartnew= new Cart();
+                cartnew.Cookie = User.Identity.Name;
+                cartnew.ItemCount = 0;
+                cartnew.CartDate = DateTime.Now;
+                CheckAuditPattern(cartnew, true);
+                db.CartManager.AddNewCart(cartnew);
+            }
             //var carrito = db.CartManager.FindCartByCookie(User.Identity.Name);
             ViewBag.Total=sum_items(obtener_cart(User.Identity.Name));
             return View(obtener_cart(User.Identity.Name));

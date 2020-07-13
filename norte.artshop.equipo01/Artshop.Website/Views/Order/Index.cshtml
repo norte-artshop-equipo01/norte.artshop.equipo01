@@ -4,19 +4,19 @@ double Total = ViewBag.Total;
 }
 @if (@Model != null && @Model.Count() > 0)
 {
-    using (Html.BeginForm("userreg", "Order"))
+    using (Html.BeginForm("Pago", "Order", FormMethod.Post))
    {
     <h1 class="h1_home"><b>Confirmacion de pago</b></h1>
     <hr />
     <br />
     <div>
         <ul style="display:inline">
-            <li>Ingrese nu numero de tarjeta</li>
+            <li><h2>Confirme su número de tarjeta</h2></li>
             <li><input type="text" name="Tarjeta" required /></li>
             <li><input class="button" type="submit" value="Confirmar pago" /></li>
         </ul>
     </div>
-    <h2>Confirmar el pagopor los siguientes artículos @Model.Count() artículos pendientes de compra.</h2>
+    <h2>Confirmar el pago por los siguientes @Model.Count() artículos  pendientes de compra.</h2>
     <br />
     <hr />
      <div style="width:100%">

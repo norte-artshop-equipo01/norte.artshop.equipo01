@@ -131,6 +131,7 @@
     <Compile Include="Data\Managers\CartItemManager.cs" />
     <Compile Include="Data\Managers\CartManager.cs" />
     <Compile Include="Data\Managers\OrderManager.cs" />
+    <Compile Include="Data\Managers\OrderNumberManager.cs" />
     <Compile Include="Data\Managers\ProductManager.cs" />
     <Compile Include="Data\Managers\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
