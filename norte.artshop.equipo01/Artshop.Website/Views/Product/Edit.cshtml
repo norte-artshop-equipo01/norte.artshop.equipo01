@@ -1,0 +1,121 @@
+﻿@{
+    @model Artshop.Data.Data.EntityFramework.Product
+    List<SelectListItem> Artistas = (List<SelectListItem>)ViewBag.artistas;
+
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Backend/_LayoutBackend.cshtml";
+}
+
+<div class="table" style="text-align:left">
+    <h1 class="h1_home"> Edición de Productos</h1>
+    <hr />
+    
+    <h4>Obra a modificar: "@Model.Title"</h4>
+    
+    <div>
+        @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.CreatedBy)
+            @Html.HiddenFor(model => model.CreatedBy)
+            @Html.HiddenFor(model => model.Image)
+            <div class="form-horizontal">
+                <hr />
+                <span class="text-danger">@ViewBag.MessageDanger</span>
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+                    <div class="separator">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                    <div class="separator">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Artist.FullName, htmlAttributes: new { @class = "control-label" })
+                    <div class="separator">
+                        @Html.DropDownListFor(x => x.ArtistId, Artistas, new {@value=Model.ArtistId })
+                        @Html.ValidationMessageFor(model => model.ArtistId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <label>Imagen actual: @Model.Image</label>
+                <div>
+
+                    <img class="imageback" id="Image" name="Image" src="~/Content/Images/Products/@Model.Image" alt="Imagen del producto. @Model.Image" title="@Model.Image" required />
+                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                    <br />
+                    <input type="file" name="Image2" id="imagenPrevisualizacion" accept="image/*">
+                    <script src="script.js"></script>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label" })
+                    <div class="separator">
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.QuantitySold, htmlAttributes: new { @class = "control-label" })
+                    <div class="separator">
+                        @Html.EditorFor(model => model.QuantitySold, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.QuantitySold, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AvgStars, htmlAttributes: new { @class = "control-label" })
+                    <div class="separator">
+                        @Html.EditorFor(model => model.AvgStars, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AvgStars, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 separator">
+                        <input type="submit" value="Guardar" class="btn-input" />
+                        @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn-input" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br/>
+@section scripts{
+    <script>
+
+        // Obtener referencia al input y a la imagen
+
+        const $seleccionArchivos = document.querySelector("#imagenPrevisualizacion"),
+            $imagenPrevisualizacion = document.querySelector("#Image");
+
+        // Escuchar cuando cambie
+        $seleccionArchivos.addEventListener("change", () => {
+            // Los archivos seleccionados, pueden ser muchos o uno
+            const archivos = $seleccionArchivos.files;
+            // Si no hay archivos salimos de la función y quitamos la imagen
+            
+            // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+            const primerArchivo = archivos[0];
+            // Lo convertimos a un objeto de tipo objectURL
+            const objectURL = URL.createObjectURL(primerArchivo);
+            // Y a la fuente de la imagen le ponemos el objectURL
+            $imagenPrevisualizacion.src = objectURL;
+        });
+    </script>
+
+}

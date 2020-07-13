@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Pago_conf";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="h1_home"><b>Su orden fue procesada</b></h1>
+<hr />
+<span class="alerta">@ViewBag.MessageAlert</span>
+<br />
+@using (Html.BeginForm("Index", "Home"))
+{
+    <div style="padding-left: 10px;align-content: center;text-align: -webkit-center;">
+
+        <h2 class="confirmacion" style="align-content:center;text-align:center">@ViewBag.Message</h2>
+
+        <br />
+        <h2 class="confirmacion" style="align-content:center;text-align:center">Gracias por su compra!</h2>
+        <br />
+        <br />
+        
+            <input class="button" type="submit" value="Volver al Inicio" />
+        
+       
+
+    </div>
+}
+    <br />
+    <hr />
+    <br />

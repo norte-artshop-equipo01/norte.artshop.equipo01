@@ -12,7 +12,7 @@ namespace Artshop.Data.Data.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Cart
+    public partial class Cart : BaseClass
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cart()
@@ -24,10 +24,8 @@ namespace Artshop.Data.Data.EntityFramework
         public string Cookie { get; set; }
         public System.DateTime CartDate { get; set; }
         public int ItemCount { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime ChangedOn { get; set; }
-        public string ChangedBy { get; set; }
+        
+        public Nullable<bool> Disabled { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CartItem> CartItem { get; set; }

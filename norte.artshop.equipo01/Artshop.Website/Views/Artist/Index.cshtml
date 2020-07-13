@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Backend/_LayoutBackend.cshtml";
+}
+
+@model IEnumerable<Artshop.Data.Data.EntityFramework.Artist>
+
+
+
+    <div class="table">
+        <h1 class="h1_home"> Administración de Artistas</h1>
+        <hr />
+        <h2 class="confirmacion">@ViewBag.message</h2>
+        <h2 class="alerta">@ViewBag.Messagealert</h2>
+
+        <br />
+
+
+        <div>
+            <h2>Agregar Nuevo Artista</h2>
+        </div>
+        <!--Tabla para agrgar un nuevo artista-->
+        @using (Html.BeginForm("Create", "Artist", FormMethod.Post))
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LifeSpan)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input name="FirstName" id="FirstName" type="text" maxlength="30" required />
+                    </td>
+                    <td>
+
+                        <input name="LastName" id="LastName" type="text" maxlength="30" required />
+                    </td>
+                    <td>
+
+                        <input name="LifeSpan" id="LifeSpan" type="number" maxlength="2" required />
+                    </td>
+                    <td>
+
+                        <input name="Country" id="Country" type="text" maxlength="30" required />
+                    </td>
+                    <td>
+
+                        <input id="Description" name="Description" rows="10" cols="60" required>
+                    </td>
+                    <td>
+                        <div class="div_button">
+                            <input class="button" type="submit" value="Agregar" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        }
+        <hr />
+        <br />
+        <h2 class="">Total de artistas  @Enumerable.Count(Model)</h2>
+        <br />
+
+        <!--Tabla para mostrar los artistas-->
+        <div>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.LifeSpan)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalProducts)
+                    </th>
+
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LifeSpan)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalProducts)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id },
+                            new { onclick = "return confirm('Realmente desea eliminar el Artista " + item.FullName + " ?')" })
+
+                        </td>
+                    </tr>
+                }
+
+                <!-- Html.ActionLink("Eliminar", "Delete", new { id = item.Id })-->
+
+            </table>
+
+
+        </div>
+
+        <br />
+
+    </div>
+

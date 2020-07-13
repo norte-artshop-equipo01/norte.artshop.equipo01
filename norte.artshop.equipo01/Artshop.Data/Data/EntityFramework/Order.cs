@@ -12,7 +12,7 @@ namespace Artshop.Data.Data.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Order : BaseClass
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
@@ -26,10 +26,8 @@ namespace Artshop.Data.Data.EntityFramework
         public double TotalPrice { get; set; }
         public int OrderNumber { get; set; }
         public int ItemCount { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime ChangedOn { get; set; }
-        public string ChangedBy { get; set; }
+        
+        public bool Disabled { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

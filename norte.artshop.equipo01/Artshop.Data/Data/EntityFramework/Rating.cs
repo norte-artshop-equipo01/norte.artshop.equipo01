@@ -12,18 +12,15 @@ namespace Artshop.Data.Data.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Rating
+    public partial class Rating : BaseClass
     {
         public int Id { get; set; }
         public int UserId { get; set; }
         public int ProductId { get; set; }
         public int Stars { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime ChangedOn { get; set; }
-        public string ChangedBy { get; set; }
+        
     
-        public virtual Product Product { get; set; }
         public virtual User User { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

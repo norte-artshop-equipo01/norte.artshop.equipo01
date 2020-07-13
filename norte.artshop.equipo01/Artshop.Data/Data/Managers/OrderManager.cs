@@ -1,6 +1,7 @@
 ﻿using Artshop.Data.Data.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Artshop.Data.Data.Managers
 {
@@ -33,9 +34,11 @@ namespace Artshop.Data.Data.Managers
             return _database.Find(filter);
         }
 
-        public List<Order> GetAllOrders()
+        public List<Order> GetAllOrders(bool includeDisabled = false)
         {
-            return _database.GetAll<Order>();
+            return !includeDisabled
+                ? _database.GetAll<Order>().Where(x => x.Disabled == false).ToList()
+                : _database.GetAll<Order>();
         }
     }
 }

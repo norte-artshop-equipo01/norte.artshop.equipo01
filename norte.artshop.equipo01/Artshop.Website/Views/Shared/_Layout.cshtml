@@ -17,7 +17,7 @@
                     <!--a <h1><a href="/">Spark Art</a></h1>
                           <h2><span>Galeria de Arte</span></h2>
                     a-->
-</div>
+            </div>
         </header>
         <nav id="menu">
             <ul>
@@ -25,8 +25,13 @@
                 <li><a href="/home/Artistas">Artistas</a></li>
                 <li><a href="/home/Galeria">Galería</a></li>
                 <li><a href="/home/about/">Nosotros</a></li>
-                <li><a href="/home/contact/">Contacto</a></li>
+                @if (Request.IsAuthenticated)
+                {
+                     <li><a href="/home/Buy/">Carrito</a></li>
+                }
+                    <li><a href="/home/contact/">Contacto</a></li>
             </ul>
+            @Html.Partial("_LoginPartial")
         </nav>
         <section id="page">
             <article id="content">

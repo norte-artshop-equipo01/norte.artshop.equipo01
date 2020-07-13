@@ -1,0 +1,123 @@
+﻿@{ @model IEnumerable<Artshop.Data.Data.EntityFramework.CartItem>
+double Total = ViewBag.Total;
+
+}
+@if (@Model != null && @Model.Count() > 0)
+{
+    <h1 class="h1_home"><b>Checkout</b></h1>
+    <div style="background-color:lightgray; padding-left:10px">
+        <hr />
+        <br />
+        <h2>Usted posee @Model.Count() artículos pendientes de compra.</h2>
+        <br />
+        <hr />
+    </div>
+    <br />
+    <div style="width:100%">
+
+
+        <div>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.Label("Eliminar")
+                    </th>
+                    <th>
+                        @Html.Label("Titulo de la Obra")
+                    </th>
+
+                    <th>
+                        @Html.Label("Nombre del Artista")
+                    </th>
+                    <th>
+                        @Html.Label("Precio Unitario")
+                    </th>
+                    <th>
+                        @Html.Label("Imagen")
+                    </th>
+                    <th>
+                        @Html.Label("Cantidad")
+                    </th>
+                    <th>
+                        @Html.Label("Total $")
+                    </th>
+                    <th>
+                        @Html.Label("Accion")
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    using (Html.BeginForm("UpdateItemCar", "Home", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(modelitem => item.Id)
+                        @Html.HiddenFor(modelitem => item.CreatedBy)
+                        @Html.HiddenFor(modelitem => item.CreatedBy)
+
+                        <tr>
+                            <td>
+                                @Html.ActionLink("Eliminar", "DeleteItemCar", new { id = item.Id },
+                                 new { onclick = "return confirm('Desea elminar el producto del carrito?')" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.Artist.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.Price)
+                            </td>
+                            <td>
+                                <img class="imagecarrito " src="~/Content/Images/Products/@item.Product.Image" alt="Imagen de @item.Product.Image" title="@item.Product.Title" />
+                            </td>
+                            <td>
+                                @Html.EditorFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Total)
+                            </td>
+                            <td>
+                                <input class="button" type="submit" value="Actualizar" />
+                                <!-- @Html.ActionLink("Actualizar", "UpdateItemCar", new { cantidad = "cantidad", id = item.Id },
+                                new { onclick = "return confirm ('Actualizar la cantidad del articulo?')" })-->
+
+                            </td>
+
+                        </tr>
+                    }
+                }
+            </table>
+            <br />
+        </div>
+    </div>
+
+    using (Html.BeginForm("Userreg", "Order", FormMethod.Get))
+    {
+        <div style="text-align:right;">
+            <h2> Total $ @Total</h2>
+            <br />
+
+            <input class="button" type="submit" value="Ir al Pago" />
+
+            <br />
+        </div>}
+    <br />
+    using (Html.BeginForm("Galeria", "Home", FormMethod.Get))
+    {
+        <div style="text-align:right">
+
+            <input class="button" type="submit" value="Volver" />
+
+        </div>
+        <br />
+        <hr />
+        <br />
+    }
+
+
+}
+@if (@Model.Count() == 0)
+{<h1 class="h1_home"><b>Aun no seleccionó ninguna de nuestras Obras</b></h1>}
+
+

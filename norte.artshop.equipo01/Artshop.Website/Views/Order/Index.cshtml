@@ -1,0 +1,114 @@
+﻿@{@model IEnumerable<Artshop.Data.Data.EntityFramework.CartItem>
+double Total = ViewBag.Total;
+
+}
+
+
+@using (Html.BeginForm("Pago", "Order", FormMethod.Post))
+{
+    <h1 class="h1_home"><b>Confirmación de pago</b></h1>
+    
+    <br />
+    <div style="background-color:lightgray; padding-left:10px">
+        <hr/>
+        <br />
+        <ul style="display:inline; left:3px">
+            <li><h2>Confirme su número de tarjeta</h2></li>
+            <li><input type="text" name="Tarjeta" required /></li>
+            <li><input class="button" type="submit" value="Confirmar pago" /></li>
+        </ul>
+        
+        <hr />
+       
+    </div>
+    
+    <h2>Confirmar el pago por los siguientes @Model.Count() artículos  pendientes de compra.</h2>
+    <br />
+    
+    <div style="width:100%">
+
+
+        <div>
+            <table class="table">
+                <tr>
+
+                    <th>
+                        @Html.Label("Titulo de la Obra")
+                    </th>
+
+                    <th>
+                        @Html.Label("Nombre del Artista")
+                    </th>
+                    <th>
+                        @Html.Label("Precio Unitario")
+                    </th>
+                    <th>
+                        @Html.Label("Imagen")
+                    </th>
+                    <th>
+                        @Html.Label("Cantidad")
+                    </th>
+                    <th>
+                        @Html.Label("Total $")
+                    </th>
+
+                </tr>
+
+                @foreach (var item in Model)
+                {
+
+
+                    @Html.HiddenFor(modelitem => item.Id)
+                    @Html.HiddenFor(modelitem => item.CreatedBy)
+                    @Html.HiddenFor(modelitem => item.CreatedBy)
+
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Artist.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Price)
+                        </td>
+                        <td>
+                            <img class="imagecarrito " src="~/Content/Images/Products/@item.Product.Image" alt="Imagen de @item.Product.Image" title="@item.Product.Title" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Total)
+                        </td>
+                    </tr>
+
+                }
+            </table>
+            <br />
+            <div style="text-align:right">
+                <h2> Total $ @Total</h2>
+                <br />
+                <input class="button" type="submit" value="Confirmar pago" />
+            </div>
+            <br/>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("Userreg", "Order", FormMethod.Get))
+{<div style="text-align:right">
+        <input class="button" type="submit" value="Volver" />
+    </div>
+    <br />
+    <hr />
+    <br />
+}
+
+
+
+
+
+
+

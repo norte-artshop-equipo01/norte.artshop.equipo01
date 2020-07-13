@@ -4,7 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Spark Art - Backend</title>
+
     @Styles.Render("~/Content/backendcss")
+    @using Microsoft.AspNet.Identity
 </head>
 <body>
    
@@ -12,49 +14,38 @@
         <!-- Cabecera -->
         <header>
             <a href="/Backend/Index"><img class="logo-header" src="~/Content/images/Logo_200x200.png" alt="Logo" /></a>
-            <nav class="menu-nav">
-                <ul>
-                    <li><a href="/Backend/Index">Inicio</a> </li>
-                    <li><a href="/Backend/ABM2">ABM2</a> </li>
-                    <li><a href="/Backend/AbmArtistas">ABM Artistas</a> </li>
-                    <li><a href="/Backend/AbmProducto">ABM Producto</a> </li>
-                    <li><a href="/Home/Galeria">Galería</a> </li>
-                </ul>
-            </nav>
         </header>
+        <nav id="menu">
+
+            <ul>
+
+                <li><a href="/Backend/Index">Inicio</a> </li>
+                <li><a href="/Artist/Index">Artistas</a> </li>
+                <li><a href="/Product/Index">Productos</a> </li>
+                <li><a href="/Home/Galeria">Galería</a> </li>
+
+            </ul>            
+                 @Html.Partial("_LoginPartial")
+            </nav>
         <!-- Contenido relacionado-->
         <aside class="aside">
             <article>
                 <div>
                     <h3 style="text-align:center">Menú</h3>
                     <br />
-                    <nav class="menu-nav-aside">
-                        <ul>
-                            <!--
-                            <li><a href="/Backend/Index">Inicio</a> </li>
-                            <li><a href="/Backend/ABM2">ABM2</a> </li>
-                            <li><a href="/Backend/AbmArtistas">ABM Artistas</a> </li>
-                            <li><a href="/Backend/Index">Artistas</a> </li>
-                            <li><a href="/Backend/Index">Galería</a> </li>
-                             -->
-                        </ul>
-                    </nav>
-                </div>
-                <hr />
-                <br />
-                <br />
-                <div>
+                    <hr />
+                    <br />
                     <h3>Menú Administrador</h3>
                     <div class="menu-nav-aside">
+
                         <ul>
                             <li><a href="/Backend/Index">Inicio</a> </li>
-                            <li><a href="/Backend/ABM2">ABM2</a> </li>
-                            <li><a href="/Backend/AbmArtistas">ABM Artistas</a> </li>
-                            <li><a href="/Backend/Index">Artistas</a> </li>
+                            <li><a href="/Artist/Index">Artistas</a> </li>
+                            <li><a href="/Product/Index">Productos</a> </li>
                             <li><a href="/Home/Galeria">Galería</a> </li>
 
 
-                            <li><a href="/Backend/AbmArtistas">ABM Artistas</a></li>
+
                         </ul>
                     </div>
                 </div>

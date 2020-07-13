@@ -23,7 +23,7 @@ h1, h2, h3 {
 
 
 p, blockquote, ul, ol {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     line-height: 2em;
 }
 
@@ -145,7 +145,7 @@ a {
         }
 
 #page {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     padding: 0px 28px;
     background: #FFFFFF url('/content/img/bg.jpg') repeat-y left top;
@@ -316,22 +316,7 @@ a {
     font-family: 'Open Sans', Arial, sans-serif;
 }
 
-/*
-    #footer p {
-        margin: 0;
-        text-align: center;
-        font-size: 11px;
-    }
 
-    #footer a {
-        text-decoration: underline;
-        color: #808080;
-    }
-
-        #footer a:hover {
-            text-decoration: none;
-        }
-*/
 .h1_home {
     font-family: 'Crimson Text',serif;
     font-size: 30px;
@@ -345,8 +330,8 @@ a {
 
 /* Galeria */
 .contimagenes {
-    margin: 1em;
-    padding: 1em;
+    margin: .5em;
+    padding: .5em;
     float: left;
     text-align: center;
     align-items: center;
@@ -367,11 +352,10 @@ a {
 }
 
 .button {
-    padding: 5px;
+    padding: 1px;
     text-decoration: none;
-    background-color: burlywood;
+    background-color: darkturquoise;
     border-radius: 5px;
-  
     margin-right: auto;
     color: black;
 }
@@ -381,4 +365,41 @@ a {
     margin-left: auto;
     margin-right: auto;
 }
+.imagecarrito {
+    max-height: 65px;
+    max-width: 100px;
+    float: left;
+    text-align: left;
+    float: none;
+}
+/*Table*/
+.table {
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 95%;
+    max-width: 95%;
+    text-align:center;
+}
 
+    .table td, .table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .table tr:hover {
+        background-color: #ddd;
+    }
+
+    .table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #C11212;
+        color: #fafafa;
+        text-align: center;
+    }

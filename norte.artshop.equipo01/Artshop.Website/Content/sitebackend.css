@@ -13,8 +13,9 @@ body {
     color: #7D807A;
 }
 #container {
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
+    background-color: darksalmon;
 }
 
 h1, h2, h3, p {
@@ -114,30 +115,53 @@ em {
    
     
 }
-
+/*#menu {
+    width: 90%;
+    height: 30px;
+    margin: 0 auto;
+    padding: 0px 0px 0px 28px;
+    margin-left: 20%
+}*/
+#menu {
+    width: 100%;
+    height: 30px;
+    margin: 0 auto;
+    padding: 0px 0px 0px 28px;
+    
+}
 
 .menu-nav {
     margin-left: 34%
 }
 
 nav ul {
+    width: 100%;
     margin: 0;
     padding: 0;
+    margin-left: 20% ;
+    font-size:15px;
+    
 }
 
     nav ul li {
         list-style: none;
         display: inline;
+        float:left
     }
 
         nav ul li > a {
-            padding: 5px;
+            padding: 6px;
             text-decoration: none;
             background-color: burlywood;
             border-radius: 5px;
             margin-left: 5px;
             color: black;
         }
+            nav ul li > a:hover {
+                text-decoration: none;
+               
+                background-color:Highlight;
+            }
 
 .menu-nav-aside {
     margin: 0;
@@ -155,7 +179,6 @@ header {
 }
 
 
-
 .ul-nav {
     padding-top: 5px;
     text-decoration: none;
@@ -164,7 +187,7 @@ header {
     margin-left: 5px;
     color: black;
     list-style: none;
-    display:block;
+    display: block;
 }
 
 
@@ -222,4 +245,52 @@ footer {
     margin-left: 5px;
     color: black;
 }
+/*Tables*/
+.table {
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 98%;
+    max-width: 98%;
+    text-align: center;
+}
 
+    .table td, .table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .table tr:hover {
+        background-color: #ddd;
+    }
+
+    .table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color:darksalmon;
+        color: #fafafa;
+    }
+
+/*Alerta*/
+.alerta{
+    font-family:Arial;
+    font-size:15px;
+    color:red;
+}
+.confirmacion {
+    font-family: Arial;
+    font-size: 15px;
+    color: green;
+}
+.imageback{
+    max-height: 130px;
+    max-width:200px;
+    float: left;
+    text-align:left;
+    float: none;
+}

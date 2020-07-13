@@ -11,8 +11,9 @@ namespace Artshop.Data.Data.EntityFramework
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Artist
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    public partial class Artist:BaseClass
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Artist()
@@ -27,10 +28,9 @@ namespace Artshop.Data.Data.EntityFramework
         public string Country { get; set; }
         public string Description { get; set; }
         public int TotalProducts { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime ChangedOn { get; set; }
-        public string ChangedBy { get; set; }
+        [NotMapped]
+        public string FullName { get { return FirstName + " " + LastName; } }
+        public bool Disabled { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }

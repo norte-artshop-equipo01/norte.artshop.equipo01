@@ -11,19 +11,18 @@ namespace Artshop.Data.Data.EntityFramework
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class CartItem
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    public partial class CartItem : BaseClass
     {
         public int Id { get; set; }
         public int CartId { get; set; }
         public int ProductId { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime ChangedOn { get; set; }
-        public string ChangedBy { get; set; }
-    
+        [NotMapped]
+        public double Total { get { return (Price * Quantity); } }
         public virtual Cart Cart { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
