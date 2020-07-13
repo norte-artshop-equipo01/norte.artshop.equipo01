@@ -252,6 +252,7 @@ footer {
     border-spacing: 0;
     width: 98%;
     max-width: 98%;
+    text-align: center;
 }
 
     .table td, .table th {
