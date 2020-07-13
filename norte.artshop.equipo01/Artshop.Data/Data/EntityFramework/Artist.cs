@@ -28,10 +28,10 @@ namespace Artshop.Data.Data.EntityFramework
         public string Country { get; set; }
         public string Description { get; set; }
         public int TotalProducts { get; set; }
-        
-        public bool Disabled { get; set; }
         [NotMapped]
         public string FullName { get { return FirstName + " " + LastName; } }
+        public bool Disabled { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
     }

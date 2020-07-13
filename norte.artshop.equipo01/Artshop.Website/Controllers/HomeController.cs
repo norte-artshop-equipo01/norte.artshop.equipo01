@@ -131,6 +131,7 @@ namespace Artshop.Website.Controllers
             ViewBag.Total=sum_items(obtener_cart(User.Identity.Name));
             return View(obtener_cart(User.Identity.Name));
             
+            
         }
 
         public ActionResult DeleteItemCar(int id)
@@ -161,7 +162,7 @@ namespace Artshop.Website.Controllers
             return RedirectToAction("Buy", obtener_cart(User.Identity.Name));
 
         }
-        private double sum_items(List<CartItem> cart)
+        public double sum_items(List<CartItem> cart)
         {
             // var cart = obtener_cart(User.Identity.Name);
             double suma = 0;

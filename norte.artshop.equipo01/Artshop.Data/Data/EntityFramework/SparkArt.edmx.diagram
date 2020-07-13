@@ -20,7 +20,7 @@
         <AssociationConnector Association="Model.AspNetUserRoles" />
         <EntityTypeShape EntityType="Model.Error" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model.Artist" Width="1.5" PointX="13.375" PointY="1.375" />
-        <EntityTypeShape EntityType="Model.Cart" Width="1.5" PointX="12.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Model.Cart" Width="1.5" PointX="12.375" PointY="11.375" />
         <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="3" PointY="2.75" />
         <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="15.625" PointY="1" />
         <AssociationConnector Association="Model.FK_PRODUCT_REFERENCE_ARTIST" />

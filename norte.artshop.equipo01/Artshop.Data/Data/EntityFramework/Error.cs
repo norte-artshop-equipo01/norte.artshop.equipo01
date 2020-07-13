@@ -24,6 +24,6 @@ namespace Artshop.Data.Data.EntityFramework
         public string Everything { get; set; }
         public string HttpReferer { get; set; }
         public string PathAndQuery { get; set; }
-        
+      
     }
 }

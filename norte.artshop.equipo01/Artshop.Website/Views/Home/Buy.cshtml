@@ -1,12 +1,6 @@
-﻿@{@model IEnumerable<Artshop.Data.Data.EntityFramework.CartItem>
-    double Total = ViewBag.Total;
-    @*double Totalcart = 0;
-    foreach (var item in Model)
-    {
-        Total += item.Price * item.Quantity;
-        Totalcart += Total;
+﻿@{ @model IEnumerable<Artshop.Data.Data.EntityFramework.CartItem>
+        double Total = ViewBag.Total;
 
-    }*@
     }
 @if (@Model != null && @Model.Count() > 0)
 {
@@ -60,7 +54,7 @@
                         <tr>
                             <td>
                                 @Html.ActionLink("Eliminar", "DeleteItemCar", new { id = item.Id },
-                               new { onclick = "return confirm('Desea elminar el producto del carrito?')" })
+                                 new { onclick = "return confirm('Desea elminar el producto del carrito?')" })
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Product.Title)
@@ -78,7 +72,7 @@
                                 @Html.EditorFor(modelItem => item.Quantity)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem=>item.Total)
+                                @Html.DisplayFor(modelItem => item.Total)
                             </td>
                             <td>
                                 <input class="button" type="submit" value="Actualizar" />
@@ -92,15 +86,21 @@
                 }
             </table>
             <br />
-            <div style="text-align:right">
-                <h2> Total $ @Total</h2>
-            </div>
-            <hr />
-            <br />
-
         </div>
-    </div>}
+    </div>
+    using (Html.BeginForm("Userreg", "Order", FormMethod.Get))
+    {
+        <div style="text-align:right">
+            <h2> Total $ @Total</h2>
+            <br />
+            <input class="button" type="submit" value="Ir al Pago" />
+        </div>
+        <hr />
+        <br />
 
+
+    }
+}
 @if (@Model.Count() == 0)
 {<h1 class="h1_home"><b>Aun no seleccionó ninguna de nuestras Obras</b></h1>}
 

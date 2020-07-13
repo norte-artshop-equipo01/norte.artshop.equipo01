@@ -20,11 +20,9 @@ namespace Artshop.Data.Data.EntityFramework
         public int ProductId { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }
-        
-    
+        [NotMapped]
+        public double Total { get { return (Price * Quantity); } }
         public virtual Cart Cart { get; set; }
         public virtual Product Product { get; set; }
-        [NotMapped]
-        public double Total { get { return (Price*Quantity); } }
     }
 }

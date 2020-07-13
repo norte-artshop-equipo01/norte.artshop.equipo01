@@ -1,0 +1,99 @@
+﻿@{@model IEnumerable<Artshop.Data.Data.EntityFramework.CartItem>
+double Total = ViewBag.Total;
+
+}
+@if (@Model != null && @Model.Count() > 0)
+{
+    using (Html.BeginForm("userreg", "Order"))
+   {
+    <h1 class="h1_home"><b>Confirmacion de pago</b></h1>
+    <hr />
+    <br />
+    <div>
+        <ul style="display:inline">
+            <li>Ingrese nu numero de tarjeta</li>
+            <li><input type="text" name="Tarjeta" required /></li>
+            <li><input class="button" type="submit" value="Confirmar pago" /></li>
+        </ul>
+    </div>
+    <h2>Confirmar el pagopor los siguientes artículos @Model.Count() artículos pendientes de compra.</h2>
+    <br />
+    <hr />
+     <div style="width:100%">
+
+
+            <div>
+                <table class="table">
+                    <tr>
+                        
+                        <th>
+                            @Html.Label("Titulo de la Obra")
+                        </th>
+
+                        <th>
+                            @Html.Label("Nombre del Artista")
+                        </th>
+                        <th>
+                            @Html.Label("Precio Unitario")
+                        </th>
+                        <th>
+                            @Html.Label("Imagen")
+                        </th>
+                        <th>
+                            @Html.Label("Cantidad")
+                        </th>
+                        <th>
+                            @Html.Label("Total $")
+                        </th>
+                        
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                       
+                        
+                            @Html.HiddenFor(modelitem => item.Id)
+                            @Html.HiddenFor(modelitem => item.CreatedBy)
+                            @Html.HiddenFor(modelitem => item.CreatedBy)
+
+                            <tr>
+                                
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Artist.FullName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Price)
+                                </td>
+                                <td>
+                                    <img class="imagecarrito " src="~/Content/Images/Products/@item.Product.Image" alt="Imagen de @item.Product.Image" title="@item.Product.Title" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Total)
+                                </td>
+                            </tr>
+                       
+                    }
+                </table>
+                <br />
+                <div style="text-align:right">
+                    <h2> Total $ @Total</h2>
+                    <br />
+                    <input class="button" type="submit" value="Confirmar pago" />
+                </div>
+                <hr />
+                <br />
+
+            </div>
+        </div>
+    }
+}
+@if (@Model.Count() == 0)
+{<h1 class="h1_home"><b>Aun no seleccionó ninguna de nuestras Obras</b></h1>}
+
+

@@ -1,0 +1,66 @@
+﻿@{@model Artshop.Data.Data.EntityFramework.User
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+
+<!DOCTYPE html>
+
+<body>
+    <h1 class="h1_home">Pagina de registro</h1>
+    <hr />
+
+    <span class="text-danger">@ViewBag.Messagealert</span>
+
+    <h2>Usuario para email:@Model.Email</h2>
+    <br />
+    <div class="container">
+        @using (Html.BeginForm("Userreg", "Order", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => x.Password);
+            @Html.HiddenFor(x => x.Id);
+            @Html.HiddenFor(x => x.Email);
+            @Html.HiddenFor(x => x.SignupDate);
+            @Html.HiddenFor(x => x.OrderCount);
+            @Html.HiddenFor(x => x.CreatedOn);
+            @Html.HiddenFor(x => x.CreatedBy);
+            @Html.HiddenFor(x => x.ChangedOn);
+            @Html.HiddenFor(x => x.ChangedBy);
+
+            <div>
+                @Html.LabelFor(x => x.FirstName)
+                <div>
+                    @Html.TextBoxFor(x => x.FirstName)
+                    @Html.ValidationMessageFor(x => x.FirstName, "", new { })
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(x => x.LastName)
+                <div>
+                    @Html.TextBoxFor(x => x.LastName)
+                    @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(x => x.City)
+                <div>
+                    @Html.TextBoxFor(x => x.City)
+                    @Html.ValidationMessageFor(x => x.City, "", new { })
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(x => x.Country)
+                <div>
+                    @Html.TextBoxFor(x => x.Country)
+                    @Html.ValidationMessageFor(x => x.Country, "", new { })
+                </div>
+            </div>
+
+            <br />
+            <div class="div_button">
+                <input class="button" type="submit" value="Registrarse" />
+            </div>
+        }
+        <br />
+    </div>
+</body>
