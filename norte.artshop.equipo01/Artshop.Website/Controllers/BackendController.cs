@@ -18,6 +18,7 @@ namespace Artshop.Website.Controllers
         public ActionResult Index()
         {
             Request.Cookies.Add(new HttpCookie("spark-cookie") { Value = User.Identity.Name, Expires = DateTime.Now.AddDays(7) });
+            
             return View();
         }
        

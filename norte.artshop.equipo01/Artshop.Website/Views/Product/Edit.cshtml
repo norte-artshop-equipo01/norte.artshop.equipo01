@@ -6,7 +6,7 @@
     Layout = "~/Views/Backend/_LayoutBackend.cshtml";
 }
 
-<div class="table">
+<div class="table" style="text-align:left">
     <h1 class="h1_home"> Edición de Productos</h1>
     <hr />
     
@@ -41,9 +41,9 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ArtistId, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.Artist.FullName, htmlAttributes: new { @class = "control-label" })
                     <div class="separator">
-                        @Html.DropDownListFor(x => x.ArtistId, Artistas)
+                        @Html.DropDownListFor(x => x.ArtistId, Artistas, new {@value=Model.ArtistId })
                         @Html.ValidationMessageFor(model => model.ArtistId, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -94,6 +94,7 @@
         }
     </div>
 </div>
+<br/>
 @section scripts{
     <script>
 
@@ -107,10 +108,7 @@
             // Los archivos seleccionados, pueden ser muchos o uno
             const archivos = $seleccionArchivos.files;
             // Si no hay archivos salimos de la función y quitamos la imagen
-            if (!archivos || !archivos.length) {
-                $imagenPrevisualizacion.src = "";
-                return;
-            }
+            
             // Ahora tomamos el primer archivo, el cual vamos a previsualizar
             const primerArchivo = archivos[0];
             // Lo convertimos a un objeto de tipo objectURL
